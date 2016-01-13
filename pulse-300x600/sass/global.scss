@@ -1,0 +1,154 @@
+@mixin font-smoothing($value: on) {
+    @if $value==on {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    @else {
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+    }
+}
+
+.pulse-wrapper {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    font-family: "FranklinITCProLight", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    width: 300px;
+}
+
+/*.pulse-ad-creative-wrapper {
+    cursor: pointer;
+    height: 250px;
+    width: 300px;
+}*/
+
+.pulse-article-ad-click {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://img.washingtonpost.com/wp-stat/advertising/pseudo-static/images/blank.gif);
+  background-repeat: no-repeat;
+}
+
+.pulse-article-list-wrapper {
+    border-radius: 0px 0px 4px 4px;
+    border: 1px solid #e9e9e9;
+    border-bottom-color: #d5d5d5;
+    border-bottom-width: 2px;
+    padding: 10px;
+
+}
+
+.pulse-article-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pulse-article-list:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pulse-article-list-item {
+    float: right;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.pulse-article-label {
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    margin: 5px 0;
+    overflow: hidden;
+}
+
+.pulse-article-label:before {
+    background-color: #2A2A2A;
+    content: "";
+    display: block;
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    height: 0.25rem;
+    margin-bottom: 0.625rem;
+    width: 2rem;
+}
+
+.pulse-article-logo {
+    float: left;
+    padding-left: 10px;
+    width: auto;
+}
+
+.pulse-article-label-small {
+    border-right: 1px solid #000000;
+    float: left;
+    font-family: "FranklinITCProLight", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 11px;
+    padding-right: 10px;
+}
+
+.pulse-article-thumb-wrapper {
+    box-sizing: border-box;
+    float: left;
+    padding-right: 10px;
+    width: 25%;
+}
+
+.pulse-article-thumb-border { 
+    border: 1px solid #f0f0f0;
+}
+
+.pulse-article-desc-wrapper {
+    box-sizing: border-box;
+    float: left;
+    padding-right: 10px;
+    width: 60%;
+}
+
+.pulse-article-number {
+    color: rgb(51, 51, 51);
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 22px;
+    float: left;
+    margin-top: -3px;
+    padding-right: 15px;
+    padding-top: 0;
+    width: auto;
+}
+
+.pulse-article-desc-header {
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+.pulse-article-desc-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pulse-article-desc-link:hover {
+    color: #2e6d9d;
+}
+
+.pulse-article-desc {
+    @include font-smoothing(on);
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.pulse-article-thumbnail {
+    width: 100%;
+}
+
+.pulse-footer { 
+    padding: 10px 0;
+    text-align: center;
+}
