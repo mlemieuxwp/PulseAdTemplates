@@ -1,11 +1,11 @@
-.pulse-wrapper { 
+.pulse-wrapper {
 	border-radius: 4px;
     border: 1px solid #e9e9e9;
     border-bottom-color: #d5d5d5;
     border-bottom-width: 2px;
 }
 
-.pulse-article-list-wrapper { 
+.pulse-article-list-wrapper {
 	border: none;
 	border-radius: 0;
 }
@@ -28,18 +28,8 @@
     height: 100%;
 }
 
-.pulse-player-poster {
-	visibility: hidden;
-    background-image: url('https://www.washingtonpost.com/wp-stat/advertising/WellsFargo/WF_300x600_Video/images/wellsfargo-poster.png');
-    background-repeat: no-repeat;
-    height: 250px;
-    position: absolute;
-    width: 300px;
-    z-index: 1px;
-}
-
 .pulse-player-play,
-.pulse-player-pause { 
+.pulse-player-pause {
 	color: #ffffff;
 	cursor: pointer;
 	display: block;
@@ -54,7 +44,7 @@
     z-index: 2;
 }
 
-.pulse-player-active .pulse-player-volume { 
+.pulse-player-active .pulse-player-volume {
 	bottom: 10px;
 	right: 10px;
 	color: #ffffff;
@@ -66,6 +56,6 @@
 
 .lt-ie10 .pulse-player-play,
 .lt-ie10 .pulse-player-pause,
-.lt-ie10 .pulse-player-volume { 
+.lt-ie10 .pulse-player-volume {
     display: none;
 }
