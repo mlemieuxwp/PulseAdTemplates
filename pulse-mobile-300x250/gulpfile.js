@@ -87,13 +87,14 @@ gulp.task('browser-sync', function() {
 *
 **/
 gulp.task('scripts', function() {
-  gulp.src('js/*.js')
+  gulp.src(['js/scripts.js','js/player.js'])
   .pipe(uglify())
-  .pipe(rename({
-    dirname: "min",
-    suffix: ".min",
-  }))
-  .pipe(gulp.dest('js'))
+  // .pipe(rename({
+  //   dirname: "min",
+  //   suffix: ".min",
+  // }))
+  .pipe(concat('scripts.min.js'))
+  .pipe(gulp.dest('js/min'))
 });
 
 /**

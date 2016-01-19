@@ -78,12 +78,50 @@
             });
         }
 
+        function setVideoPoster(video) {
+            var img = _$(video).data('img');
+            video.setAttribute('poster', img);
+        }
+
+        function setVideoSrc(video) {
+            var src = _$(video).data('src'),
+                source = document.createElement('source');
+            source.setAttribute('src', src);
+            video.appendChild(source);
+        }
+
+        function playVideoOnSlide() {
+            if (document.getElementById('pulse-player')) {
+
+                var video = document.getElementById('pulse-player'),
+                    video_parent = video.parentNode.parentNode,
+                    slick_index = _$(video_parent).data('slick-index');
+
+                $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                    if (nextSlide === slick_index) {
+                        setVideoPoster(video);
+                        setVideoSrc(video);
+                        video.play();
+                        video.setAttribute('playing', 'true');
+                    } else {
+                        if (video.hasAttribute('playing')) {
+                            video.pause();
+                            video.removeAttribute('playing');
+                        }
+                    }
+                });
+
+            }
+
+        }
+
         function init() {
 
             loadSlick().done(function(data, textStatus, jqXHR) {
                 loadCarousel();
                 headerFooterSlide();
-                autoPlayVideoOnSlide();
+                //autoPlayVideoOnSlide();
+                playVideoOnSlide();
                 //PulseTracking.init();
             });
 
