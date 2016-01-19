@@ -8,6 +8,7 @@
                 click_thru = _$('.pulse-wrapper').data('click'),
                 $video_play_button = _$('.pulse-player-play'),
                 $video_mute_button = _$('.pulse-player-volume');
+                $has_video_ctrls   = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
 
 
             function advClickThru(event) {
@@ -42,7 +43,9 @@
 
             function videoEndEvents() {
                 video.load();
-                $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
+                if($has_video_ctrls){
+                    $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
+                }
             }
 
             function videoBtnEffects() {

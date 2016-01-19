@@ -72,7 +72,7 @@ gulp.task('clean-scripts', function () {
 *
 **/
 gulp.task('browser-sync', function() {
-  browserSync.init(['css/*.css', 'js/**/*.js', 'slick/*.css', 'slick/*.js', 'index.html'], {
+  browserSync.init(['css/*.css', 'js/**/*.js', 'slick/*.css', 'slick/*.js', 'index.html','templates/*.html'], {
     server: {
       baseDir: './'
     }
