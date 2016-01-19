@@ -128,10 +128,11 @@
                     if (nextSlide === slick_index) {
                         setVideoPoster(video);
                         setVideoSrc(video);
-                    }
-                    else {
+                    } else {
                         if (video.hasAttribute('playing')) {
                             video.pause();
+                            _$('.pulse-player-active').removeClass('pulse-player-active');
+                            _$('.pulse-player-pause').show();
                             video.removeAttribute('playing');
                         }
                     }

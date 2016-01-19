@@ -62,7 +62,6 @@
 
             function bindFunctions() {
                 _$(video).on('click', advClickThru);
-                _$('.pulse-player-poster').on('click', advClickThru);
                 $video_mute_button.on('click', muteBtnClick);
                 $video_play_button.on('click', playBtnClick);
                 _$(video).on('ended', videoEndEvents);
