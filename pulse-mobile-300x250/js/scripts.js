@@ -59,28 +59,30 @@
 
         }
 
-        function autoPlayVideoOnSlide(){
+        function autoPlayVideoOnSlide() {
             var $pulseVideo = $pulse.find('.pulse-video').not(".slick-cloned");
-            if(!$pulseVideo.length){
+            if (!$pulseVideo.length) {
                 return;
             }
             var videoSlideIndex = $pulseVideo.data('slick-index'),
-            pulseVideo = $pulseVideo.find('#pulse-player').get(0);
-            $pulse.on('afterChange', function(event, slick, currentSlide){
-                if(currentSlide === videoSlideIndex){
+                pulseVideo = $pulseVideo.find('#pulse-player').get(0);
+            $pulse.on('afterChange', function(event, slick, currentSlide) {
+                if (currentSlide === videoSlideIndex) {
                     pulseVideo.play();
-                }else{
+                } else {
                     pulseVideo.pause();
                 }
             });
-            $(pulseVideo).on('ended', function(){
+            $(pulseVideo).on('ended', function() {
                 pulseVideo.play();
             });
         }
 
         function setVideoPoster(video) {
-            var img = _$(video).data('img');
-            video.setAttribute('poster', img);
+            var poster = _$(video).data('poster');
+            if (poster) {
+                video.setAttribute('poster', poster);
+            }
         }
 
         function setVideoSrc(video) {
@@ -115,13 +117,38 @@
 
         }
 
+        function videoSlide() {
+            if (document.getElementById('pulse-player')) {
+
+                var video = document.getElementById('pulse-player'),
+                    video_parent = video.parentNode.parentNode,
+                    slick_index = _$(video_parent).data('slick-index');
+
+                $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                    if (nextSlide === slick_index) {
+                        setVideoPoster(video);
+                        setVideoSrc(video);
+                    }
+                    else {
+                        if (video.hasAttribute('playing')) {
+                            video.pause();
+                            video.removeAttribute('playing');
+                        }
+                    }
+                });
+
+            }
+
+        }
+
         function init() {
 
             loadSlick().done(function(data, textStatus, jqXHR) {
                 loadCarousel();
                 headerFooterSlide();
+                videoSlide();
                 //autoPlayVideoOnSlide();
-                playVideoOnSlide();
+                //playVideoOnSlide();
                 //PulseTracking.init();
             });
 
