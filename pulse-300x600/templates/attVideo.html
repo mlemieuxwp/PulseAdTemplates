@@ -1,62 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title></title>
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-</head>
-
-<body>
-    <link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/300x600/main.css">
-    <div class="pulse-wrapper" data-click="%%CLICK_URL_UNESC%%">
-        <div class="pulse-player-wrapper pulse-player-no-ctrls">
-            <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
-            <i class="fa fa-volume-up pulse-player-volume"></i>
-            <video id="pulse-player" class="pulse-player" poster="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_unlock_poster.jpg" preload="none" autoplay>
-                <source src="http://videoads.washingtonpost.com/pulse_att_unlock_640_360_600.mp4" type="video/mp4" />
-            </video>
+<!-- Remove jquery before trafficking in dfp -->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js">
+</script>
+<link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/300x600/main.css">
+<div class="pulse-wrapper" data-click="%%CLICK_URL_UNESC%%">
+    <div class="pulse-player-wrapper pulse-player-no-ctrls">
+        <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
+        <i class="fa fa-volume-up pulse-player-volume"></i>
+        <video id="pulse-player" class="pulse-player" poster="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_unlock_poster.jpg" preload="none" autoplay>
+            <source src="http://videoads.washingtonpost.com/pulse_att_unlock_640_360_600.mp4" type="video/mp4" />
+        </video>
+    </div>
+    <div class="pulse-article-list-wrapper">
+        <div class="pulse-article-label">
+            <div class="pulse-article-label-small">Content Selected By AT&T</div>
+            <div class="pulse-article-logo"><img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/WashPost-Logo-200x30.png" alt="" border="0" width="108" /></div>
         </div>
-        <div class="pulse-article-list-wrapper">
-            <div class="pulse-article-label">
-                <div class="pulse-article-label-small">Sponsored by AT&T</div>
-                <div class="pulse-article-logo"><img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/WashPost-Logo-200x30.png" alt="" border="0" width="108" /></div>
-            </div>
-            <ul class="pulse-article-list">
-                <li class="pulse-article-list-item">
-                    <div class="pulse-article-thumb-wrapper">
-                        <a href="https://www.washingtonpost.com/news/the-switch/wp/2016/01/15/what-to-expect-from-virtual-reality-in-2016/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://img.washingtonpost.com/rf/image_908w/2010-2019/Wires/Images/2014-06-14/Reuters/2014-06-15T033750Z_01_KDJ040_RTRIDSP_3_VIDEOGAMES-VIRTUALREALITY.jpg&w=140" border="0" class="pulse-article-thumbnail"></a>
-                    </div>
-                    <div class="pulse-article-number">1</div>
-                    <div class="pulse-article-desc-wrapper">
-                        <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/the-switch/wp/2016/01/15/what-to-expect-from-virtual-reality-in-2016/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">What to expect from virtual reality in 2016</a></p>
-                    </div>
-                </li>
-                <li class="pulse-article-list-item">
-                    <div class="pulse-article-thumb-wrapper">
-                        <a href="https://www.washingtonpost.com/news/innovations/wp/2016/01/06/the-10-edgiest-innovation-concepts-of-2016/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://img.washingtonpost.com/rf/image_908w/2010-2019/WashingtonPost/2015/12/22/Health-Environment-Science/Images/2015-12-22T044741Z_01_SRR01_RTRIDSP_3_USA-SPACEX.jpg&w=140" class="pulse-article-thumbnail"></a>
-                    </div>
-                    <div class="pulse-article-number">2</div>
-                    <div class="pulse-article-desc-wrapper">
-                        <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/innovations/wp/2016/01/06/the-10-edgiest-innovation-concepts-of-2016/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">The 10 edgiest innovation ideas of 2016</a></p>
-                        </a>
-                    </div>
-                </li>
-                <li class="pulse-article-list-item">
-                    <div class="pulse-article-thumb-wrapper">
-                        <a href="https://www.washingtonpost.com/news/innovations/wp/2015/12/30/7-of-the-biggest-innovations-that-made-headlines-in-2015/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://www.washingtonpost.com/blogs/innovations/files/2015/12/21981159388_e1fd235714_k.jpg&w=140" border="0" class="pulse-article-thumbnail"></a>
-                    </div>
-                    <div class="pulse-article-number">3</div>
-                    <div class="pulse-article-desc-wrapper">
-                        <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/innovations/wp/2015/12/30/7-of-the-biggest-innovations-that-made-headlines-in-2015/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">7 of the biggest innovations that made headlines in 2015</a></p>
-                    </div>
-                </li>
-            </ul>
-            <div class="pulse-footer">
-                <a href="%%CLICK_URL_UNESC%%" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_globe_rgb_pos.jpg" alt="" border="0" width="40" /></a>
-            </div>
+        <ul class="pulse-article-list">
+            <li class="pulse-article-list-item">
+                <div class="pulse-article-thumb-wrapper">
+                    <a href="https://www.washingtonpost.com/news/the-switch/wp/2016/01/15/what-to-expect-from-virtual-reality-in-2016/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://img.washingtonpost.com/rf/image_908w/2010-2019/Wires/Images/2014-06-14/Reuters/2014-06-15T033750Z_01_KDJ040_RTRIDSP_3_VIDEOGAMES-VIRTUALREALITY.jpg&h=60&w=60" border="0" class="pulse-article-thumbnail"></a>
+                </div>
+                <div class="pulse-article-number">1</div>
+                <div class="pulse-article-desc-wrapper">
+                    <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/the-switch/wp/2016/01/15/what-to-expect-from-virtual-reality-in-2016/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">What to expect from virtual reality in 2016</a></p>
+                </div>
+            </li>
+            <li class="pulse-article-list-item">
+                <div class="pulse-article-thumb-wrapper">
+                    <a href="https://www.washingtonpost.com/news/innovations/wp/2016/01/06/the-10-edgiest-innovation-concepts-of-2016/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://img.washingtonpost.com/rf/image_908w/2010-2019/WashingtonPost/2015/12/22/Health-Environment-Science/Images/2015-12-22T044741Z_01_SRR01_RTRIDSP_3_USA-SPACEX.jpg&h=60&w=60" class="pulse-article-thumbnail"></a>
+                </div>
+                <div class="pulse-article-number">2</div>
+                <div class="pulse-article-desc-wrapper">
+                    <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/innovations/wp/2016/01/06/the-10-edgiest-innovation-concepts-of-2016/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">The 10 edgiest innovation ideas of 2016</a></p>
+                    </a>
+                </div>
+            </li>
+            <li class="pulse-article-list-item">
+                <div class="pulse-article-thumb-wrapper">
+                    <a href="https://www.washingtonpost.com/news/innovations/wp/2015/12/30/7-of-the-biggest-innovations-that-made-headlines-in-2015/?spon_con=ppulse_att1" target="_top"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://www.washingtonpost.com/blogs/innovations/files/2015/12/21981159388_e1fd235714_k.jpg&h=60&w=60" border="0" class="pulse-article-thumbnail"></a>
+                </div>
+                <div class="pulse-article-number">3</div>
+                <div class="pulse-article-desc-wrapper">
+                    <p class="pulse-article-desc"><a href="https://www.washingtonpost.com/news/innovations/wp/2015/12/30/7-of-the-biggest-innovations-that-made-headlines-in-2015/?spon_con=ppulse_att1" class="pulse-article-desc-link" target="_top">7 of the biggest innovations that made headlines in 2015</a></p>
+                </div>
+            </li>
+        </ul>
+        <div class="pulse-footer">
+            <a href="%%CLICK_URL_UNESC%%" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_globe_rgb_pos.jpg" alt="" border="0" width="40" /></a>
         </div>
     </div>
-    <script type="text/javascript" src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/300x600/scripts.min.js"></script>
-</body>
-
-</html>
+</div>
+<script type="text/javascript" src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/300x600/scripts.min.js"></script>
