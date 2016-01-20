@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+    <link rel="stylesheet" href="https://css.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/css/font-awesome.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <style type="text/css">
+    body {
+        background-color: gray;
+    }
+    
+    .pulse-bb-wrapper {
+        background-color: #ffffff;
+        width: 970px;
+    }
+    
+    .pulse-bb-ad-wrapper {
+        display: inline-block;
+        height: 250px;
+        width: 300px;
+        vertical-align: middle;
+    }
+    
+    .pulse-bb-ad {
+        background-color: blue;
+        height: 250px;
+        width: 300px;
+    }
+    
+    .pulse-bb-slideshow-wrapper {
+        display: inline-block;
+        margin-left: 25px;
+        width: 600px;
+        vertical-align: middle;
+    }
+    
+    .pulse-bb-slides {
+        margin: 0 auto;
+        width: 550px;
+    }
+    
+    .pulse-bb-slide {
+        height: 100px;
+        text-align: center;
+    }
+    
+    .pulse-bb-slide-img {
+        display: inline-block;
+    }
+    
+    .pulse-bb-slide-desc {
+        display: inline-block;
+        text-align: left;
+        width: 40%;
+        font-family: "FranklinITCPro", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 14px;
+        line-height: 18px;
+        padding-left: 10px;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        vertical-align: top;
+    }
+    
+    .pulse-bb-label {
+        position: relative;
+        top: -35px;
+    }
+    
+    .pulse-bb-label:before {
+        background-color: #2A2A2A;
+        content: "";
+        display: block;
+        font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        height: 0.25rem;
+        margin-bottom: 0.625rem;
+        width: 2rem;
+    }
+    
+    .pulse-bb-label-sponsor {
+        display: inline-block;
+        /*float: left;*/
+        font-family: "FranklinITCProBold", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 14px;
+        padding-right: 10px
+    }
+    
+    .pulse-bb-logo-wrapper {
+        display: inline-block;
+        font-family: "FranklinITCProLight", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 16px;
+        /*float: left;*/
+        /* margin-top: -5px;*/
+        width: auto
+    }
+    
+    .pulse-article-logo {
+        display: inline-block;
+        vertical-align: middle
+    }
+    
+    .pulse-article-wp-logo {
+        padding-left: 5px
+    }
+    
+    .pulse-article-client-logo {
+        padding-right: 5px
+    }
+    
+    @font-face {
+        font-family: 'FontAwesome';
+        src: url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.eot?v=4.4.0);
+        src: url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0) format('embedded-opentype'), url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.woff2?v=4.4.0) format('woff2'), url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.woff?v=4.4.0) format('woff'), url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.ttf?v=4.4.0) format('truetype'), url(http://www.washingtonpost.com/pb/resources/assets/fonts/fontawesome/latest/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular) format('svg');
+        font-weight: normal;
+        font-style: normal
+    }
+    
+    .slick-slider {
+        margin-bottom: 0;
+    }
+    
+    .slick-arrow {
+        font-family: "FontAwesome"
+    }
+    
+    .slick-arrow {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale
+    }
+    
+    .slick-prev:before,
+    .slick-next:before {
+        font-family: inherit;
+        font-size: 2em;
+        line-height: 1;
+        position: absolute;
+        color: #e9e9e9;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .slick-prev:before {
+        content: "\f053";
+        /*        left: 5px*/
+    }
+    
+    .slick-next:before {
+        content: "\f054";
+    }
+    </style>
+</head>
+
+<body>
+    <!-- Add your site or application content here -->
+    <div class="pulse-bb-wrapper">
+        <div class="pulse-bb-ad-wrapper">
+            <div class="pulse-bb-ad"></div>
+        </div>
+        <div class="pulse-bb-slideshow-wrapper">
+            <div class="pulse-bb-label">
+                <div class="pulse-bb-label-sponsor">Sponsored by Wells Fargo</div>
+                <div class="pulse-bb-logo-wrapper">
+                    <a href="%%CLICK_URL_UNESC%%http://www.wellsfargo.com/" target="_blank"><img src="https://img.washingtonpost.com/wp-stat/advertising/WellsFargo/WF_300x250_Mobile/images/wellsfargo-logo.png" class="pulse-article-logo pulse-article-client-logo pulse" border="0" width="22"></a>|<img src="https://img.washingtonpost.com/wp-stat/advertising/WellsFargo/WF_300x250_Mobile/images/WashPost
+-Logo.png" class="pulse-article-logo pulse-article-wp-logo" border="0" width="112" /></div>
+            </div>
+            <div class="pulse-bb-slideshow">
+                <div class="pulse-bb-slides">
+                    <div class="pulse-bb-slide">
+                        <div class="pulse-bb-slide-img">
+                            <img src="https://www.fillmurray.com/100/100">
+                        </div>
+                        <div class="pulse-bb-slide-desc">
+                            Developers face city pushback on their Brookland townhouse proposal
+                        </div>
+                    </div>
+                    <div class="pulse-bb-slide">
+                        <div class="pulse-bb-slide-img">
+                            <img src="https://www.fillmurray.com/g/100/100">
+                        </div>
+                        <div class="pulse-bb-slide-desc">
+                            Fresh idea: A farm-to-table community in Loudoun County
+                        </div>
+                    </div>
+                    <div class="pulse-bb-slide">
+                        <div class="pulse-bb-slide-img">
+                            <img src="http://www.placecage.com/100/100">
+                        </div>
+                        <div class="pulse-bb-slide-desc">
+                            How to play Powerball so you don’t have to share the jackpot
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="slick/slick.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('.pulse-bb-slides').slick({
+                lazyLoad: 'ondemand',
+                slidesToShow: 2,
+                slidesToScroll: 1
+            });
+        });
+        </script>
+</body>
+
+</html>
