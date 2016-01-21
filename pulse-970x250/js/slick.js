@@ -22,7 +22,7 @@
     } else if (typeof exports !== 'undefined') {
         module.exports = factory(require('jquery'));
     } else {
-        factory(jQuery);
+        factory(top.jQuery);
     }
 
 }(function($) {

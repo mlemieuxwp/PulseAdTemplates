@@ -12,6 +12,7 @@
                 slidesToShow: 2,
                 slidesToScroll: 1
             });
+            _$('.pulse-bb-wrapper').show();
         }
 
         function init() {
