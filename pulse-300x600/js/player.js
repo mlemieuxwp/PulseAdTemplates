@@ -33,17 +33,26 @@
     }else{
         loadJQuery(url);
     }
-}(function($){
-    var PulsePlayer = (function() {
+}(function($) {
 
-        var _$ = $.proxy($.fn.find, $(document));
+    var _$ = $.proxy($.fn.find, $(document));
+
+    var PulsePlayer = (function() {
 
         var video = document.getElementById('pulse-player'),
             click_thru = _$('.pulse-wrapper').data('click'),
+            tracking_url = _$('.pulse-wrapper').data('track') ? _$('.pulse-wrapper').data('track') : false;
             $video_play_button = _$('.pulse-player-play'),
-            $video_mute_button = _$('.pulse-player-volume');
-            $has_video_ctrls   = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
+            $video_mute_button = _$('.pulse-player-volume'),
+            $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
 
+        function playBtnTrack(tracking_url) {
+            if (tracking_url) {
+                var rand_num = Math.floor(Math.random() * 10000000) + '?';
+                    tracking_url = tracking_url + rand_num;
+                _$('.pulse-tracking-wrapper').append('<img src="' + tracking_url + '" alt="" border="0" height="1" width="1" style="display:none;" />');
+            }
+        }
 
         function advClickThru(event) {
             event.preventDefault();
@@ -65,6 +74,7 @@
         function playBtnClick(event) {
             event.preventDefault();
             if (video.paused || video.ended) {
+                playBtnTrack(tracking_url);
                 video.play();
                 _$(video).parent().addClass('pulse-player-active');
                 _$(video).css('visibility', 'visible');
@@ -77,7 +87,7 @@
 
         function videoEndEvents() {
             video.load();
-            if($has_video_ctrls){
+            if ($has_video_ctrls) {
                 $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
             }
         }

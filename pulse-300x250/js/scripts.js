@@ -41,24 +41,24 @@
     var _$ = $.proxy($.fn.find, $(document)),
         $pulse = _$('.pulse-mobile');
 
-    var PulseTracking = (function() {
+    // var PulseTracking = (function() {
 
-        function setTrackingPixel(url) {
-            _$('.pulse-mobile-tracking').append('<img src="' + url + '" alt="" height="1" width="1" style="display:none;" />');
-        }
+    //     function setTrackingPixel(url) {
+    //         _$('.pulse-mobile-tracking').append('<img src="' + url + '" alt="" height="1" width="1" style="display:none;" />');
+    //     }
 
-        function init() {
-            var tracking_url = $pulse.attr('data-tracking');
-            $pulse.on('afterChange', function(event, slick, currentSlide) {
-                setTrackingPixel(tracking_url);
-            });
-        }
+    //     function init() {
+    //         var tracking_url = $pulse.attr('data-tracking');
+    //         $pulse.on('afterChange', function(event, slick, currentSlide) {
+    //             setTrackingPixel(tracking_url);
+    //         });
+    //     }
 
-        return {
-            init: init
-        };
+    //     return {
+    //         init: init
+    //     };
 
-    })();
+    // })();
 
     var PulseCarousel = (function() {
 

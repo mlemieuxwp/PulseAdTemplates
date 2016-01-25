@@ -1,29 +1,29 @@
 .pulse-mobile-wrapper {
-	background-color: #000000;
-	border-radius: 4px 4px 4px 4px;
-	border: 1px solid #e8e8e8;
-	border-bottom-color: #d5d5d5;
+    background-color: #000000;
+    border-radius: 4px 4px 4px 4px;
+    border: 1px solid #e8e8e8;
+    border-bottom-color: #d5d5d5;
     border-bottom-width: 2px;
-	box-sizing: border-box;
-	height: 250px;
-	margin: 0 auto;
-	min-height: 250px;
-	overflow: hidden;
-	position: relative;
-	width: 300px;
+    box-sizing: border-box;
+    height: 250px;
+    margin: 0 auto;
+    min-height: 250px;
+    overflow: hidden;
+    position: relative;
+    width: 300px;
 }
 
 .pulse-mobile-header,
 .pulse-mobile-footer {
-	height: 50px;
-	position: absolute;
-	width: 100%;
-	z-index: 1;
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 }
 
 .pulse-mobile-header {
-	background-color: #ffffff;
-	top: 0;
+    background-color: #ffffff;
+    top: 0;
 }
 
 .pulse-article-label {
@@ -44,7 +44,7 @@
 }
 
 .pulse-article-logo-wrapper {
-	font-family: "FranklinITCProLight", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-family: "FranklinITCProLight", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 16px;
     float: left;
     margin-top: -5px;
@@ -52,16 +52,16 @@
 }
 
 .pulse-article-logo {
-	display: inline-block;
-	vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .pulse-article-wp-logo {
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
 .pulse-article-client-logo {
-	padding-right: 5px;
+    padding-right: 5px;
 }
 
 .pulse-article-label-small {
@@ -71,27 +71,27 @@
     padding-right: 5px;
 }
 
-.pulse-mobile-footer { 
-	background-image: url('https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/Logo-TWP-White.png');
-	background-position: 160px 22px;
-	background-repeat: no-repeat;
+.pulse-mobile-footer {
+    background-image: url('https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/Logo-TWP-White.png');
+    background-position: 160px 22px;
+    background-repeat: no-repeat;
     /*text-align: center;*/
 }
 
 .pulse-mobile-footer-logo {
-	position: relative;
-	top: 50%;
+    position: relative;
+    top: 50%;
     transform: translateY(-50%);
 }
 
 .pulse-mobile-desc-wrapper {
-	background: rgba(0,0,0,0.3);
-	height: 250px;
-	width: 300px;
+    background: rgba(0, 0, 0, 0.3);
+    height: 250px;
+    width: 300px;
 }
 
 .pulse-mobile-desc {
-	color: #ffffff;
+    color: #ffffff;
     font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 18px;
     line-height: 22px;
@@ -105,7 +105,7 @@
 }
 
 .pulse-mobile-desc-link {
-	text-decoration: none;
+    text-decoration: none;
     color: inherit;
 }
 
@@ -113,52 +113,57 @@
     color: inherit;
 }
 
-.pulse-mobile-desc-text, .pulse-mobile-article-readmore {
-	text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+.pulse-mobile-desc-text,
+.pulse-mobile-article-readmore {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .pulse-mobile-desc-text {
-	margin: 0 auto;
-	padding: 10px 0;
+    margin: 0 auto;
+    padding: 10px 0;
 }
 
 .pulse-mobile-article-readmore {
-	font-size: 11px;
-	margin: 0;
-	padding: 0;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
 }
 
-.pulse-mobile-article-readmore .fa-angle-double-right  {
-	font-size: 8px;
-	height: 11px;
-	vertical-align: middle;
+.pulse-mobile-article-readmore .fa-angle-double-right {
+    font-size: 8px;
+    height: 11px;
+    vertical-align: middle;
 }
 
 .pulse-mobile-slide-img {
-	display: none;
+    display: none;
 }
 
 .pulse-mobile-footer {
-	bottom: 0;
+    bottom: 0;
 }
 
 .pulse-mobile {
-	background-color: #000000;
-	margin: 0 auto;
-	min-height: 250px;
-	width: 300px;
+    background-color: #000000;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 300px;
 }
 
 .slick-slide img {
-	user-select: none;
+    user-select: none;
 }
 
 .slick-slide {
-	background-repeat: no-repeat;
-	background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .pulse-player-mobile {
     width: 100%;
     height: 100%;
+}
+
+.pulse-tracking-wrapper {
+    display: none;
 }
