@@ -2,13 +2,13 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js">
 </script>
 <link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/300x600/main.css">
-<div class="pulse-wrapper" data-click="%%CLICK_URL_UNESC%%">
+<div class="pulse-wrapper" data-click="%%DEST_URL%%">
     <div style="position:relative;height:250px;">
         <div style="position:absolute;width:300px;height:249px;left:-1px;top:-1px;overflow:hidden;">
             <script type="text/adtag">
-                <iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0' height='250' width='300' src='https://ad.atdmt.com/i/a.html;p=11022203261114;cache=%%CACHEBUSTER%%?click=%%CLICK_URL_ESC%%' topmargin='0' leftmargin='0' allowtransparency='1'></iframe>
+                <iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0' height='250' width='300' src='https://ad.atdmt.com/i/a.html;p=11022203261113;idfa=;idfa_lat=;aaid=;aaid_lat=;cache=?click=' topmargin='0' leftmargin='0' allowtransparency='1'></iframe>
             </script>
-            <script language="javascript" type="text/javascript" src="https://cdn.doubleverify.com/dvbs_src.js?ctx=607671&cmp=11022203256750&plc=11022203261114&sid=11182200774641&dvregion=0&unit=300x250">
+            <script language="javascript" type="text/javascript" src="https://cdn.doubleverify.com/dvbs_src.js?ctx=607671&cmp=11022203256750&plc=11022203261113&sid=11182200774641&dvregion=0&unit=300x250">
             </script>
         </div>
     </div>
@@ -48,7 +48,13 @@
             </li>
         </ul>
         <div class="pulse-footer">
-            <a href="%%CLICK_URL_UNESC%%" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_globe_rgb_pos.jpg" alt="" border="0" width="40" /></a>
+            <a href="%%DEST_URL%%" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/ATT/pulse/images/att_globe_rgb_pos.jpg" alt="" border="0" width="40" /></a>
+        </div>
+        <div class="pulse-tracking-wrapper">
+            <!-- doubleverify tag -->
+            <img src="https://tps30.doubleverify.com/visit.jpg?ctx=607671&cmp=11022203256750&sid=11182200774641&plc=11022203314296&num=&adid=&advid=607672&adsrv=155&region=30&btreg=&btadsrv=&crt=&crtname=&chnl=&unit=&pid=&uid=&tagtype=&dvtagver=6.1.img&" alt="" border="0" width="0" height="0" />
+            <!-- additional tracking -->
+            <img src="https://ad.atdmt.com/i/img;p=11022203314296;idfa=;idfa_lat=;aaid=;aaid_lat=;cache=%%CACHEBUSTER%%" alt="" border="0" height="1" width="1" style="display:none;" />
         </div>
     </div>
 </div>
