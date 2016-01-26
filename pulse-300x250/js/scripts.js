@@ -3,9 +3,9 @@ getScript([
         'slick'
     ], function() {
     // set jquery scope for ad iframe
-
     var _$ = $.proxy($.fn.find, $(document)),
         $pulse = _$('.pulse-mobile');
+
 
     var PulseCarousel = (function() {
 
@@ -114,19 +114,32 @@ getScript([
 
         }
 
+        function iframeSlide() {
+            if (document.getElementById('pulse-mobile-ad')) {
+
+                var adv = document.getElementById('pulse-mobile-ad'),
+                    adv_parent = adv.parentNode.parentNode,
+                    slick_index = _$(adv_parent).data('slick-index');
+
+                $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+
+                    if (!_$(adv).hasClass('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
+
+                        var iframe_src = _$(adv).data('iframe');
+                        _$(adv).append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>').addClass('js-pulse-mobile-ad-active');
+
+                    }
+
+                });
+
+            }
+
+        }
+
         function init() {
             loadCarousel();
             headerFooterSlide();
             videoSlide();
-            // loadSlick().done(function(data, textStatus, jqXHR) {
-            //     loadCarousel();
-            //     headerFooterSlide();
-            //     videoSlide();
-            //     //autoPlayVideoOnSlide();
-            //     //playVideoOnSlide();
-            //     //PulseTracking.init();
-            // });
-
         }
 
         return {

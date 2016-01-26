@@ -139,6 +139,20 @@
     display: none;
 }
 
+.pulse-mobile-ad-slide-wrapper {
+    height:250px;
+    position:relative;
+}
+
+.pulse-mobile-ad-slide-inner {
+    height:249px;
+    left:-1px;
+    overflow:hidden;
+    position:absolute;
+    width:300px;
+    top:-1px;
+}
+
 .pulse-mobile-footer {
     bottom: 0;
 }
