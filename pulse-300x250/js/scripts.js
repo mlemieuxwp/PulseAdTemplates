@@ -1,4 +1,4 @@
-(function(factory){
+(function(factory) {
     var url = 'https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/jquery-1.11.0.min.js';
 
     function isJQueryLoaded(url) {
@@ -10,14 +10,14 @@
         return false;
     }
 
-    function loadJQuery (url){
-        if(typeof parent.window.jQuery === 'undefined') {
+    function loadJQuery(url) {
+        if (typeof parent.window.jQuery === 'undefined') {
             var headTag = document.getElementsByTagName("head")[0];
             var jqTag = document.createElement('script');
             jqTag.type = 'text/javascript';
             jqTag.src = url;
             headTag.appendChild(jqTag);
-            jqTag.onload = function(){
+            jqTag.onload = function() {
                 factory(jQuery);
             };
         } else {
@@ -26,13 +26,13 @@
     }
 
     var tag = isJQueryLoaded(url);
-    if(tag){
+    if (tag) {
         var onload = tag.onload;
-        tag.onload = function(){
+        tag.onload = function() {
             onload(jQuery);
             factory(jQuery);
         };
-    }else{
+    } else {
         loadJQuery(url);
     }
 }(function($) {
@@ -178,11 +178,34 @@
 
         }
 
+        function iframeSlide() {
+            if (document.getElementById('pulse-mobile-ad')) {
+
+                var adv = document.getElementById('pulse-mobile-ad'),
+                    adv_parent = adv.parentNode.parentNode,
+                    slick_index = _$(adv_parent).data('slick-index');
+
+                $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+
+                    if (!_$(adv).hasClass('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
+
+                        var iframe_src = _$(adv).data('iframe');
+                        _$(adv).append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>').addClass('js-pulse-mobile-ad-active');
+
+                    }
+
+                });
+
+            }
+
+        }
+
         function init() {
             loadSlick().done(function(data, textStatus, jqXHR) {
                 loadCarousel();
                 headerFooterSlide();
                 videoSlide();
+                iframeSlide();
                 //autoPlayVideoOnSlide();
                 //playVideoOnSlide();
                 //PulseTracking.init();

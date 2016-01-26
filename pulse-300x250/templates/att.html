@@ -1,7 +1,7 @@
 <!-- Remove jquery before trafficking in dfp -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!--script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script-->
 <link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/mobile-300x250/main.css">
-<div class="pulse-mobile-wrapper" data-click="%%CLICK_URL_ESC%%%%DEST_URL%%" data-track="https://ad.doubleclick.net/N701/ad/wpni.clientmarketing/attpulse;sz=1x1;ord=">
+<div class="pulse-mobile-wrapper" data-click="%%CLICK_URL_ESC%%%%DEST_URL%%">
     <div class="pulse-mobile-header js-pulse-animate">
         <div class="pulse-article-label">
             <div class="pulse-article-label-small">Content Selected By AT&T</div>
@@ -45,9 +45,9 @@
             <img class="pulse-mobile-slide-img" data-lazy="https://img.washingtonpost.com/wp-apps/imrs.php?src=http://www.washingtonpost.com/blogs/innovations/files/2015/12/21981159388_e1fd235714_k.jpg&w=300">
         </div>
         <div>
-            <div style="position:relative;height:250px;">
-                <div style="position:absolute;width:300px;height:249px;left:-1px;top:-1px;overflow:hidden;">
-                    <iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0' height='250' width='300' src='https://ad.atdmt.com/i/a.html;p=11022203260427;cache=%%CACHEBUSTER%%?click=%%CLICK_URL_ESC%' topmargin='0' leftmargin='0' allowtransparency='1'></iframe>
+            <div class="pulse-mobile-ad-slide-wrapper">
+                <div id="pulse-mobile-ad" class="pulse-mobile-ad-slide-inner" data-iframe="https://ad.atdmt.com/i/a.html;p=11022203260427;cache=%%CACHEBUSTER%%?click=%%CLICK_URL_ESC%">
+
                 </div>
             </div>
         </div>
@@ -58,3 +58,4 @@
     </div>
 </div>
 <script src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/mobile-300x250/scripts.min.js"></script>
+<!--script src="../js/min/scripts.min.js"></script-->
