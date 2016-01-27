@@ -132,7 +132,8 @@
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    overflow: visible;
 }
 
 .pulse-bb-slideshow .slick-prev:before,
