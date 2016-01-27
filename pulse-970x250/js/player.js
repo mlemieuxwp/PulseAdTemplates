@@ -1,41 +1,7 @@
-(function(factory){
-    var url = 'https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/jquery-1.11.0.min.js';
-
-    function isJQueryLoaded(url) {
-        var scripts = document.getElementsByTagName('script');
-        for (var i = scripts.length; i--;) {
-            var tag = scripts[i];
-            if (tag.src == url) return tag;
-        }
-        return false;
-    }
-
-    function loadJQuery (url){
-        if(typeof parent.window.jQuery === 'undefined') {
-            var headTag = document.getElementsByTagName("head")[0];
-            var jqTag = document.createElement('script');
-            jqTag.type = 'text/javascript';
-            jqTag.src = url;
-            headTag.appendChild(jqTag);
-            jqTag.onload = function(){
-                factory(jQuery);
-            };
-        } else {
-            factory(parent.window.jQuery);
-        }
-    }
-
-    var tag = isJQueryLoaded(url);
-    if(tag){
-        var onload = tag.onload;
-        tag.onload = function(){
-            onload(jQuery);
-            factory(jQuery);
-        };
-    }else{
-        loadJQuery(url);
-    }
-}(function($) {
+getScript([
+        'jquery'
+    ],
+    function() {
 
         var PulsePlayer = (function() {
 
@@ -45,7 +11,7 @@
                 click_thru = _$('.pulse-wrapper').data('click'),
                 $video_play_button = _$('.pulse-player-play'),
                 $video_mute_button = _$('.pulse-player-volume');
-                $has_video_ctrls   = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
+                $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
 
 
             function advClickThru(event) {
@@ -80,7 +46,7 @@
 
             function videoEndEvents() {
                 video.load();
-                if($has_video_ctrls){
+                if ($has_video_ctrls) {
                     $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
                 }
             }
@@ -114,5 +80,4 @@
         })();
 
         PulsePlayer.init();
-
-    }));
+    });
