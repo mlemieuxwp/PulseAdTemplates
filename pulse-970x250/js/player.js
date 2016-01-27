@@ -34,6 +34,9 @@ getScript([
 
             function playBtnClick(event) {
                 event.preventDefault();
+                if($video_wrapper.length){
+                    $video_wrapper.off('click');
+                }
                 if (video.paused || video.ended) {
                     video.play();
                     _$(video).parent().addClass('pulse-player-active');
@@ -64,7 +67,6 @@ getScript([
             function bindVideoWrapper() {
                 if($video_wrapper.length && !video.hasAttribute('autoplay')){
                     $video_wrapper.on('click', function(e){
-                        $video_wrapper.off('click');
                         $video_play_button.click();
                         _$(video).on('click', advClickThru);
                     });
