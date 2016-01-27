@@ -10,7 +10,8 @@ getScript([
             var video = document.getElementById('pulse-player'),
                 click_thru = _$('.pulse-wrapper').data('click'),
                 $video_play_button = _$('.pulse-player-play'),
-                $video_mute_button = _$('.pulse-player-volume');
+                $video_mute_button = _$('.pulse-player-volume'),
+                $video_wrapper = _$('.pulse-player-wrapper');
                 $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
 
 
@@ -60,11 +61,23 @@ getScript([
                 });
             }
 
+            function bindVideoWrapper() {
+                if($video_wrapper.length && !video.hasAttribute('autoplay')){
+                    $video_wrapper.on('click', function(e){
+                        $video_wrapper.off('click');
+                        $video_play_button.click();
+                        _$(video).on('click', advClickThru);
+                    });
+                }else{
+                    _$(video).on('click', advClickThru);
+                }
+            }
+
             function bindFunctions() {
-                _$(video).on('click', advClickThru);
                 _$('.pulse-player-poster').on('click', advClickThru);
                 $video_mute_button.on('click', muteBtnClick);
                 $video_play_button.on('click', playBtnClick);
+                bindVideoWrapper();
                 _$(video).on('ended', videoEndEvents);
             }
 
