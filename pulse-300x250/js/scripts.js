@@ -140,6 +140,7 @@ getScript([
             loadCarousel();
             headerFooterSlide();
             videoSlide();
+            iframeSlide();
         }
 
         return {
