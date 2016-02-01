@@ -26,14 +26,13 @@
         },
         doc = global.document,
         head = doc && (doc.head || doc.getElementsByTagName('head')[0]),
-        activeScripts = {},
-        readyStates = 'addEventListener' in global ? {} : { 'loaded': 1, 'complete': 1 };
+        activeScripts = {};
 
         /** Get jQuery from parent window. Remove if you don't have parent window. **/
-        if(global.parent.jQuery){
-            global.$ = global.parent.jQuery;
-            global.jQuery = global.parent.jQuery;
-        }
+        // if(global.parent.jQuery){
+        //     global.$ = global.parent.jQuery;
+        //     global.jQuery = global.parent.jQuery;
+        // }
         /*******/
 
         function getScript(scripts, factory){
@@ -75,30 +74,26 @@
 
         function loadScript(script, factory, isEnd){
             /** Get jQuery from parent window. Remove if you don't have parent window. **/
-            if(global.parent.jQuery && script === 'jquery'){
-                if(isEnd){
-                    factory();
-                }
-                return;
-            }
+            // if(global.parent.jQuery && script === 'jquery'){
+            //     if(isEnd){
+            //         factory();
+            //     }
+            //     return;
+            // }
             /********/
             var el = document.createElement('script');
             el.type = 'text/javascript';
 
-            function process (ev) {
-                ev = ev || global.event;
-                if (ev.type == 'load' || readyStates[el.readyState]) {
-                    delete activeScripts[script];
-                    el.onload = el.onreadystatechange = el.onerror = '';
-                    if(factory && isEnd) {
-                        factory();
-                    }
+            function process (event) {
+                delete activeScripts[script];
+                el.onload = el.onreadystatechange = el.onerror = '';
+                if(factory && isEnd) {
+                    factory();
                 }
             }
             function fail (e) {
                 throw new Error('Syntax or http error: ' + script);
             }
-
             el.onload = el.onreadystatechange = process;
             el.onerror = fail;
             el.charset = 'utf-8';
