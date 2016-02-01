@@ -137,6 +137,11 @@
     color: #2e6d9d;
 }
 
+.pulse-article-cont-link {
+    margin: 10px 0 0 0;
+    font-size: .7em;
+}
+
 .pulse-article-desc {
     @include font-smoothing(on);
     font-size: 15px;
@@ -149,8 +154,122 @@
     width: 100%;
 }
 
+.pulse-slideshow-wrapper {
+    padding-top: 10px
+}
+
+.pulse-slideshow-label {
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    margin: 5px 0;
+    padding: 0px 10px 5px 10px;
+    overflow: hidden;
+}
+
+.pulse-slideshow-label:before {
+    background-color: #2A2A2A;
+    content: "";
+    display: block;
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    height: 0.25rem;
+    margin-bottom: 0.625rem;
+    width: 2rem;
+}
+
+.pulse-slides {
+    margin: 0;
+    width: 300px;
+    height: 230px;
+}
+
+.pulse-slideshow .pulse-slide {
+    text-align: center;
+}
+
+.pulse-slide-img {
+    display: inline-block;
+}
+
+.pulse-slide-img {
+    position: relative;
+}
+
+.pulse-slide-img-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.pulse-slide-desc {
+    position: absolute;
+    width: 75%;
+    margin: 0 12.5%;
+    top: 30%;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.pulse-slide-wp-logo {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.pulse-slideshow .slick-slider {
+    margin-bottom: 0;
+}
+
+.pulse-slideshow .slick-arrow {
+    font-family: "FontAwesome"
+}
+
+.pulse-slideshow .slick-arrow {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: visible;
+}
+
+.pulse-slideshow .slick-next {
+    right: 7px;
+}
+
+.pulse-slideshow .slick-prev {
+    left: 7px;
+}
+
+.pulse-slideshow .slick-prev:before,
+.pulse-slideshow .slick-next:before {
+    font-family: inherit;
+    font-size: 2em;
+    line-height: 1;
+    position: absolute;
+    color: #e9e9e9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.pulse-slideshow .slick-prev:before {
+    content: "\f053";
+}
+
+.pulse-slideshow .slick-next:before {
+    content: "\f054";
+}
+
 .pulse-footer { 
     padding: 0;
+    text-align: center;
+}
+
+.pulse-slideshow-footer { 
+    margin: 10px 0;
     text-align: center;
 }
 
