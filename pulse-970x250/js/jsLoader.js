@@ -29,10 +29,10 @@
         activeScripts = {};
 
         /** Get jQuery from parent window. Remove if you don't have parent window. **/
-        if(global.parent.jQuery){
-            global.$ = global.parent.jQuery;
-            global.jQuery = global.parent.jQuery;
-        }
+        // if(global.parent.jQuery){
+        //     global.$ = global.parent.jQuery;
+        //     global.jQuery = global.parent.jQuery;
+        // }
         /*******/
 
         function getScript(scripts, factory){
@@ -74,12 +74,12 @@
 
         function loadScript(script, factory, isEnd){
             /** Get jQuery from parent window. Remove if you don't have parent window. **/
-            if(global.parent.jQuery && script === 'jquery'){
-                if(isEnd){
-                    factory();
-                }
-                return;
-            }
+            // if(global.parent.jQuery && script === 'jquery'){
+            //     if(isEnd){
+            //         factory();
+            //     }
+            //     return;
+            // }
             /********/
             var el = document.createElement('script');
             el.type = 'text/javascript';
