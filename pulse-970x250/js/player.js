@@ -17,7 +17,7 @@ getScript([
 
             function advClickThru(event) {
                 event.preventDefault();
-                top.window.open(click_thru);
+                window.open(click_thru);
             }
 
             function muteBtnClick(event) {
