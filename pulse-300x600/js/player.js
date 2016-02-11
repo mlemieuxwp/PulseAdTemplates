@@ -12,7 +12,8 @@ getScript([
             $video_play_button = _$('.pulse-player-play'),
             $video_mute_button = _$('.pulse-player-volume'),
             $video_wrapper = _$('.pulse-player-wrapper'),
-            $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true;
+            $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true,
+            isFirstClick = true;
 
         function playBtnTrack(tracking_url) {
             if (tracking_url) {
@@ -41,9 +42,12 @@ getScript([
 
         function playBtnClick(event) {
             event.preventDefault();
-            if($video_wrapper.length){
+            if($video_wrapper.length && isFirstClick){
                 $video_wrapper.off('click');
+                isFirstClick = false;
+                _$(video).on('click', advClickThru);
             }
+
             if (video.paused || video.ended) {
                 playBtnTrack(tracking_url);
                 video.play();
@@ -76,7 +80,6 @@ getScript([
             if($video_wrapper.length && !video.hasAttribute('autoplay')){
                 $video_wrapper.on('click', function(e){
                     $video_play_button.click();
-                    _$(video).on('click', advClickThru);
                 });
             }else{
                 _$(video).on('click', advClickThru);
