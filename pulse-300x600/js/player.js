@@ -9,7 +9,7 @@ getScript([
         var video = document.getElementById('pulse-player'),
             click_thru = _$('.pulse-wrapper').data('click'),
             tracking_url = _$('.pulse-wrapper').data('track') ? _$('.pulse-wrapper').data('track') : false;
-        $video_play_button = _$('.pulse-player-play'),
+            $video_play_button = _$('.pulse-player-play'),
             $video_mute_button = _$('.pulse-player-volume'),
             $video_wrapper = _$('.pulse-player-wrapper'),
             $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true,
@@ -27,7 +27,6 @@ getScript([
             if ($(video).data('current-time')) {
                 video.currentTime = $(video).data('current-time');
             }
-
         }
 
         function advClickThru(event) {
