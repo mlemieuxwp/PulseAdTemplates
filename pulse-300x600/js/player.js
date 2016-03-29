@@ -1,7 +1,7 @@
 getScript([
     'jquery'
 ], function() {
-
+    $ = typeof $ !== 'undefined' ? $ : top.jQuery;
     var _$ = $.proxy($.fn.find, $(document));
 
     var PulsePlayer = (function() {
@@ -25,6 +25,8 @@ getScript([
 
         function setStartTime() {
             if ($(video).data('current-time')) {
+                video.play();
+                video.pause();
                 video.currentTime = $(video).data('current-time');
             }
         }
