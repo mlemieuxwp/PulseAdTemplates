@@ -1,13 +1,18 @@
 getScript([
-        'jquery',
-        'slick'
-    ], function() {
+    'jquery',
+    'slick'
+], function() {
     // set jquery scope for ad iframe
     var _$ = $.proxy($.fn.find, $(document)),
-        $pulse = _$('.pulse-mobile');
-
+        $pulse = _$('.pulse-mobile'),
+        click_thru = _$('.pulse-mobile-wrapper').data('click');
 
     var PulseCarousel = (function() {
+
+        function advClickThru(event) {
+            event.preventDefault();
+            window.open(click_thru);
+        }
 
         function headerFooterSlide() {
             var _slick = $pulse.slick('getSlick');
@@ -136,11 +141,23 @@ getScript([
 
         }
 
+        function imgAdSlide() {
+            if (click_thru && document.getElementById('pulse-mobile-img-ad')) {
+                var ad = document.getElementById('pulse-mobile-ad'),
+                    ad_click = _$('.pulse-mobile-wrapper').data('click');
+
+                _$('#pulse-mobile-img-ad').on('click', advClickThru);
+
+            }
+
+        }
+
         function init() {
             loadCarousel();
             headerFooterSlide();
             videoSlide();
             iframeSlide();
+            imgAdSlide();
         }
 
         return {
