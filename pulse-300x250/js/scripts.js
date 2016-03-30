@@ -142,11 +142,11 @@ getScript([
         }
 
         function imgAdSlide() {
-            if (click_thru && document.getElementById('pulse-mobile-img-ad')) {
+            if (click_thru && document.getElementById('js-pulse-mobile-img-ad')) {
                 var ad = document.getElementById('pulse-mobile-ad'),
                     ad_click = _$('.pulse-mobile-wrapper').data('click');
 
-                _$('#pulse-mobile-img-ad').on('click', advClickThru);
+                _$('#js-pulse-mobile-img-ad').on('click', advClickThru);
 
             }
 
