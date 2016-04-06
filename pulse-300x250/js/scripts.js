@@ -115,25 +115,38 @@ getScript([
         }
 
         function iframeSlide() {
-            if (document.getElementById('pulse-mobile-ad')) {
-
-                var adv = document.getElementById('pulse-mobile-ad'),
-                    adv_parent = adv.parentNode.parentNode,
+            var adv = document.getElementById('pulse-mobile-ad');
+            if (adv) {
+                var adv_parent = adv.parentNode.parentNode,
                     slick_index = _$(adv_parent).data('slick-index');
-
                 $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
 
                     if (!_$(adv).hasClass('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
-
                         var iframe_src = _$(adv).data('iframe');
                         _$(adv).append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>').addClass('js-pulse-mobile-ad-active');
-
                     }
-
                 });
-
             }
+        }
 
+        function lazyLoadAdIframeTag(){
+            var adContainer = document.getElementById('pulse-mobile-ad-iframe');
+            if(adContainer){
+                var slick_index = _$(adContainer).data('slick-index'),
+                adContent = _$(adContainer).children(':first')[0],
+                isNoScriptContent = _$(adContent).is('NOSCRIPT')? true:false,
+                isLoaded = false;
+
+                if(slick_index && isNoScriptContent){
+                    $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                        if (nextSlide === slick_index && !isLoaded) {
+                            var noscriptContent = _$(adContent).text();
+                            _$(adContainer).append(noscriptContent);
+                            isLoaded = true;
+                        }
+                    });
+                }
+            }
         }
 
         function init() {
@@ -141,6 +154,7 @@ getScript([
             headerFooterSlide();
             videoSlide();
             iframeSlide();
+            lazyLoadAdIframeTag();
         }
 
         return {
