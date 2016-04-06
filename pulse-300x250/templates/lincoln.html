@@ -1,10 +1,9 @@
-<!-- Remove jquery before trafficking in dfp -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/mobile-300x250/main.css">
-<div class="pulse-mobile-wrapper" data-click="%%CLICK_URL_ESC%%%%DEST_URL%%" data-track="https://ad.doubleclick.net/N701/ad/wpni.clientmarketing/lincolnpulse2;sz=1x1;ord=">
+<!--link rel="stylesheet" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/mobile-300x250/main.css"-->
+<link rel="stylesheet" href="../css/main.css">
+<div class="pulse-mobile-wrapper" data-click="%%CLICK_URL_ESC%%https://ad.doubleclick.net/ddm/clk/300247989;128628321;k" data-track="https://ad.doubleclick.net/N701/ad/wpni.clientmarketing/lincolnpulse2;sz=1x1;ord=">
     <div class="pulse-mobile-header js-pulse-animate">
         <div class="pulse-article-label">
-            <div class="pulse-article-label-small"><a href="%%CLICK_URL_ESC%%%%DEST_URL%%" class="pulse-mobile-desc-link" target="_blank">Content Selected By Lincoln</a></div>
+            <div class="pulse-article-label-small"><a href="%%CLICK_URL_ESC%%https://ad.doubleclick.net/ddm/clk/300247989;128628321;k" class="pulse-mobile-desc-link" target="_blank">Content Sponsored By Lincoln</a></div>
             <div class="pulse-article-logo-wrapper">
                 |<img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/WashPost-Logo-200x30.png" class="pulse-article-logo pulse-article-wp-logo" border="0" width="112" />
             </div>
@@ -48,12 +47,18 @@
             <div class="pulse-player-wrapper">
                 <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
                 <i class="fa fa-volume-up pulse-player-volume"></i>
-                <video id="pulse-player" class="pulse-player" data-src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_2016.mp4">
+                <video id="pulse-player" class="pulse-player" data-current-time="0.25" data-src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_2016.mp4">
                 </video>
             </div>
         </div>
     </div>
-    <div class="pulse-mobile-footer js-pulse-animate"></div>
-    <div class="pulse-tracking-wrapper"></div>
+    <div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate">
+        <div class="pulse-mobile-footer-client-logo">
+            <a href="%%CLICK_URL_ESC%%https://ad.doubleclick.net/ddm/clk/300247989;128628321;k" class="pulse-mobile-desc-link" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_logo.png" alt="" border="0" width="280" /></a>
+        </div>
+    </div>
+    <div class="pulse-tracking-wrapper">
+        <img src="https://ad.doubleclick.net/ddm/ad/N3016.washingtonpost.com/B9294900.128628321;sz=1x1;ord=%%CACHEBUSTER%%;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" border="0" height="1" width="1" alt="" />
+    </div>
 </div>
 <script src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/mobile-300x250/scripts.min.js"></script>

@@ -1,13 +1,18 @@
 getScript([
-        'jquery',
-        'slick'
-    ], function() {
+    'jquery',
+    'slick'
+], function() {
     // set jquery scope for ad iframe
     var _$ = $.proxy($.fn.find, $(document)),
-        $pulse = _$('.pulse-mobile');
-
+        $pulse = _$('.pulse-mobile'),
+        click_thru = _$('.pulse-mobile-wrapper').data('click');
 
     var PulseCarousel = (function() {
+
+        function advClickThru(event) {
+            event.preventDefault();
+            window.open(click_thru);
+        }
 
         function headerFooterSlide() {
             var _slick = $pulse.slick('getSlick');
@@ -115,38 +120,36 @@ getScript([
         }
 
         function iframeSlide() {
-            var adv = document.getElementById('pulse-mobile-ad');
-            if (adv) {
-                var adv_parent = adv.parentNode.parentNode,
+            if (document.getElementById('pulse-mobile-ad')) {
+
+                var adv = document.getElementById('pulse-mobile-ad'),
+                    adv_parent = adv.parentNode.parentNode,
                     slick_index = _$(adv_parent).data('slick-index');
+
                 $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
 
                     if (!_$(adv).hasClass('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
+
                         var iframe_src = _$(adv).data('iframe');
                         _$(adv).append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>').addClass('js-pulse-mobile-ad-active');
+
                     }
+
                 });
+
             }
+
         }
 
-        function lazyLoadAdIframeTag(){
-            var adContainer = document.getElementById('pulse-mobile-ad-iframe');
-            if(adContainer){
-                var slick_index = _$(adContainer).data('slick-index'),
-                adContent = _$(adContainer).children(':first')[0],
-                isNoScriptContent = _$(adContent).is('NOSCRIPT')? true:false,
-                isLoaded = false;
+        function imgAdSlide() {
+            if (click_thru && document.getElementById('js-pulse-mobile-img-ad')) {
+                var ad = document.getElementById('pulse-mobile-ad'),
+                    ad_click = _$('.pulse-mobile-wrapper').data('click');
 
-                if(slick_index && isNoScriptContent){
-                    $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        if (nextSlide === slick_index && !isLoaded) {
-                            var noscriptContent = _$(adContent).text();
-                            _$(adContainer).append(noscriptContent);
-                            isLoaded = true;
-                        }
-                    });
-                }
+                _$('#js-pulse-mobile-img-ad').on('click', advClickThru);
+
             }
+
         }
 
         function init() {
@@ -154,7 +157,7 @@ getScript([
             headerFooterSlide();
             videoSlide();
             iframeSlide();
-            lazyLoadAdIframeTag();
+            imgAdSlide();
         }
 
         return {

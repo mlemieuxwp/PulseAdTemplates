@@ -1,17 +1,15 @@
-<!-- Remove jquery before trafficking in dfp -->
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/300x600/main.css">
-<div class="pulse-wrapper" data-click="%%CLICK_URL_ESC%%%%DEST_URL%%" data-track="https://ad.doubleclick.net/N701/ad/wpni.clientmarketing/lincolnpulse1;sz=1x1;ord=">
+<div class="pulse-wrapper" data-click="%%CLICK_URL_ESC%%?https://ad.doubleclick.net/ddm/clk/300247989;128619819;w" data-track="https://ad.doubleclick.net/N701/ad/wpni.clientmarketing/lincolnpulse1;sz=1x1;ord=">
     <div class="pulse-player-wrapper">
         <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
         <i class="fa fa-volume-up pulse-player-volume"></i>
-        <video id="pulse-player" class="pulse-player">
-            <source src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_2016.mp4" type="video/mp4" />
+        <video id="pulse-player" class="pulse-player" data-current-time="0.25">
+            <source src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_2016.mp4#t=0.25,30" type="video/mp4" />
         </video>
     </div>
     <div class="pulse-article-list-wrapper">
         <div class="pulse-article-label">
-            <div class="pulse-article-label-small">Content Selected By Lincoln</div>
+            <div class="pulse-article-label-small">Content Sponsored By Lincoln</div>
             <div class="pulse-article-logo"><img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/WashPost-Logo-200x30.png" alt="" border="0" width="108" /></div>
         </div>
         <ul class="pulse-article-list">
@@ -45,12 +43,13 @@
             </li>
         </ul>
         <div class="pulse-footer">
-            <a href="%%CLICK_URL_ESC%%%%DEST_URL%%" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_logo.png" alt="" border="0" height="36" width="100%" /></a>
+            <a href="%%CLICK_URL_ESC%%?https://ad.doubleclick.net/ddm/clk/300247989;128623769;v" target="_blank"><img src="https://www.washingtonpost.com/wp-stat/advertising/Lincoln/Lincoln_300x600/lincoln_MKX_logo.png" alt="" border="0" height="36" width="100%" /></a>
         </div>
     </div>
-    <div class="pulse-tracking-wrapper"></div>
+    <div class="pulse-tracking-wrapper">
+        <img src="https://ad.doubleclick.net/ddm/ad/N3016.washingtonpost.com/B9294900.128619819;sz=1x1;ord=%%CACHEBUSTER%%;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" border="0" height="1" width="1" alt="" />
+        <img src="https://ad.doubleclick.net/ddm/ad/N3016.washingtonpost.com/B9294900.128623769;sz=1x1;ord=%%CACHEBUSTER%%;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" border="0" height="1" width="1" alt="" />
+    </div>
+</div>
 </div>
 <script type="text/javascript" src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/300x600/scripts.min.js"></script>
-<!-- <script src="/js/min/scripts.min.js"></script> -->
-<script src="/js/jsLoader.js"></script>
-<script src="/js/player.js"></script>

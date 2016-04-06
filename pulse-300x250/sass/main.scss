@@ -75,12 +75,25 @@
     background-image: url('https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/Logo-TWP-White.png');
     background-position: 160px 22px;
     background-repeat: no-repeat;
-    /*text-align: center;*/
+}
+
+.pulse-mobile-footer-wrapper { 
+    background-color: #ffffff;
 }
 
 .pulse-mobile-footer-logo {
     position: relative;
     top: 50%;
+    transform: translateY(-50%);
+}
+
+.pulse-mobile-footer-client-logo { 
+    padding: 0 10px 0 10px;
+    position: relative;
+    text-align: center;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 

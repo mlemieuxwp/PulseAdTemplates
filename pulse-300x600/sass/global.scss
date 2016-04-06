@@ -63,7 +63,7 @@
 
 .pulse-article-label {
     font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    margin: 5px 0;
+    margin: 0 0 5px 0;
     overflow: hidden;
 }
 
@@ -81,6 +81,12 @@
     float: left;
     padding-left: 10px;
     width: auto;
+}
+
+.pulse-article-logo-sm { 
+    position: relative;
+    top: -2px;
+    width: 23px;
 }
 
 .pulse-article-label-small {

@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/300x600/main.css">
+<div class="pulse-wrapper" data-click="[UNENCODED_CLICK_REDIRECT]" data-track="https://pubads.g.doubleclick.net/gampad/ad?iu=701/wpni.clientmarketing/siemensvidstart&sz=1x1&c=">
+    <div class="pulse-player-wrapper">
+        <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
+        <i class="fa fa-volume-up pulse-player-volume"></i>
+        <video id="pulse-player" class="pulse-player" poster="">
+            <source src="https://videoads.washingtonpost.com/siemens_2016-03_640_360_600.mp4" type="video/mp4" />
+        </video>
+    </div>
+    <div class="pulse-article-list-wrapper">
+        <div class="pulse-article-label">
+            <div class="pulse-article-label-small">Content Selected By Siemens</div>
+            <div class="pulse-article-logo">
+                <img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/WashPost-Logo-200x30.png" alt="" border="0" width="108" />
+            </div>
+        </div>
+        <!-- THIS WILL BE FILLED WITH THE ARTICLES -->
+        <div id="articles"></div>
+        <!-- THIS WILL BE FILLED WITH THE ARTICLES -->
+        <div class="pulse-footer">
+            <a href="[UNENCODED_CLICK_REDIRECT]" target="_blank">
+                <img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=https://www.washingtonpost.com/wp-stat/incontext/assets/e291ac8f-bdad-4a35-86f8-7ab5ddef877e.png&h=40" alt="" border="0" />
+            </a>
+        </div>
+        <div class="pulse-tracking-wrapper">
+            <!-- PLACE TRACKING PIXEL CODE HERE -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/300x600/scripts.min.js"></script>
+<script type="text/javascript" src="https://wp-stat.s3.amazonaws.com/incontext/postpulse/loader.js?1">
+</script>
+<script type="text/javascript">
+loadArticles(3447898, "desktop");
+</script>

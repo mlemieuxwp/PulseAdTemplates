@@ -1,7 +1,7 @@
 getScript([
-        'jquery'
-    ], function() {
-
+    'jquery'
+], function() {
+    $ = typeof $ !== 'undefined' ? $ : top.jQuery;
     var _$ = $.proxy($.fn.find, $(document));
 
     var PulsePlayer = (function() {
@@ -18,8 +18,16 @@ getScript([
         function playBtnTrack(tracking_url) {
             if (tracking_url) {
                 var rand_num = Math.floor(Math.random() * 10000000) + '?';
-                    tracking_url = tracking_url + rand_num;
+                tracking_url = tracking_url + rand_num;
                 _$('.pulse-tracking-wrapper').append('<img src="' + tracking_url + '" alt="" border="0" height="1" width="1" style="display:none;" />');
+            }
+        }
+
+        function setStartTime() {
+            if ($(video).data('current-time')) {
+                video.play();
+                video.pause();
+                video.currentTime = $(video).data('current-time');
             }
         }
 
@@ -42,7 +50,7 @@ getScript([
 
         function playBtnClick(event) {
             event.preventDefault();
-            if($video_wrapper.length && isFirstClick){
+            if ($video_wrapper.length && isFirstClick) {
                 $video_wrapper.off('click');
                 isFirstClick = false;
                 _$(video).on('click', advClickThru);
@@ -77,11 +85,11 @@ getScript([
         }
 
         function bindVideoWrapper() {
-            if($video_wrapper.length && !video.hasAttribute('autoplay')){
-                $video_wrapper.on('click', function(e){
+            if ($video_wrapper.length && !video.hasAttribute('autoplay')) {
+                $video_wrapper.on('click', function(e) {
                     $video_play_button.click();
                 });
-            }else{
+            } else {
                 _$(video).on('click', advClickThru);
             }
         }
@@ -90,6 +98,7 @@ getScript([
             _$('.pulse-player-poster').on('click', advClickThru);
             $video_mute_button.on('click', muteBtnClick);
             $video_play_button.on('click', playBtnClick);
+            setStartTime();
             bindVideoWrapper();
             _$(video).on('ended', videoEndEvents);
         }
