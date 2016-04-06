@@ -152,12 +152,33 @@ getScript([
 
         }
 
+        function lazyLoadAdIframeTag(){
+            var adContainer = document.getElementById('pulse-mobile-ad-iframe');
+            if(adContainer){
+                var slick_index = _$(adContainer).data('slick-index'),
+                adContent = _$(adContainer).children(':first')[0],
+                isNoScriptContent = _$(adContent).is('NOSCRIPT')? true:false,
+                isLoaded = false;
+
+                if(slick_index && isNoScriptContent){
+                    $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                        if (nextSlide === slick_index && !isLoaded) {
+                            var noscriptContent = _$(adContent).text();
+                            _$(adContainer).append(noscriptContent);
+                            isLoaded = true;
+                        }
+                    });
+                }
+            }
+        }
+
         function init() {
             loadCarousel();
             headerFooterSlide();
             videoSlide();
             iframeSlide();
             imgAdSlide();
+            lazyLoadAdIframeTag();
         }
 
         return {
