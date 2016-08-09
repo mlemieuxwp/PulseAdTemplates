@@ -19,13 +19,15 @@ getScript([
             var slide_count = _slick.slideCount - 1;
 
             $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                if (slide_count === nextSlide) {
+
+                if (slick.$slides[nextSlide].hasAttribute('data-animate')) {
                     _$('.js-pulse-animate').slideUp();
                 }
 
                 if (!_$('.js-pulse-animate').is(':visible')) {
                     _$('.js-pulse-animate').slideDown();
                 }
+            
             });
         }
 

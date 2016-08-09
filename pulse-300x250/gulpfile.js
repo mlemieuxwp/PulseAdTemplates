@@ -87,7 +87,7 @@ gulp.task('browser-sync', function() {
 *
 **/
 gulp.task('scripts', function() {
-  gulp.src(['js/jsLoader.js', 'js/scripts.js','js/player.js'])
+  gulp.src(['js/jsLoader.js', 'js/articles.js', 'js/scripts.js','js/player.js'])
   .pipe(uglify())
   // .pipe(rename({
   //   dirname: "min",
