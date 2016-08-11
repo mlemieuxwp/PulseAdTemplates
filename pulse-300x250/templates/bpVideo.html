@@ -1,0 +1,46 @@
+<script type="text/javascript">
+var linkClickPixel = '';
+var PulseVideoTracking = {
+    start: 'https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=isi&interactionsStr=37785452~~0^ebVideoStarted~0~0~1~0~1~0~0&pos=9425&ebRandom=%%CACHEBUSTER%%',
+    end: 'https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=isi&interactionsStr=37785452~~0^ebVideoFullPlay~0~0~1~0~1~0~0&pos=9425&ebRandom=%%CACHEBUSTER%%',
+    quarter: 'https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=isi&interactionsStr=37785452~~0^eb25Per_Played~0~0~1~0~1~0~0&pos=9425&ebRandom=%%CACHEBUSTER%%',
+    half: 'https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=isi&interactionsStr=37785452~~0^eb50Per_Played~0~0~1~0~1~0~0&pos=9425&ebRandom=%%CACHEBUSTER%%',
+    threequarters: 'https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=isi&interactionsStr=37785452~~0^eb75Per_Played~0~0~1~0~1~0~0&pos=9425&ebRandom=%%CACHEBUSTER%%'
+}
+</script>
+<link rel="stylesheet" type="text/css" href="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/css/mobile-300x250/main.css">
+<div class="pulse-mobile-wrapper" data-click="%%CLICK_URL_ESC%%%%DEST_URL%%">
+    <div class="pulse-mobile-header js-pulse-animate">
+        <div class="pulse-article-label">
+            <div class="pulse-article-label-small">Content Selected By BP</div>
+            <div class="pulse-article-logo-wrapper">
+                |<img src="https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/wp_logo.png" class="pulse-article-logo pulse-article-wp-logo pulse-article-logo-sm" border="0" width="23" />
+            </div>
+        </div>
+    </div>
+    <div class="pulse-mobile">
+        <!-- THIS WILL BE FILLED WITH THE ARTICLES -->
+        <div id="articles"></div>
+        <div id="pulse-mobile-ad-iframe">
+            <div class="pulse-player-wrapper">
+                <i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>
+                <i class="fa fa-volume-up pulse-player-volume"></i>
+                <video id="pulse-player" class="pulse-player" poster="https://www.washingtonpost.com/wp-stat/incontext/assets/ed9af3de-fc11-48fe-afb7-7cba8c651d2e.png" data-src="https://www.washingtonpost.com/wp-stat/advertising/BP/postPulse/BP_640_360_600.mp4"></video>
+            </div>
+        </div>
+        <!-- THIS WILL BE FILLED WITH THE ARTICLES -->
+    </div>
+    <div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate">
+        <div class="pulse-mobile-footer-client-logo">
+            <a href="%%CLICK_URL_ESC%%%%DEST_URL%%" class="pulse-mobile-desc-link" target="_blank"><img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=https://www.washingtonpost.com/wp-stat/incontext/assets/cd6da3f0-3660-48f8-be53-87e878fd0907.png&h=40" alt="" border="0" class="pulse-mobile-footer-logo" /></a>
+        </div>
+    </div>
+    <div class="pulse-tracking-wrapper" style="display:none;">
+        <img src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=tf&c=19&mc=imp&pli=18439635&PluID=0&ord=%%CACHEBUSTER%%&rtu=-1" />
+    </div>
+</div>
+<script type="text/javascript" src="../js/min/scripts.min.js">
+</script>
+<!--script type="text/javascript">
+loadArticles(3453339, "mobile");
+</script-->
