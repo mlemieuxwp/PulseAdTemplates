@@ -1,12 +1,12 @@
 var PulseTracking = (function() {
-	
-	// get video element and tracking object
-    
+
+    // get video element and tracking object
+
     var videoId = document.getElementById('pulse-player');
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
     // set up tracking variables
-    if(typeof PulseVideoTracking !== 'undefined'){
+    if (typeof PulseVideoTracking !== 'undefined') {
         var trackStart = PulseVideoTracking && PulseVideoTracking.start || null,
             trackEnd = PulseVideoTracking && PulseVideoTracking.end || null,
             trackQuarter = PulseVideoTracking && PulseVideoTracking.quarter || null,
@@ -18,12 +18,12 @@ var PulseTracking = (function() {
 
     function setTrackPixel(url) {
 
-    	var img = new Image();
-	    	img.alt = '';
-		    img.border = 0;
-		    img.height = 1;
-		    img.width = 1;
-		    img.style.display = 'none';
+        var img = new Image();
+        img.alt = '';
+        img.border = 0;
+        img.height = 1;
+        img.width = 1;
+        img.style.display = 'none';
 
         if (url) {
             url = url.replace(/%%CACHEBUSTER%%/gi, '');
@@ -71,7 +71,7 @@ var PulseTracking = (function() {
     // event: video play
 
     function videoPlay() {
-    	setTrackPixel(trackStart);
+        setTrackPixel(trackStart);
         setKeyFrames(this.duration)
     }
 
@@ -81,11 +81,13 @@ var PulseTracking = (function() {
         console.log('video paused');
     }
 
-    function bindEvents(){ 
-    	videoId.addEventListener('ended', videoEnd, false);
-        videoId.addEventListener('timeupdate', videoTimeUpdate, false);
-        videoId.addEventListener('play', videoPlay, false);
-        //videoId.addEventListener('pause', videoPause, false);
+    function bindEvents() {
+        if (videoId) {
+            videoId.addEventListener('ended', videoEnd, false);
+            videoId.addEventListener('timeupdate', videoTimeUpdate, false);
+            videoId.addEventListener('play', videoPlay, false);
+            //videoId.addEventListener('pause', videoPause, false);
+        }
     }
 
     function init() {
@@ -99,4 +101,3 @@ var PulseTracking = (function() {
 })();
 
 document.addEventListener('DOMContentLoaded', PulseTracking.init(), false);
-
