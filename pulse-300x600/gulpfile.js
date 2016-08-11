@@ -19,6 +19,27 @@ var imagemin = require("gulp-imagemin");
 var pngquant = require('imagemin-pngquant');
 var concat = require('gulp-concat');
 
+/**
+*** Versioning
+*** Versioning Used: [Semantic](http://semver.org/)
+*** String, lowercase
+
+  - MAJOR ("major") version when you make incompatible API changes
+  - MINOR ("minor") version when you add functionality in a backwards-compatible manner
+  - PATCH ("patch") version when you make backwards-compatible bug fixes.
+  - PRERELEASE ("prerelease") a pre-release version
+
+*** Version example
+
+    major: 1.0.0
+    minor: 0.1.0
+    patch: 0.0.2
+    prerelease: 0.0.1-2
+**/
+var version = "1.0.0";
+
+
+
 function swallowError() {
     console.log(err);
     this.emit('end');
@@ -73,7 +94,7 @@ gulp.task('scripts', function() {
         .pipe(concat('scripts.js'))
         .pipe(rename({
             dirname: "min",
-            suffix: ".min",
+            suffix: "-"+version+".min",
         }))
         .pipe(gulp.dest('js'))
         .pipe(gulp.dest('dist/js'));
