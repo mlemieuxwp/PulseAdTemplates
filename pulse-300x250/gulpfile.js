@@ -24,6 +24,25 @@ var clean        = require('gulp-clean');
 var concat       = require('gulp-concat');
 
 /**
+*** Versioning
+*** Versioning Used: [Semantic](http://semver.org/)
+*** String, lowercase
+
+  - MAJOR ("major") version when you make incompatible API changes
+  - MINOR ("minor") version when you add functionality in a backwards-compatible manner
+  - PATCH ("patch") version when you make backwards-compatible bug fixes.
+  - PRERELEASE ("prerelease") a pre-release version
+
+*** Version example
+
+    major: 1.0.0
+    minor: 0.1.0
+    patch: 0.0.2
+    prerelease: 0.0.1-2
+**/
+var version = "1.0.0";
+
+/**
 *
 * Styles
 * - Compile
@@ -93,7 +112,7 @@ gulp.task('scripts', function() {
   //   dirname: "min",
   //   suffix: ".min",
   // }))
-  .pipe(concat('scripts.min.js'))
+  .pipe(concat('scripts-'+version+'.min.js'))
   .pipe(gulp.dest('js/min'));
 });
 
