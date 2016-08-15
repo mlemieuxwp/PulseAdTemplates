@@ -36,7 +36,7 @@ var concat = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "1.0.0";
+var version = "2.0.0";
 
 
 
