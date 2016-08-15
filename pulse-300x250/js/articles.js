@@ -12,7 +12,9 @@ var PulseArticles = (function() {
         '</a>' +
         '</div>' +
         '</div>' +
+        '<%if(this.articles[index].src) {%>' +
         '<img class="pulse-mobile-slide-img" data-lazy="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300">' +
+        '<%}%>' +
         '</div>' +
         '<%}%>' +
         '<%} else {%>' +
