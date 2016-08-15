@@ -6,7 +6,9 @@ var PulseArticles = (function() {
         '<li class="pulse-article-list-item">' +
         '<div class="pulse-article-thumb-wrapper">' +
         '<a href="<%this.articles[index].url%>" target="_top">' +
+        '<%if(this.articles[index].src) {%>' +
         '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=60&w=60" border="0" class="pulse-article-thumbnail" />' +
+        '<%}%>' +
         '</a>' +
         '</div>' +
         '<div class="pulse-article-number"><% this.addOne(index) %></div>' +
@@ -45,13 +47,15 @@ var PulseArticles = (function() {
     }
 
     function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+        if(array){
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
         }
-        return array;
     }
 
 
@@ -67,7 +71,7 @@ var PulseArticles = (function() {
 
             articles = JSON.parse(articles);
             rand_articles = shuffleArray(articles);
-            sel_articles = rand_articles.slice(1, 4);
+            sel_articles = rand_articles.slice(0, 3);
 
             var html = TemplateEngine(template, {
                 articles: sel_articles,
@@ -77,14 +81,7 @@ var PulseArticles = (function() {
                 }
             });
 
-            var elem = document.createElement('ul');
-            elem.className = 'pulse-article-list';
-            elem.innerHTML = html;
-
-            articleDiv.parentNode.insertBefore(elem, articleDiv);
-
-            var parent = articleDiv.parentNode;
-            parent.removeChild(articleDiv);
+            articleDiv.innerHTML = html;
 
         }
 

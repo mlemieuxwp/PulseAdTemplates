@@ -71,9 +71,9 @@ var PulseArticles = (function() {
                 sel_articles = articles;
             }
 
-            while (articleDiv.firstChild) {
-                articleDiv.removeChild(articleDiv.firstChild);
-            }
+            // while (articleDiv.firstChild) {
+            //     articleDiv.removeChild(articleDiv.firstChild);
+            // }
 
             var html = TemplateEngine(template, {
                 articles: sel_articles,
@@ -87,12 +87,13 @@ var PulseArticles = (function() {
 
                 el = elem.childNodes[i];
                 elem.removeChild(el);
-                articleDiv.parentNode.insertBefore(el, articleDiv);
+                articleDiv.insertBefore(el, articleDiv.firstChild);
             
             }
 
-            var parent = articleDiv.parentNode;
-            parent.removeChild(articleDiv);
+
+            // var parent = articleDiv.parentNode;
+            // parent.removeChild(articleDiv);
 
         }
     }

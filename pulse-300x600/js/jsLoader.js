@@ -17,11 +17,10 @@
     var
         config = {
             path:{
-                'jquery': 'https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/jquery-1.11.0.min.js',
-                'slick': 'https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/mobile-300x250/slick.min.js'
+                'jquery': 'https://www.washingtonpost.com/wp-stat/advertising/PostPulse/js/jquery-1.11.0.min.js'
             },
             shim: {
-                'slick':{deps: ['jquery']}
+                // 'slick':{deps: ['jquery']}
             }
         },
         doc = global.document,
