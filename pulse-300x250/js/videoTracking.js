@@ -7,11 +7,11 @@ var PulseTracking = (function() {
 
     // set up tracking variables
     if (typeof PulseVideoTracking !== 'undefined') {
-        var trackStart = PulseVideoTracking && PulseVideoTracking.start || null,
-            trackEnd = PulseVideoTracking && PulseVideoTracking.end || null,
-            trackQuarter = PulseVideoTracking && PulseVideoTracking.quarter || null,
-            trackHalf = PulseVideoTracking && PulseVideoTracking.half || null,
-            trackThreeQ = PulseVideoTracking && PulseVideoTracking.threequarters || null;
+        var trackStart = PulseVideoTracking && PulseVideoTracking.trackStart || null,
+            track100 = PulseVideoTracking && PulseVideoTracking.track100 || null,
+            track25 = PulseVideoTracking && PulseVideoTracking.track25 || null,
+            track50 = PulseVideoTracking && PulseVideoTracking.track50 || null,
+            track75 = PulseVideoTracking && PulseVideoTracking.track75 || null;
     }
 
     // create tracking pixel
@@ -49,14 +49,14 @@ var PulseTracking = (function() {
 
         var curTime = videoId.currentTime.toFixed(1);
 
-        if (trackQuarter && (curTime >= parseInt(sessionStorage.getItem('one')))) {
-            setTrackPixel(trackQuarter);
+        if (track25 && (curTime >= parseInt(sessionStorage.getItem('one')))) {
+            setTrackPixel(track25);
             sessionStorage.setItem('one', null);
-        } else if (trackHalf && (curTime >= parseInt(sessionStorage.getItem('two')))) {
-            setTrackPixel(trackHalf);
+        } else if (track50 && (curTime >= parseInt(sessionStorage.getItem('two')))) {
+            setTrackPixel(track50);
             sessionStorage.setItem('two', null);
-        } else if (trackThreeQ && (curTime >= parseInt(sessionStorage.getItem('three')))) {
-            setTrackPixel(trackThreeQ);
+        } else if (track75 && (curTime >= parseInt(sessionStorage.getItem('three')))) {
+            setTrackPixel(track75);
             sessionStorage.setItem('three', null);
         }
 
@@ -65,7 +65,7 @@ var PulseTracking = (function() {
     // event: video end
 
     function videoEnd() {
-        setTrackPixel(trackEnd);
+        setTrackPixel(track100);
     }
 
     // event: video play

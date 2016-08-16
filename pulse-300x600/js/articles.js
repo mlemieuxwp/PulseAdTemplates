@@ -47,7 +47,7 @@ var PulseArticles = (function() {
     }
 
     function shuffleArray(array) {
-        if(array){
+        if (array) {
             for (var i = array.length - 1; i > 0; i--) {
                 var j = Math.floor(Math.random() * (i + 1));
                 var temp = array[i];
@@ -69,19 +69,22 @@ var PulseArticles = (function() {
             var sel_articles;
             var rand_articles;
 
-            articles = JSON.parse(articles);
-            rand_articles = shuffleArray(articles);
-            sel_articles = rand_articles.slice(0, 3);
+            if (articles) {
+                
+                articles = JSON.parse(articles);
+                rand_articles = shuffleArray(articles);
+                sel_articles = rand_articles.slice(0, 3);
 
-            var html = TemplateEngine(template, {
-                articles: sel_articles,
-                showArticles: true,
-                addOne: function(i) {
-                    return parseInt(i, 10) + 1;
-                }
-            });
+                var html = TemplateEngine(template, {
+                    articles: sel_articles,
+                    showArticles: true,
+                    addOne: function(i) {
+                        return parseInt(i, 10) + 1;
+                    }
+                });
 
-            articleDiv.innerHTML = html;
+                articleDiv.innerHTML = html;
+            }
 
         }
 
