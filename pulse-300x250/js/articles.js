@@ -66,36 +66,31 @@ var PulseArticles = (function() {
 
             articles = JSON.parse(articles);
 
-            if (shuffle) {
-                rand_articles = shuffleArray(articles);
-                sel_articles = rand_articles.slice(1, 4);
-            } else {
-                sel_articles = articles;
+            if (articles) {
+
+                if(shuffle){
+                    sel_articles = shuffleArray(articles).slice(0, 3);
+                } else {
+                    sel_articles = articles.slice(0, 3);
+                    sel_articles.reverse();
+                }
+
+                var html = TemplateEngine(template, {
+                    articles: sel_articles,
+                    showArticles: true
+                });
+
+                var elem = document.createElement('div');
+                elem.innerHTML = html;
+
+                for (i = 0; i < elem.childNodes.length;) {
+                    el = elem.childNodes[i];
+                    elem.removeChild(el);
+                    articleDiv.insertBefore(el, articleDiv.firstChild);
+                }
+
+
             }
-
-            // while (articleDiv.firstChild) {
-            //     articleDiv.removeChild(articleDiv.firstChild);
-            // }
-
-            var html = TemplateEngine(template, {
-                articles: sel_articles,
-                showArticles: true
-            });
-
-            var elem = document.createElement('div');
-            elem.innerHTML = html;
-
-            for (i = 0; i < elem.childNodes.length;) {
-
-                el = elem.childNodes[i];
-                elem.removeChild(el);
-                articleDiv.insertBefore(el, articleDiv.firstChild);
-            
-            }
-
-
-            // var parent = articleDiv.parentNode;
-            // parent.removeChild(articleDiv);
 
         }
     }

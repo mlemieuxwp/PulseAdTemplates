@@ -72,9 +72,13 @@ var PulseArticles = (function() {
             if (articles) {
                 
                 articles = JSON.parse(articles);
-                rand_articles = shuffleArray(articles);
-                sel_articles = rand_articles.slice(0, 3);
 
+                if(shuffle){
+                    sel_articles = shuffleArray(articles).slice(0, 3);
+                } else {
+                    sel_articles = articles.slice(0, 3);
+                }
+                
                 var html = TemplateEngine(template, {
                     articles: sel_articles,
                     showArticles: true,
