@@ -57,13 +57,17 @@ gulp.task('sass', function() {
   .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
   .pipe(plumber())
   .pipe(concat('main.css'))
+  .pipe(rename({
+            dirname: "min",
+            suffix: "-"+version+".min",
+  }))
   .pipe(gulp.dest('css'));
 });
 
-gulp.task('clean-scripts', function () {
-  return gulp.src('css/*', {read: false})
-    .pipe(clean());
-});
+// gulp.task('clean-scripts', function () {
+//   return gulp.src('css/*', {read: false})
+//     .pipe(clean());
+// });
 
 // gulp.task('remote', function() {
 //   remotesrc(['cc82e7d48c.css'], {
@@ -140,7 +144,7 @@ gulp.task('images', function () {
 * - Watchs for file changes for images, scripts and sass/css
 *
 **/
-gulp.task('default', ['clean-scripts', 'sass', 'browser-sync', 'scripts', 'images'], function () {
+gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
   gulp.watch('sass/**/*.scss', ['sass']);
   gulp.watch('js/**/*.js', ['scripts']);
   gulp.watch('images/*', ['images']);
