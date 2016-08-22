@@ -36,7 +36,7 @@ var concat = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "2.0.0";
+var version = "2.1.0";
 
 
 
@@ -62,6 +62,10 @@ gulp.task('sass', function() {
         .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
         .pipe(plumber(swallowError))
         .pipe(concat('main.css'))
+        .pipe(rename({
+            dirname: "min",
+            suffix: "-"+version+".min",
+        }))
         .pipe(gulp.dest('css'))
         .pipe(gulp.dest('dist/css'));
 });

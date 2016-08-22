@@ -3,7 +3,8 @@ var PulseArticles = (function() {
     var template =
         '<%if(this.showArticles) {%>' +
         '<%for(var index in this.articles) {%>' +
-        '<li class="pulse-article-list-item">' +
+        '<li class="pulse-article-list-item <% this.sponCheck(index) %>">' +
+        '<div class="pulse-article-wrapper cf">' +
         '<div class="pulse-article-thumb-wrapper">' +
         '<a href="<%this.articles[index].url%>" target="_top">' +
         '<%if(this.articles[index].src) {%>' +
@@ -15,9 +16,15 @@ var PulseArticles = (function() {
         '<div class="pulse-article-desc-wrapper">' +
         '<p class="pulse-article-desc">' +
         '<a href="<%this.articles[index].url%>" class="pulse-article-desc-link" target="_top">' +
+        '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
+        '<label class="pulse-article-desc-label">' +
+        'content from <%this.articles[index].content_from%>' +
+        '</label>' +
+        '<%}%>' +
         '<%this.articles[index].title%>' +
         '</a>' +
         '</p>' +
+        '</div>' +
         '</div>' +
         '</li>' +
         '<%}%>' +
@@ -70,20 +77,27 @@ var PulseArticles = (function() {
             var rand_articles;
 
             if (articles) {
-                
+
                 articles = JSON.parse(articles);
 
-                if(shuffle){
+                if (shuffle) {
                     sel_articles = shuffleArray(articles).slice(0, 3);
                 } else {
                     sel_articles = articles.slice(0, 3);
                 }
-                
+
                 var html = TemplateEngine(template, {
                     articles: sel_articles,
                     showArticles: true,
                     addOne: function(i) {
                         return parseInt(i, 10) + 1;
+                    },
+                    sponCheck: function(i) {
+                        var classes = ''
+                        if (this.articles[i].sponsor && this.articles[i].content_from) {
+                            classes = 'sponsor'
+                        }
+                        return classes;
                     }
                 });
 

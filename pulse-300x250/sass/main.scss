@@ -81,11 +81,11 @@
     background-color: #ffffff;
 }
 
-.pulse-mobile-footer-logo {
+/*.pulse-mobile-footer-logo {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-}
+}*/
 
 .pulse-mobile-footer-client-logo { 
     padding: 0 10px 0 10px;
@@ -101,6 +101,11 @@
     background: rgba(0, 0, 0, 0.3);
     height: 250px;
     width: 300px;
+}
+
+.pulse-mobile-desc-label { 
+    font-size: 12px;
+    text-transform: capitalize;
 }
 
 .pulse-mobile-desc {

@@ -7,6 +7,11 @@ var PulseArticles = (function() {
         '<div class="pulse-mobile-desc-wrapper">' +
         '<div class="pulse-mobile-desc">' +
         '<a href="<%this.articles[index].url%>" class="pulse-mobile-desc-link" target="_top">' +
+        '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
+        '<label class="pulse-mobile-desc-label">' + 
+        'content from <%this.articles[index].content_from%>' +
+        '</label>' +
+        '<%}%>' +
         '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
         '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
         '</a>' +
@@ -72,7 +77,7 @@ var PulseArticles = (function() {
                     sel_articles = shuffleArray(articles).slice(0, 3);
                 } else {
                     sel_articles = articles.slice(0, 3);
-                    sel_articles.reverse();
+                    sel_articles.reverse(); //need to reverse to keep article order when we insertBefore below.
                 }
 
                 var html = TemplateEngine(template, {
