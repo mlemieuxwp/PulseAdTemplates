@@ -6,7 +6,7 @@ var PulseArticles = (function() {
         '<li class="pulse-article-list-item <% this.sponCheck(index) %>">' +
         '<div class="pulse-article-wrapper cf">' +
         '<div class="pulse-article-thumb-wrapper">' +
-        '<a href="<%this.articles[index].url%>" target="_top">' +
+        '<a href="<%this.articles[index].url%><%this.url_param%>" target="_top">' +
         '<%if(this.articles[index].src) {%>' +
         '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=60&w=60" border="0" class="pulse-article-thumbnail" />' +
         '<%}%>' +
@@ -15,7 +15,7 @@ var PulseArticles = (function() {
         '<div class="pulse-article-number"><% this.addOne(index) %></div>' +
         '<div class="pulse-article-desc-wrapper">' +
         '<p class="pulse-article-desc">' +
-        '<a href="<%this.articles[index].url%>" class="pulse-article-desc-link" target="_top">' +
+        '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-article-desc-link" target="_top">' +
         '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
         '<label class="pulse-article-desc-label">' +
         'content from <%this.articles[index].content_from%>' +
@@ -73,6 +73,8 @@ var PulseArticles = (function() {
             var articleDiv = document.getElementById('articles');
             var articles = articleDiv.getAttribute('data-articles');
             var shuffle = articleDiv.getAttribute('data-shuffle');
+            var url_param = articleDiv.getAttribute('data-urlparam');
+            console.log('url_param',url_param);
             var sel_articles;
             var rand_articles;
 
@@ -98,7 +100,8 @@ var PulseArticles = (function() {
                             classes = 'sponsor'
                         }
                         return classes;
-                    }
+                    },
+                    url_param: '?spon_con=' + url_param || ''
                 });
 
                 articleDiv.innerHTML = html;
