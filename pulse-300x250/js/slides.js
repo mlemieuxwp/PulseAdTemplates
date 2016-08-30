@@ -7,7 +7,7 @@ var PulseSlides = (function() {
             '<div class="js-pulse-mobile-article">' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%>" class="pulse-mobile-desc-link" target="_top">' +
+            '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="_top">' +
             '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
             '<label class="pulse-mobile-desc-label">' +
             'content from <%this.articles[index].content_from%>' +
@@ -99,6 +99,7 @@ var PulseSlides = (function() {
             var articleDiv = document.getElementById('articles');
             var articles = articleDiv.getAttribute('data-articles');
             var shuffle = articleDiv.getAttribute('data-shuffle');
+            var url_param = articleDiv.getAttribute('data-urlparam');
             var sel_articles;
             var rand_articles;
 
@@ -115,7 +116,8 @@ var PulseSlides = (function() {
 
                 var html = TemplateEngine(Templates['articles'], {
                     articles: sel_articles,
-                    showArticles: true
+                    showArticles: true,
+                    url_param: '?spon_con=' + url_param || ''
                 });
 
                 // var elem = document.createElement('div');
@@ -139,8 +141,6 @@ var PulseSlides = (function() {
                 });
                 html = adHtml + html;
             }
-
-
 
             var elem = document.createElement('div');
             elem.innerHTML = html;

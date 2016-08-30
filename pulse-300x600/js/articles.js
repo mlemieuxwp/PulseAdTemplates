@@ -74,7 +74,6 @@ var PulseArticles = (function() {
             var articles = articleDiv.getAttribute('data-articles');
             var shuffle = articleDiv.getAttribute('data-shuffle');
             var url_param = articleDiv.getAttribute('data-urlparam');
-            console.log('url_param',url_param);
             var sel_articles;
             var rand_articles;
 
