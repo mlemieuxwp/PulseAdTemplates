@@ -117,7 +117,7 @@ var PulseSlides = (function() {
                 var html = TemplateEngine(Templates['articles'], {
                     articles: sel_articles,
                     showArticles: true,
-                    url_param: '?spon_con=' + url_param || ''
+                    url_param: url_param ? '?spon_con=' + url_param : ''
                 });
 
                 // var elem = document.createElement('div');

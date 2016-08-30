@@ -100,7 +100,7 @@ var PulseArticles = (function() {
                         }
                         return classes;
                     },
-                    url_param: '?spon_con=' + url_param || ''
+                    url_param: url_param ? '?spon_con=' + url_param : ''
                 });
 
                 articleDiv.innerHTML = html;
