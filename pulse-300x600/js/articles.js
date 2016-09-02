@@ -8,7 +8,7 @@ var PulseArticles = (function() {
         '<div class="pulse-article-thumb-wrapper">' +
         '<a href="<%this.articles[index].url%><%this.url_param%>" target="_top">' +
         '<%if(this.articles[index].src) {%>' +
-        '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=60&w=60" border="0" class="pulse-article-thumbnail" />' +
+        '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=61&w=61" border="0" class="pulse-article-thumbnail" />' +
         '<%}%>' +
         '</a>' +
         '</div>' +
@@ -94,7 +94,7 @@ var PulseArticles = (function() {
                         return parseInt(i, 10) + 1;
                     },
                     sponCheck: function(i) {
-                        var classes = ''
+                        var classes = '';
                         if (this.articles[i].sponsor && this.articles[i].content_from) {
                             classes = 'sponsor'
                         }

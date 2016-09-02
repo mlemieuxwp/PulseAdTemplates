@@ -63,7 +63,7 @@
 }
 
 .pulse-article-list-item.sponsor { 
-    background-color: #eee;
+    background-color: #e6e6e6;
 }
 
 .pulse-article-wrapper { 
@@ -72,9 +72,9 @@
 
 .pulse-article-label {
     font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    margin: 0 0 5px 0;
+    margin: 0;
     overflow: hidden;
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 15px 10px;
 }
 
 .pulse-article-label:before {
@@ -102,8 +102,8 @@
 .pulse-article-label-small {
     border-right: 1px solid #000000;
     float: left;
-    font-family: "FranklinITCProLight", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    font-size: 11px;
+    font-family: "FranklinITCProMedium", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 10.25px;
     padding-right: 10px;
 }
 
@@ -111,7 +111,7 @@
     box-sizing: border-box;
     float: left;
     padding-right: 10px;
-    width: 25%;
+    width: auto;
 }
 
 .pulse-article-thumb-border { 
@@ -128,7 +128,7 @@
 .pulse-article-number {
     color: rgb(51, 51, 51);
     font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-size: 22px;
+    font-size: 24px;
     float: left;
     margin-top: -3px;
     padding-right: 15px;
@@ -161,18 +161,20 @@
 .pulse-article-desc {
     @include font-smoothing(on);
     font-size: 15px;
-    line-height: 18px;
+    line-height: 17px;
     margin: 0;
     padding: 0;
 }
 
 .pulse-article-desc-label {
-    width: 100%;
-    font-size: 8px;
+    color: #666666;
+    font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 9px;
     font-weight: bold;
     display: block;
-    line-height: 1.5;
+    line-height: 1;
     text-transform: uppercase;
+    width: 100%;
 }
 
 .pulse-article-thumbnail {
@@ -290,7 +292,7 @@
 }
 
 .pulse-footer { 
-    padding: 0 0 10px 0;
+    padding: 0 0 3px 0;
     text-align: center;
 }
 
