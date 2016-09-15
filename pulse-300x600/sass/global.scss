@@ -20,6 +20,11 @@
     width: 300px;
 }
 
+.pulse-wrapper iframe,
+.pulse-wrapper img { 
+    vertical-align: bottom;
+}
+
 /*.pulse-ad-creative-wrapper {
     cursor: pointer;
     height: 250px;
@@ -125,7 +130,7 @@
 .pulse-article-desc-wrapper {
     box-sizing: border-box;
     float: left;
-    padding-right: 10px;
+/*    padding-right: 10px;*/
     width: 60%;
 }
 
@@ -296,7 +301,7 @@
 }
 
 .pulse-footer { 
-    padding: 0 0 3px 0;
+    padding: 3px 0;
     text-align: center;
 }
 
