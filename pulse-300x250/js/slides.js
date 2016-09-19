@@ -4,7 +4,7 @@ var PulseSlides = (function() {
     var Templates = {
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article">' +
+            '<div class="js-pulse-mobile-article <%if(this.articles[index].sponsor && this.articles[index].content_from) {%>slick-sponsor<%}%>">' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="_top">' +
@@ -18,7 +18,7 @@ var PulseSlides = (function() {
             '</a>' +
             '</div>' +
             '</div>' +
-            '<%if(this.articles[index].src) {%>' +
+            '<%if(this.articles[index].src && !this.articles[index].sponsor) {%>' +
             '<img class="pulse-mobile-slide-img" data-lazy="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300">' +
             '<%}%>' +
             '</div>' +
@@ -100,8 +100,10 @@ var PulseSlides = (function() {
             var articles = articleDiv.getAttribute('data-articles');
             var shuffle = articleDiv.getAttribute('data-shuffle');
             var url_param = articleDiv.getAttribute('data-urlparam');
+            var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
             var sel_articles;
             var rand_articles;
+            var pulseTrackingWrapper = document.getElementsByClassName('pulse-mobile-tracking')[0];
 
             articles = JSON.parse(articles);
 
@@ -149,6 +151,29 @@ var PulseSlides = (function() {
                 el = elem.childNodes[i];
                 elem.removeChild(el);
                 articleDiv.insertBefore(el, articleDiv.firstChild);
+            }
+
+            // Add tracker for clicks
+            function clickTrackHandler(link) {
+                link.onclick = function(event) {
+                    if (linkClickPixel) {
+                        var img = document.createElement("img");
+                        img.alt = "";
+                        img.border = 0;
+                        img.src = linkClickPixel;
+                        img.style.width = "1px";
+                        img.style.height = "1px";
+                        img.style.display = "none";
+                        pulseTrackingWrapper.appendChild(img);
+                    }
+                };
+            };
+
+            if (articleDiv.querySelectorAll) {
+                var links = articleDiv.querySelectorAll("a");
+                for (i = 0; i < links.length; i++) {
+                    clickTrackHandler(links[i]);
+                }
             }
 
 

@@ -74,8 +74,10 @@ var PulseArticles = (function() {
             var articles = articleDiv.getAttribute('data-articles');
             var shuffle = articleDiv.getAttribute('data-shuffle');
             var url_param = articleDiv.getAttribute('data-urlparam');
+            var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
             var sel_articles;
             var rand_articles;
+            var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
             if (articles) {
 
@@ -104,6 +106,31 @@ var PulseArticles = (function() {
                 });
 
                 articleDiv.innerHTML = html;
+
+                // Add tracker for clicks
+                function clickTrackHandler(link) {
+                    link.onclick = function(event) {
+                        if (linkClickPixel) {
+                            var img = document.createElement("img");
+                            img.alt = "";
+                            img.border = 0;
+                            img.src = linkClickPixel;
+                            img.style.width = "1px";
+                            img.style.height = "1px";
+                            img.style.display = "none";
+                            pulseTrackingWrapper.appendChild(img);
+                        }
+                    };
+                };
+
+                if (articleDiv.querySelectorAll) {
+                    var links = articleDiv.querySelectorAll("a");
+                    for (i = 0; i < links.length; i++) {
+                        clickTrackHandler(links[i]);
+                    }
+                }
+
+
             }
 
         }
