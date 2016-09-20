@@ -138,7 +138,7 @@ var PulseSlides = (function() {
             var ad = articleDiv.getAttribute('data-ad');
             ad = JSON.parse(ad);
 
-            if (ad.type==='video') {
+            if (ad && ad.type==='video') {
                 ad.videoTracking = {};
                 ad.videoTracking.trackStart = ad.trackstart || null;
                 ad.videoTracking.track25 = ad.track25 || null;

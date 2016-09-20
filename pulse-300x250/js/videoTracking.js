@@ -5,9 +5,9 @@ var PulseTracking = (function() {
     var videoId = document.getElementById('pulse-player');
     var pulsePlayerWrapper = document.getElementsByClassName('pulse-player-wrapper')[0];
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
-    var videoTracking = pulsePlayerWrapper.getAttribute('data-videotracking');
+    var videoTracking = pulsePlayerWrapper && pulsePlayerWrapper.getAttribute('data-videotracking');
 
-    videoTracking = JSON.parse(videoTracking);
+    videoTracking = videoTracking && JSON.parse(videoTracking);
 
     // set up tracking variables
     if (typeof videoTracking !== 'undefined' && videoTracking) {

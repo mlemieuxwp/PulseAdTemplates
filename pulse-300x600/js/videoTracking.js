@@ -6,11 +6,11 @@ var PulseTracking = (function() {
     var pulsePlayerWrapper = document.getElementsByClassName('pulse-player-wrapper')[0];
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
-    var videoTracking = pulsePlayerWrapper.getAttribute('data-videotracking');
+    var videoTracking = pulsePlayerWrapper && pulsePlayerWrapper.getAttribute('data-videotracking');
     
     // set up tracking variables
 
-    videoTracking = JSON.parse(videoTracking);
+    videoTracking = videoTracking && JSON.parse(videoTracking);
 
     if (typeof videoTracking !== 'undefined' && videoTracking) {
         var trackstart = videoTracking.trackstart || null,
