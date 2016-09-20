@@ -3,15 +3,19 @@ var PulseTracking = (function() {
     // get video element and tracking object
 
     var videoId = document.getElementById('pulse-player');
+    var pulsePlayerWrapper = document.getElementsByClassName('pulse-player-wrapper')[0];
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
+    var videoTracking = pulsePlayerWrapper.getAttribute('data-videotracking');
+
+    videoTracking = JSON.parse(videoTracking);
 
     // set up tracking variables
-    if (typeof PulseVideoTracking !== 'undefined') {
-        var trackStart = PulseVideoTracking && PulseVideoTracking.trackStart || null,
-            track100 = PulseVideoTracking && PulseVideoTracking.track100 || null,
-            track25 = PulseVideoTracking && PulseVideoTracking.track25 || null,
-            track50 = PulseVideoTracking && PulseVideoTracking.track50 || null,
-            track75 = PulseVideoTracking && PulseVideoTracking.track75 || null;
+    if (typeof videoTracking !== 'undefined' && videoTracking) {
+        var trackStart = videoTracking.trackStart || null,
+            track100 = videoTracking.track100 || null,
+            track25 = videoTracking.track25 || null,
+            track50 = videoTracking.track50 || null,
+            track75 = videoTracking.track75 || null;
     }
 
     // create tracking pixel

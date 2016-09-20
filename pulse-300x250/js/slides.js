@@ -48,7 +48,7 @@ var PulseSlides = (function() {
             '</div>',
 
         video: '<div data-animate="true">' +
-            '<div class="pulse-player-wrapper">' +
+            '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>' +
             '<i class="fa fa-volume-up pulse-player-volume"></i>' +
             '<video id="pulse-player" class="pulse-player" data-current-time="0.25">' +
@@ -103,7 +103,7 @@ var PulseSlides = (function() {
             var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
             var sel_articles;
             var rand_articles;
-            var pulseTrackingWrapper = document.getElementsByClassName('pulse-mobile-tracking')[0];
+            var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
             articles = JSON.parse(articles);
 
@@ -137,6 +137,17 @@ var PulseSlides = (function() {
 
             var ad = articleDiv.getAttribute('data-ad');
             ad = JSON.parse(ad);
+
+            if (ad.type==='video') {
+                ad.videoTracking = {};
+                ad.videoTracking.trackStart = ad.trackstart || null;
+                ad.videoTracking.track25 = ad.track25 || null;
+                ad.videoTracking.track50 = ad.track50 || null;
+                ad.videoTracking.track75 = ad.track75 || null;
+                ad.videoTracking.track100 = ad.track100 || null;
+                ad.videoTracking = JSON.stringify(ad.videoTracking);
+            }
+
             if (ad) {
                 var adHtml = TemplateEngine(Templates[ad.type], {
                     ad: ad
