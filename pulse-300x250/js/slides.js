@@ -51,7 +51,7 @@ var PulseSlides = (function() {
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>' +
             '<i class="fa fa-volume-up pulse-player-volume"></i>' +
-            '<video id="pulse-player" class="pulse-player" data-current-time="0.25">' +
+            '<video id="pulse-player" class="pulse-player" data-current-time="0.25" poster="<% this.ad.poster_url %>">' +
             '<source src="<%this.ad.src%>" type="video/mp4" />' +
             '</video>' +
             '</div>' +
