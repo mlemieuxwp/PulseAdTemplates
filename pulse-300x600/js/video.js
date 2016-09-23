@@ -98,12 +98,22 @@ getScript([
             }
         }
 
+        function isAutoPlay(){ 
+            if(video.getAttribute('autoplay')){
+                video.muted = true;
+                $video_wrapper.addClass('pulse-player-active');
+                $video_play_button.hide().addClass('fa-pause-circle-o pulse-player-pause');
+                $video_mute_button.addClass('fa-volume-off');
+            }
+        }
+
         function bindFunctions() {
             _$('.pulse-player-poster').on('click', advClickThru);
             $video_mute_button.on('click', muteBtnClick);
             $video_play_button.on('click', playBtnClick);
             setStartTime();
             bindVideoWrapper();
+            isAutoPlay();
             _$(video).on('ended', videoEndEvents);
         }
 
