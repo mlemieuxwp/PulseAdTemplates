@@ -99,7 +99,7 @@ getScript([
         }
 
         function isAutoPlay(){ 
-            if(video.getAttribute('autoplay')){
+            if(video.autoplay){
                 video.muted = true;
                 $video_wrapper.addClass('pulse-player-active');
                 $video_play_button.hide().addClass('fa-pause-circle-o pulse-player-pause');
