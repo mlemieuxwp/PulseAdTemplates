@@ -17,11 +17,6 @@ var PulseArticles = (function() {
         '<div class="pulse-article-desc-wrapper">' +
         '<p class="pulse-article-desc">' +
         '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-article-desc-link" target="_top">' +
-        '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
-        '<label class="pulse-article-desc-label">' +
-        'content from <%this.articles[index].content_from%>' +
-        '</label>' +
-        '<%}%>' +
         '<%this.articles[index].title%>' +
         '</a>' +
         '</p>' +
@@ -32,6 +27,8 @@ var PulseArticles = (function() {
         '<%} else {%>' +
         '<p>none</p>' +
         '<%}%>';
+
+    var articleWrapper = document.getElementById('articles');
 
     // Javascript template engine by http://krasimirtsonev.com/
     function TemplateEngine(html, options) {
@@ -76,9 +73,11 @@ var PulseArticles = (function() {
             var url_param = articleDiv.getAttribute('data-urlparam');
             var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
             var maxLength = articleDiv.getAttribute('data-maxlength') || 3;
+            var sponsorAll = articleDiv.getAttribute('data-sponsorall') || false;
             var sel_articles;
             var rand_articles;
             var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
+
 
             if (articles) {
 
@@ -93,12 +92,13 @@ var PulseArticles = (function() {
                 var html = TemplateEngine(template, {
                     articles: sel_articles,
                     showArticles: true,
+                    sponsorAll: sponsorAll,
                     // addOne: function(i) {
                     //     return parseInt(i, 10) + 1;
                     // },
                     sponCheck: function(i) {
                         var classes = '';
-                        if (this.articles[i].sponsor && this.articles[i].content_from) {
+                        if (!this.sponsorAll && this.articles[i].sponsor && this.articles[i].content_from) {
                             classes = 'sponsor'
                         }
                         return classes;
@@ -139,8 +139,7 @@ var PulseArticles = (function() {
     }
 
     function setArticleNum() {
-        var articleWrapper = document.getElementById('articles');
-
+        
         if (articleWrapper.querySelectorAll) {
             var articleNums = articleWrapper.querySelectorAll(".pulse-article-number");
             for (i = 0; i < articleNums.length; i++) {
@@ -160,6 +159,7 @@ var PulseArticles = (function() {
         }
 
         setArticleNum();
+        articleWrapper.style.display = 'block';
 
     }
 

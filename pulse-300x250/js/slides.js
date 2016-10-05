@@ -8,19 +8,13 @@ var PulseSlides = (function() {
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="_top">' +
-            '<%if(this.articles[index].sponsor && this.articles[index].content_from) {%>' +
-            '<label class="pulse-mobile-desc-label">' +
-            'content from <%this.articles[index].content_from%>' +
-            '</label>' +
-            '<%}%>' +
             '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
             '</div>' +
+            '<span class="pulse-mobile-logo"></span>' +
             '</div>' +
-            '<%if(this.articles[index].src && !this.articles[index].sponsor) {%>' +
             '<img class="pulse-mobile-slide-img" data-lazy="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300">' +
-            '<%}%>' +
             '</div>' +
             '<%}%>' +
             '<%} else {%>' +
