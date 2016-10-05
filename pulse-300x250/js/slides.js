@@ -4,7 +4,7 @@ var PulseSlides = (function() {
     var Templates = {
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article <%if(this.articles[index].sponsor && this.articles[index].content_from) {%>slick-sponsor<%}%>">' +
+            '<div class="js-pulse-mobile-article <%if(this.articles[index].sponsor) {%>slick-sponsor<%}%>">' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
