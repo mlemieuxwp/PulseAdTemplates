@@ -3,15 +3,21 @@ var PulseTracking = (function() {
     // get video element and tracking object
 
     var videoId = document.getElementById('pulse-player');
+    var pulsePlayerWrapper = document.getElementsByClassName('pulse-player-wrapper')[0];
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
+    var videoTracking = pulsePlayerWrapper && pulsePlayerWrapper.getAttribute('data-videotracking');
+    
     // set up tracking variables
-    if (typeof PulseVideoTracking !== 'undefined') {
-        var trackStart = PulseVideoTracking && PulseVideoTracking.start || null,
-            trackEnd = PulseVideoTracking && PulseVideoTracking.end || null,
-            trackQuarter = PulseVideoTracking && PulseVideoTracking.quarter || null,
-            trackHalf = PulseVideoTracking && PulseVideoTracking.half || null,
-            trackThreeQ = PulseVideoTracking && PulseVideoTracking.threequarters || null;
+
+    videoTracking = videoTracking && JSON.parse(videoTracking);
+
+    if (typeof videoTracking !== 'undefined' && videoTracking) {
+        var trackstart = videoTracking.trackstart || null,
+            track100 = videoTracking.track100 || null,
+            track25 = videoTracking.track25 || null,
+            track50 = videoTracking.track50 || null,
+            track75 = videoTracking.track75 || null;
     }
 
     // create tracking pixel
@@ -49,14 +55,14 @@ var PulseTracking = (function() {
 
         var curTime = videoId.currentTime.toFixed(1);
 
-        if (trackQuarter && (curTime >= parseInt(sessionStorage.getItem('one')))) {
-            setTrackPixel(trackQuarter);
+        if (track25 && (curTime >= parseInt(sessionStorage.getItem('one')))) {
+            setTrackPixel(track25);
             sessionStorage.setItem('one', null);
-        } else if (trackHalf && (curTime >= parseInt(sessionStorage.getItem('two')))) {
-            setTrackPixel(trackHalf);
+        } else if (track50 && (curTime >= parseInt(sessionStorage.getItem('two')))) {
+            setTrackPixel(track50);
             sessionStorage.setItem('two', null);
-        } else if (trackThreeQ && (curTime >= parseInt(sessionStorage.getItem('three')))) {
-            setTrackPixel(trackThreeQ);
+        } else if (track75 && (curTime >= parseInt(sessionStorage.getItem('three')))) {
+            setTrackPixel(track75);
             sessionStorage.setItem('three', null);
         }
 
@@ -65,13 +71,13 @@ var PulseTracking = (function() {
     // event: video end
 
     function videoEnd() {
-        setTrackPixel(trackEnd);
+        setTrackPixel(track100);
     }
 
     // event: video play
 
     function videoPlay() {
-        setTrackPixel(trackStart);
+        setTrackPixel(trackstart);
         setKeyFrames(this.duration)
     }
 
@@ -92,6 +98,7 @@ var PulseTracking = (function() {
 
     function init() {
         bindEvents();
+
     }
 
     return {

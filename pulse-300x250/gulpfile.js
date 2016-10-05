@@ -40,7 +40,7 @@ var concat       = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "1.0.0";
+var version = "2.2.0";
 
 /**
 *
@@ -57,13 +57,17 @@ gulp.task('sass', function() {
   .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
   .pipe(plumber())
   .pipe(concat('main.css'))
+  .pipe(rename({
+            dirname: "min",
+            suffix: "-"+version+".min",
+  }))
   .pipe(gulp.dest('css'));
 });
 
-gulp.task('clean-scripts', function () {
-  return gulp.src('css/*', {read: false})
-    .pipe(clean());
-});
+// gulp.task('clean-scripts', function () {
+//   return gulp.src('css/*', {read: false})
+//     .pipe(clean());
+// });
 
 // gulp.task('remote', function() {
 //   remotesrc(['cc82e7d48c.css'], {
@@ -106,7 +110,7 @@ gulp.task('browser-sync', function() {
 *
 **/
 gulp.task('scripts', function() {
-  gulp.src(['js/jsLoader.js', 'js/scripts.js','js/player.js', 'js/playerTracking.js'])
+  gulp.src(['js/jsLoader.js', 'js/slides.js', 'js/slider.js','js/video.js', 'js/videoTracking.js'])
   .pipe(uglify())
   // .pipe(rename({
   //   dirname: "min",
@@ -140,7 +144,7 @@ gulp.task('images', function () {
 * - Watchs for file changes for images, scripts and sass/css
 *
 **/
-gulp.task('default', ['clean-scripts', 'sass', 'browser-sync', 'scripts', 'images'], function () {
+gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
   gulp.watch('sass/**/*.scss', ['sass']);
   gulp.watch('js/**/*.js', ['scripts']);
   gulp.watch('images/*', ['images']);
