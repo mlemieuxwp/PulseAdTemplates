@@ -7,7 +7,7 @@ var PulseSlides = (function() {
             '<div class="js-pulse-mobile-article <%if(this.articles[index].sponsor && this.articles[index].content_from) {%>slick-sponsor<%}%>">' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="_top">' +
+            '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
             '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
@@ -114,6 +114,9 @@ var PulseSlides = (function() {
 
                 var html = TemplateEngine(Templates['articles'], {
                     articles: sel_articles,
+                    linkTarget: function(i) {
+                        return !this.articles[i].sponsor ? '_top' : '_blank';
+                    },
                     showArticles: true,
                     url_param: url_param ? '?spon_con=' + url_param : ''
                 });

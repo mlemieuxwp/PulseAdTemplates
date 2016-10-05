@@ -3,10 +3,10 @@ var PulseArticles = (function() {
     var template =
         '<%if(this.showArticles) {%>' +
         '<%for(var index in this.articles) {%>' +
-        '<li class="pulse-article-list-item <% this.sponCheck(index) %>">' +
+        '<li class="pulse-article-list-item">' +
         '<div class="pulse-article-wrapper cf">' +
         '<div class="pulse-article-thumb-wrapper">' +
-        '<a href="<%this.articles[index].url%><%this.url_param%>" target="_top">' +
+        '<a href="<%this.articles[index].url%><%this.url_param%>" target="<% this.linkTarget(index) %>">' +
         '<%if(this.articles[index].src) {%>' +
         '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=61&w=61" border="0" class="pulse-article-thumbnail" />' +
         '<%}%>' +
@@ -16,7 +16,7 @@ var PulseArticles = (function() {
         '<div class="pulse-article-number"></div>' +
         '<div class="pulse-article-desc-wrapper">' +
         '<p class="pulse-article-desc">' +
-        '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-article-desc-link" target="_top">' +
+        '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
         '<%this.articles[index].title%>' +
         '</a>' +
         '</p>' +
@@ -96,12 +96,8 @@ var PulseArticles = (function() {
                     // addOne: function(i) {
                     //     return parseInt(i, 10) + 1;
                     // },
-                    sponCheck: function(i) {
-                        var classes = '';
-                        if (!this.sponsorAll && this.articles[i].sponsor && this.articles[i].content_from) {
-                            classes = 'sponsor'
-                        }
-                        return classes;
+                    linkTarget: function(i) {
+                        return !this.articles[i].sponsor ? '_top' : '_blank';
                     },
                     url_param: url_param ? '?spon_con=' + url_param : ''
                 });
