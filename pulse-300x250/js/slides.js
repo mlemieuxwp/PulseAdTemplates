@@ -31,7 +31,7 @@ var PulseSlides = (function() {
 
         image: '<div data-animate="true">' +
             '<%if(this.ad.url) {%>' +
-            '<a href="<%this.ad.url%>">' +
+            '<a href="<%this.ad.url%>" target="_blank">' +
             '<%}%>' +
             '<%if(this.ad.src) {%>' +
             '<img src="<%this.ad.src%>" alt="" border="0" style="border:0" />' +
