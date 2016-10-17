@@ -26,20 +26,16 @@ var PulseSlides = (function() {
             '</div>',
 
         iframe: '<div data-animate="true">' +
-            '<iframe src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+            '<iframe src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div data-animate="true">' +
-            '<%if(this.ad.url) {%>' +
-            '<a href="<%this.ad.url%>" target="_blank">' +
-            '<%}%>' +
-            '<%if(this.ad.src) {%>' +
-            '<img src="<%this.ad.src%>" alt="" border="0" style="border:0" />' +
-            '<%}%>' +
-            '<%if(this.ad.url) {%>' +
-            '</a>' +
-            '<%}%>' +
-            '</div>',
+               '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
+               '<%if(this.ad.src) {%>' +
+               '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+               '<%}%>' +
+               '</a>' +
+               '</div>',
 
         video: '<div data-animate="true">' +
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
@@ -85,6 +81,22 @@ var PulseSlides = (function() {
             array[j] = temp;
         }
         return array;
+    }
+
+    function checkImgSrc(src) {
+        if (src && !/.gif/i.test(src)) {
+            src = 'https://img.washingtonpost.com/wp-apps/imrs.php?src=' + src + '&h=250&w=300';
+        }
+        return src;
+    }
+
+    function setAdClick(url) {
+        if (!url) {
+            var mobileWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
+            url = mobileWrapper.getAttribute('data-click');
+        }
+        return url;
+
     }
 
 
@@ -137,7 +149,7 @@ var PulseSlides = (function() {
             var ad = articleDiv.getAttribute('data-ad');
             ad = JSON.parse(ad);
 
-            if (ad && ad.type==='video') {
+            if (ad && ad.type === 'video') {
                 ad.videoTracking = {};
                 ad.videoTracking.trackStart = ad.trackstart || null;
                 ad.videoTracking.track25 = ad.track25 || null;
@@ -149,7 +161,9 @@ var PulseSlides = (function() {
 
             if (ad) {
                 var adHtml = TemplateEngine(Templates[ad.type], {
-                    ad: ad
+                    ad: ad,
+                    setAdClick: setAdClick,
+                    checkImgSrc: checkImgSrc
                 });
                 html = adHtml + html;
             }
