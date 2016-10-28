@@ -36,7 +36,7 @@ var concat = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "2.2.0";
+var version = "3.0.0";
 
 
 
@@ -87,21 +87,28 @@ gulp.task('browser-sync', function() {
 
 
 /**
- *
- * Javascript
- * - Uglify
- *
- **/
+*
+* Javascript
+* - Uglify
+*
+**/
 gulp.task('scripts', function() {
-    gulp.src('js/*.js')
-        .pipe(uglify())
-        .pipe(concat('scripts.js'))
-        .pipe(rename({
-            dirname: "min",
-            suffix: "-"+version+".min",
-        }))
-        .pipe(gulp.dest('js'))
-        .pipe(gulp.dest('dist/js'));
+  gulp.src([
+    'js/jsLoader.js', 
+    'js/xmlHttp.js', 
+    'js/utils.js', 
+    'js/templates.js', 
+    'js/articles.js', 
+    'js/video.js', 
+    'js/videoTracking.js'
+  ])
+  .pipe(uglify())
+  // .pipe(rename({
+  //   dirname: "min",
+  //   suffix: ".min",
+  // }))
+  .pipe(concat('scripts-'+version+'.min.js'))
+  .pipe(gulp.dest('js/min'));
 });
 
 /**

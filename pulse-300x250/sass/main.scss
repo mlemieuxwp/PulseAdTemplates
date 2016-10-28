@@ -148,9 +148,12 @@
     background-color: #eaeaea;
 }
 
+.pulse-feed .pulse-article-label-small,
 .pulse-sponsored .pulse-article-label-small { 
     display: none;
  }
+ 
+.pulse-feed .pulse-label-sponsor,
 .pulse-sponsored .pulse-label-sponsor,
 .pulse-label-sponsor .pulse-article-label-small { 
     display: block;

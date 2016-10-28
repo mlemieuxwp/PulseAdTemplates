@@ -40,7 +40,7 @@ var concat       = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "2.2.0";
+var version = "3.0.0";
 
 /**
 *
@@ -110,7 +110,16 @@ gulp.task('browser-sync', function() {
 *
 **/
 gulp.task('scripts', function() {
-  gulp.src(['js/jsLoader.js', 'js/slides.js', 'js/slider.js','js/video.js', 'js/videoTracking.js'])
+  gulp.src([
+    'js/jsLoader.js', 
+    'js/xmlHttp.js', 
+    'js/utils.js', 
+    'js/templates.js', 
+    'js/slides.js', 
+    'js/slider.js', 
+    'js/video.js', 
+    'js/videoTracking.js'
+  ])
   .pipe(uglify())
   // .pipe(rename({
   //   dirname: "min",

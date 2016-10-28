@@ -1,160 +1,78 @@
 var PulseArticles = (function() {
 
-    var template =
-        '<%if(this.showArticles) {%>' +
-        '<%for(var index in this.articles) {%>' +
-        '<li class="pulse-article-list-item">' +
-        '<div class="pulse-article-wrapper cf">' +
-        '<div class="pulse-article-thumb-wrapper">' +
-        '<a href="<%this.articles[index].url%><%this.url_param%>" target="<% this.linkTarget(index) %>">' +
-        '<%if(this.articles[index].src) {%>' +
-        '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=61&w=61" border="0" class="pulse-article-thumbnail" />' +
-        '<%}%>' +
-        '</a>' +
-        '</div>' +
-        //'<div class="pulse-article-number"><% this.addOne(index) %></div>' +
-        '<div class="pulse-article-number"></div>' +
-        '<div class="pulse-article-desc-wrapper">' +
-        '<p class="pulse-article-desc">' +
-        '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
-        '<%this.articles[index].title%>' +
-        '</a>' +
-        '</p>' +
-        '</div>' +
-        '</div>' +
-        '</li>' +
-        '<%}%>' +
-        '<%} else {%>' +
-        '<p>none</p>' +
-        '<%}%>';
-
-    var articleWrapper = document.getElementById('articles');
-
-    // Javascript template engine by http://krasimirtsonev.com/
-    function TemplateEngine(html, options) {
-        var re = /<%([^%>]+)?%>/g,
-            reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
-            code = 'var r=[];\n',
-            cursor = 0,
-            match;
-        var add = function(line, js) {
-            js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
-                (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
-            return add;
-        }
-        while (match = re.exec(html)) {
-            add(html.slice(cursor, match.index))(match[1], true);
-            cursor = match.index + match[0].length;
-        }
-        add(html.substr(cursor, html.length - cursor));
-        code += 'return r.join("");';
-        return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
-    }
-
-    function shuffleArray(array) {
-        if (array) {
-            for (var i = array.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
-            return array;
-        }
-    }
-
     function loadArticles(articlesElem) {
 
         if (articlesElem) {
 
-            var articleDiv = articlesElem;
-            var articles = articleDiv.getAttribute('data-articles');
-            var shuffle = articleDiv.getAttribute('data-shuffle');
-            var url_param = articleDiv.getAttribute('data-urlparam');
-            var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
-            var maxLength = articleDiv.getAttribute('data-maxlength') || 3;
-            var sponsorAll = articleDiv.getAttribute('data-sponsorall') || false;
-            var sel_articles;
-            var rand_articles;
+            var articles = articlesElem.getAttribute('data-articles');
+            var articleFeed = articlesElem.getAttribute('data-feed');
+            var linkClickPixel = articlesElem.getAttribute('data-clicktrack');
+            var maxLength = articlesElem.getAttribute('data-maxlength') || 3;
             var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
+            var selArticles;
+            var shuffle = articlesElem.getAttribute('data-shuffle');
+            var sponsorAll = articlesElem.getAttribute('data-sponsorall') || false;
+            var urlParam = articlesElem.getAttribute('data-urlparam');
 
-
-            if (articles) {
+            function initArticles(articles) {
 
                 articles = JSON.parse(articles);
 
                 if (shuffle) {
-                    sel_articles = shuffleArray(articles).slice(0, maxLength);
+                    selArticles = Utils.shuffleArray(articles).slice(0, maxLength);
                 } else {
-                    sel_articles = articles.slice(0, maxLength);
+                    selArticles = articles.slice(0, maxLength);
                 }
 
-                var html = TemplateEngine(template, {
-                    articles: sel_articles,
+                var html = Templates.engine(Templates.types['articles'], {
+                    articles: selArticles,
                     showArticles: true,
                     sponsorAll: sponsorAll,
-                    // addOne: function(i) {
-                    //     return parseInt(i, 10) + 1;
-                    // },
                     linkTarget: function(i) {
-                        return !this.articles[i].sponsor ? '_top' : '_blank';
+                        return sponsorAll || this.articles[i].sponsor ? '_blank' : '_top';
                     },
-                    url_param: url_param ? '?spon_con=' + url_param : ''
+                    urlParam: urlParam ? '?spon_con=' + urlParam : ''
                 });
 
-                articleDiv.innerHTML = html;
+                articlesElem.innerHTML = html;
 
-                // Add tracker for clicks
-                function clickTrackHandler(link) {
-                    link.onclick = function(event) {
-                        if (linkClickPixel) {
-                            var img = document.createElement("img");
-                            img.alt = "";
-                            img.border = 0;
-                            img.src = linkClickPixel;
-                            img.style.width = "1px";
-                            img.style.height = "1px";
-                            img.style.display = "none";
-                            pulseTrackingWrapper.appendChild(img);
-                        }
-                    };
-                };
-
-                if (articleDiv.querySelectorAll) {
-                    var links = articleDiv.querySelectorAll("a");
+                if (articlesElem.querySelectorAll) {
+                    var links = articlesElem.querySelectorAll("a");
                     for (i = 0; i < links.length; i++) {
-                        clickTrackHandler(links[i]);
+                        Utils.clickTrackHandler(links[i]);
                     }
                 }
 
+                Utils.setArticleNum();
+
+            }
+
+            if (articleFeed) {
+
+                xmlHttp.get(articleFeed, function(xhr) {
+                    initArticles(xhr.responseText);
+                });
+
+            } else if (articles) {
+
+                initArticles(articles);
 
             }
 
         }
 
-    }
-
-    function setArticleNum() {
-        
-        if (articleWrapper.querySelectorAll) {
-            var articleNums = articleWrapper.querySelectorAll(".pulse-article-number");
-            for (i = 0; i < articleNums.length; i++) {
-                articleNums[i].innerText = i + 1;
-            }
-        }
     }
 
     function init() {
 
+        var articleWrapper = document.getElementById('articles');
         var articles = document.getElementsByClassName('pulse-article-list');
-        var tempArray = [];
         var i = articles.length;
 
         while (i--) {
             loadArticles(articles[i]);
         }
 
-        setArticleNum();
         articleWrapper.style.display = 'block';
 
     }

@@ -1,213 +1,109 @@
 var PulseSlides = (function() {
 
-    // Create template for html, iframe, image and video
-    var Templates = {
-        articles: '<%if(this.showArticles) {%>' +
-            '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article <%if(this.articles[index].sponsor) {%>slick-sponsor<%}%>">' +
-            '<div class="pulse-mobile-desc-wrapper">' +
-            '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
-            '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
-            '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
-            '</a>' +
-            '</div>' +
-            '<span class="pulse-mobile-logo"></span>' +
-            '</div>' +
-            '<img class="pulse-mobile-slide-img" data-lazy="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300">' +
-            '</div>' +
-            '<%}%>' +
-            '<%} else {%>' +
-            '<p>none</p>' +
-            '<%}%>',
+    function loadArticles(articleDiv) {
 
-        html: '<div data-animate="true">' +
-            '<%this.ad.html%>' +
-            '</div>',
+        if (articleDiv) {
 
-        iframe: '<div data-animate="true">' +
-            '<iframe src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
-            '</div>',
-
-        image: '<div data-animate="true">' +
-               '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
-               '<%if(this.ad.src) {%>' +
-               '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
-               '<%}%>' +
-               '</a>' +
-               '</div>',
-
-        video: '<div data-animate="true">' +
-            '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
-            '<i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>' +
-            '<i class="fa fa-volume-up pulse-player-volume"></i>' +
-            '<video id="pulse-player" class="pulse-player" data-current-time="0.25" poster="<% this.ad.poster_url %>">' +
-            '<%if(this.ad.src) {%>' +
-            '<source src="<%this.ad.src%>" type="video/mp4" />' +
-            '<%}%>' +
-            '</video>' +
-            '</div>' +
-            '</div>'
-    }
-
-
-
-    // Javascript template engine by http://krasimirtsonev.com/
-    function TemplateEngine(html, options) {
-        var re = /<%([^%>]+)?%>/g,
-            reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
-            code = 'var r=[];\n',
-            cursor = 0,
-            match;
-        var add = function(line, js) {
-            js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
-                (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
-            return add;
-        }
-        while (match = re.exec(html)) {
-            add(html.slice(cursor, match.index))(match[1], true);
-            cursor = match.index + match[0].length;
-        }
-        add(html.substr(cursor, html.length - cursor));
-        code += 'return r.join("");';
-        return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
-    }
-
-    function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-        return array;
-    }
-
-    function checkImgSrc(src) {
-        if (src && !/.gif/i.test(src)) {
-            src = 'https://img.washingtonpost.com/wp-apps/imrs.php?src=' + src + '&h=250&w=300';
-        }
-        return src;
-    }
-
-    function setAdClick(url) {
-        if (!url) {
-            var mobileWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
-            url = mobileWrapper.getAttribute('data-click');
-        }
-        return url;
-
-    }
-
-
-    function load() {
-
-        if (document.getElementById('articles')) {
-
-            var articleDiv = document.getElementById('articles');
             var articles = articleDiv.getAttribute('data-articles');
-            var shuffle = articleDiv.getAttribute('data-shuffle');
-            var url_param = articleDiv.getAttribute('data-urlparam');
+            var articleFeed = articleDiv.getAttribute('data-feed');
             var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
-            var sel_articles;
-            var rand_articles;
             var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
+            var selArticles;
+            var shuffle = articleDiv.getAttribute('data-shuffle');
+            var sponsorAll = articleDiv.getAttribute('data-sponsorall') || false;
+            var urlParam = articleDiv.getAttribute('data-urlparam');
 
-            articles = JSON.parse(articles);
+            function initArticles(articles) {
 
-            if (articles) {
+                articles = JSON.parse(articles);
 
                 if (shuffle) {
-                    sel_articles = shuffleArray(articles).slice(0, 3);
+                    selArticles = Utils.shuffleArray(articles).slice(0, 3);
                 } else {
-                    sel_articles = articles.slice(0, 3);
-                    sel_articles.reverse(); //need to reverse to keep article order when we insertBefore below.
+                    selArticles = articles.slice(0, 3);
+                    selArticles.reverse(); //need to reverse to keep article order when we insertBefore below.
                 }
 
-                var html = TemplateEngine(Templates['articles'], {
-                    articles: sel_articles,
+                var html = Templates.engine(Templates.types['articles'], {
+                    articles: selArticles,
                     linkTarget: function(i) {
                         return !this.articles[i].sponsor ? '_top' : '_blank';
                     },
                     showArticles: true,
-                    url_param: url_param ? '?spon_con=' + url_param : ''
+                    sponsorAll: sponsorAll,
+                    urlParam: urlParam ? '?spon_con=' + urlParam : ''
                 });
 
-                // var elem = document.createElement('div');
-                // elem.innerHTML = html;
+                var ad = articleDiv.getAttribute('data-ad');
+                ad = JSON.parse(ad);
 
-                // for (i = 0; i < elem.childNodes.length;) {
-                //     el = elem.childNodes[i];
-                //     elem.removeChild(el);
-                //     articleDiv.insertBefore(el, articleDiv.firstChild);
-                // }
-
-
-            }
-
-
-            var ad = articleDiv.getAttribute('data-ad');
-            ad = JSON.parse(ad);
-
-            if (ad && ad.type === 'video') {
-                ad.videoTracking = {};
-                ad.videoTracking.trackStart = ad.trackstart || null;
-                ad.videoTracking.track25 = ad.track25 || null;
-                ad.videoTracking.track50 = ad.track50 || null;
-                ad.videoTracking.track75 = ad.track75 || null;
-                ad.videoTracking.track100 = ad.track100 || null;
-                ad.videoTracking = JSON.stringify(ad.videoTracking);
-            }
-
-            if (ad) {
-                var adHtml = TemplateEngine(Templates[ad.type], {
-                    ad: ad,
-                    setAdClick: setAdClick,
-                    checkImgSrc: checkImgSrc
-                });
-                html = adHtml + html;
-            }
-
-            var elem = document.createElement('div');
-            elem.innerHTML = html;
-
-            for (i = 0; i < elem.childNodes.length;) {
-                el = elem.childNodes[i];
-                elem.removeChild(el);
-                articleDiv.insertBefore(el, articleDiv.firstChild);
-            }
-
-            // Add tracker for clicks
-            function clickTrackHandler(link) {
-                link.onclick = function(event) {
-                    if (linkClickPixel) {
-                        var img = document.createElement("img");
-                        img.alt = "";
-                        img.border = 0;
-                        img.src = linkClickPixel;
-                        img.style.width = "1px";
-                        img.style.height = "1px";
-                        img.style.display = "none";
-                        pulseTrackingWrapper.appendChild(img);
-                    }
-                };
-            };
-
-            if (articleDiv.querySelectorAll) {
-                var links = articleDiv.querySelectorAll("a");
-                for (i = 0; i < links.length; i++) {
-                    clickTrackHandler(links[i]);
+                if (ad && ad.type === 'video') {
+                    ad.videoTracking = {};
+                    ad.videoTracking.trackStart = ad.trackstart || null;
+                    ad.videoTracking.track25 = ad.track25 || null;
+                    ad.videoTracking.track50 = ad.track50 || null;
+                    ad.videoTracking.track75 = ad.track75 || null;
+                    ad.videoTracking.track100 = ad.track100 || null;
+                    ad.videoTracking = JSON.stringify(ad.videoTracking);
                 }
+
+                if (ad) {
+                    var adHtml = Templates.engine(Templates.types[ad.type], {
+                        ad: ad,
+                        setAdClick: Utils.setAdClick,
+                        checkImgSrc: Utils.checkImgSrc
+                    });
+                    html = adHtml + html;
+                }
+
+                var elem = document.createElement('div');
+                elem.innerHTML = html;
+
+                for (i = 0; i < elem.childNodes.length;) {
+                    el = elem.childNodes[i];
+                    elem.removeChild(el);
+                    articleDiv.insertBefore(el, articleDiv.firstChild);
+                }
+
+                if (articleDiv.querySelectorAll) {
+                    var links = articleDiv.querySelectorAll("a");
+                    for (i = 0; i < links.length; i++) {
+                        Utils.clickTrackHandler(links[i]);
+                    }
+                }
+
+            }
+
+
+            if (articleFeed) {
+
+                xmlHttp.get(articleFeed, function(xhr) {
+
+                    initArticles(xhr.responseText);
+
+                });
+
+            } else if (articles) {
+
+                initArticles(articles);
+
             }
 
 
         }
     }
 
+    function init() {
+
+        var articles = document.getElementById('articles');
+        loadArticles(articles);
+
+    }
+
     return {
-        load: load
+        init: init
     };
 
 })();
 
-PulseSlides.load();
+PulseSlides.init();
