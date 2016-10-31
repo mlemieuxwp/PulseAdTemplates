@@ -114,11 +114,12 @@ gulp.task('scripts', function() {
     'js/jsLoader.js', 
     'js/xmlHttp.js', 
     'js/utils.js', 
-    'js/templates.js', 
+    'js/templates.js',
+    'js/carousel.js',
     'js/slides.js', 
-    'js/slider.js', 
     'js/video.js', 
-    'js/videoTracking.js'
+    'js/videoTracking.js',
+    'js/init.js'
   ])
   .pipe(uglify())
   // .pipe(rename({

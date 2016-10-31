@@ -1,0 +1,10 @@
+.js-pulse-animate {
+    overflow-y: hidden;
+    max-height: 50px;
+    -webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition:         all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.js-pulse-animate.closed {
+    max-height: 0;
+}

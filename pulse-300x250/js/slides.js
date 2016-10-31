@@ -80,6 +80,7 @@ var PulseSlides = (function() {
                 xmlHttp.get(articleFeed, function(xhr) {
 
                     initArticles(xhr.responseText);
+                    PulseCarousel.init();
 
                 });
 
@@ -105,5 +106,3 @@ var PulseSlides = (function() {
     };
 
 })();
-
-PulseSlides.init();

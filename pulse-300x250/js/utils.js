@@ -1,5 +1,10 @@
 var Utils = (function() {
 
+    function advClickThru(event) {
+        event.preventDefault();
+        window.open(click_thru);
+    }
+
     function checkImgSrc(src) {
         if (src && !/.gif/i.test(src)) {
             src = 'https://img.washingtonpost.com/wp-apps/imrs.php?src=' + src + '&h=250&w=300';
@@ -42,6 +47,7 @@ var Utils = (function() {
     }
 
     return {
+        advClickThru: advClickThru,
         checkImgSrc: checkImgSrc,
         clickTrackHandler: clickTrackHandler,
         setAdClick: setAdClick,
