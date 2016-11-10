@@ -1,21 +1,18 @@
 var PulseCarousel = (function() {
 
     function headerFooterSlide($pulse,_$) {
-        var _slick = $pulse.slick('getSlick');
-        var slide_count = _slick.slideCount - 1;
+
+        var swiper = $pulse[0].swiper;
+        var slide_count = swiper.slides.length - 1;
+
         var pulseHeader = document.getElementsByClassName('js-pulse-animate')[0];
         var pulseFooter = document.getElementsByClassName('js-pulse-animate')[1];
 
-        $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-
-            if (slick.$slides[nextSlide].classList.contains('slick-sponsor') && !_$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
+        swiper.on('onSlideChangeStart', function(swiper) {
+            //console.log("start:"+swiper.activeIndex);
+            if (swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && !_$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
                 _$('.pulse-mobile-wrapper').addClass('pulse-sponsored');
             }
-
-            // if(!slick.$slides[nextSlide].classList.contains('slick-sponsor') && _$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')){
-            //     _$('.pulse-mobile-wrapper').removeClass('pulse-sponsored');
-            // }
-
 
             if (_$('.js-pulse-animate').hasClass('closed')) {
                 //_$('.js-pulse-animate').slideDown();
@@ -24,7 +21,7 @@ var PulseCarousel = (function() {
             }
 
 
-            if (slick.$slides[nextSlide].hasAttribute('data-animate')) {
+            if (swiper.slides[swiper.activeIndex].hasAttribute('data-animate')) {
                 //_$('.js-pulse-animate').slideUp();
                 pulseHeader.classList.toggle('closed');
                 pulseFooter.classList.toggle('closed');
@@ -33,18 +30,31 @@ var PulseCarousel = (function() {
 
         });
 
-        $pulse.on('afterChange', function(event, slick, currentSlide) {
-            if (!slick.$slides[currentSlide].classList.contains('slick-sponsor') && _$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
+        swiper.on('onSlideChangeEnd', function(swiper) {
+            if (!swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && _$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
                 _$('.pulse-mobile-wrapper').removeClass('pulse-sponsored');
             }
         });
     }
 
     function loadCarousel($pulse) {
-        $pulse.slick({
+        /*$pulse.slick({
             lazyLoad: 'ondemand',
             rtl: false
-        })
+        })*/
+
+        // Adding next, prev buttons to slider 
+        $pulse.append('<a class="pulse-prev"></a><a class="pulse-next"></a>');
+
+        new Swiper($pulse,{
+            slideClass      : 'pulse-slide',
+            wrapperClass    : 'pulse-mobile',
+            preloadImages   : false,
+            lazyLoading     : true,
+            loop            : true,
+            nextButton      : '.pulse-next',
+            prevButton      : '.pulse-prev'
+        });
     }
 
     function autoPlayVideoOnSlide() {
@@ -186,7 +196,7 @@ var PulseCarousel = (function() {
     function init() {
 
         var _$ = $.proxy($.fn.find, $(document)),
-        $pulse = _$('.pulse-mobile'),
+        $pulse = _$('.pulse-mobile-wrapper'),
         click_thru = _$('.pulse-mobile-wrapper').data('click');
 
         loadCarousel($pulse);

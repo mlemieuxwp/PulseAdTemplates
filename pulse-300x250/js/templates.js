@@ -25,7 +25,7 @@ var Templates = (function() {
     var types = {
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article <%if(this.sponsorAll || this.articles[index].sponsor) {%>slick-sponsor<%}%>">' +
+            '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll || this.articles[index].sponsor) {%>slick-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
@@ -42,15 +42,15 @@ var Templates = (function() {
             '<p>none</p>' +
             '<%}%>',
 
-        html: '<div data-animate="true">' +
+        html: '<div data-animate="true" class="pulse-slide">' +
             '<%this.ad.html%>' +
             '</div>',
 
-        iframe: '<div data-animate="true">' +
+        iframe: '<div data-animate="true" class="pulse-slide">' +
             '<iframe src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
-        image: '<div data-animate="true">' +
+        image: '<div data-animate="true" class="pulse-slide">' +
             '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
             '<%if(this.ad.src) {%>' +
             '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
@@ -58,7 +58,7 @@ var Templates = (function() {
             '</a>' +
             '</div>',
 
-        video: '<div data-animate="true">' +
+        video: '<div data-animate="true" class="pulse-slide">' +
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>' +
             '<i class="fa fa-volume-up pulse-player-volume"></i>' +

@@ -33,10 +33,11 @@ var PulseSlides = (function() {
                     sponsorAll: sponsorAll,
                     urlParam: urlParam ? '?spon_con=' + urlParam : ''
                 });
+                //console.log(html);
 
                 var ad = articleDiv.getAttribute('data-ad');
                 ad = JSON.parse(ad);
-
+                //console.log(ad.type);
                 if (ad && ad.type === 'video') {
                     ad.videoTracking = {};
                     ad.videoTracking.trackStart = ad.trackstart || null;
@@ -76,9 +77,9 @@ var PulseSlides = (function() {
 
 
             if (articleFeed) {
-
+                //console.log(articleFeed);
                 xmlHttp.get(articleFeed, function(xhr) {
-
+                    //console.log(xhr.responseText);
                     initArticles(xhr.responseText);
                     PulseCarousel.init();
 

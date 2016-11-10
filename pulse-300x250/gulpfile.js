@@ -115,8 +115,9 @@ gulp.task('scripts', function() {
     'js/xmlHttp.js', 
     'js/utils.js', 
     'js/templates.js',
+    'js/swiper.js',
     'js/carousel.js',
-    'js/slides.js', 
+    'js/slides.js',
     'js/video.js', 
     'js/videoTracking.js',
     'js/init.js'
@@ -155,7 +156,7 @@ gulp.task('images', function () {
 *
 **/
 gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
-  gulp.watch('sass/**/*.scss', ['sass']);
-  gulp.watch('js/**/*.js', ['scripts']);
-  gulp.watch('images/*', ['images']);
+    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('js/**/*.js', ['scripts']);
+    gulp.watch('images/*', ['images']);
 });

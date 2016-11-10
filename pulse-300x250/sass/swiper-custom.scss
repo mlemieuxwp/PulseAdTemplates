@@ -1,0 +1,77 @@
+.pulse-mobile-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    /* Fix of Webkit flickering */
+    z-index: 1;
+}
+.pulse-mobile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    -ms-transition-property: -ms-transform;
+    transition-property: transform;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transform: translate3d(0px, 0, 0);
+    -moz-transform: translate3d(0px, 0, 0);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+}
+.pulse-slide {
+    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-position: center 50px;
+}
+.pulse-next,
+.pulse-prev {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 15px;
+    cursor: pointer;
+    margin-top: -15px;
+}
+.pulse-next {
+    left: auto;
+    right: 15px;
+}
+.pulse-next:before,
+.pulse-next:after,
+.pulse-prev:after,
+.pulse-prev:before {
+    content: "";
+    background-color: #fff;
+    height: 20px;
+    width: 6px;
+    display: block;
+    border-radius: 2px;
+}
+.pulse-next:before,
+.pulse-prev:after {
+    transform: rotate(-45deg);
+}
+.pulse-prev:before,
+.pulse-next:after {
+    transform: rotate(45deg);
+}
+.pulse-prev:after,
+.pulse-next:after {
+    margin-top: -10px;
+}
