@@ -1,127 +1,139 @@
-getScript([
-        'jquery'
-    ],
-    function() {
+var PulsePlayer = (function() {
 
-        var PulsePlayer = (function() {
+    var pluse_main = document.getElementsByClassName('pulse-mobile-wrapper')[0],
+        pulse_wrapper = document.getElementsByClassName('pulse-player-wrapper'),
+        isFirstClick = true,
+        click_thru = pluse_main.getAttribute('data-click'),
+        has_video_ctrls = document.getElementsByClassName('pulse-player-no-ctrls').length > 0 ? false : true;
 
-            var _$ = $.proxy($.fn.find, $(document));
+    function setTrackPixel(url) {
+        if (url) {
+            url = url.replace(/%%CACHEBUSTER%%/gi, '');
+            url += Math.floor(1E12 * Math.random()) + '?';
+            var tracking_wrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
-            var video = document.getElementById('pulse-player'),
-                click_thru = _$('.pulse-mobile-wrapper').data('click');
+            var img = document.createElement("img");
+            img.setAttribute("src", url );
+            img.setAttribute("height", "1");
+            img.setAttribute("width", "1");
+            img.setAttribute("border", "0");
+            img.setAttribute("style", "display:none;");
 
-            var track_play = (_$('.pulse-player-wrapper').data('video-track-play') || _$('.pulse-mobile-wrapper').data('track')) || false;
-            var track_end = _$('.pulse-player-wrapper').data('video-track-end') || false;
+            tracking_wrapper.appendChild(img);
+            console.log(img);
 
-            var $video_play_button = _$('.pulse-player-play'),
-                $video_mute_button = _$('.pulse-player-volume'),
-                $video_wrapper = _$('.pulse-player-wrapper');
-                $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true,
-                isFirstClick = true;
+        }
+    }
 
+    function advClickThru() {
+        window.open(click_thru);
+    }
 
-            function setTrackPixel(url) {
-                if (url) {
-                    url = url.replace(/%%CACHEBUSTER%%/gi, '');
-                    url += Math.floor(1E12 * Math.random()) + '?';
-                    _$('.pulse-tracking-wrapper').append('<img src="' + url + '" alt="" border="0" height="1" width="1" style="display:none;" />');
-                }
-            }
+    function muteVideo(video,wrapper,button) { 
+        if (video.muted) {
+            video.muted = false;
+            wrapper.classList.remove('pulse-player-muted');
+            //button.classList.remove('fa-volume-off');
+        } else {
+            video.muted = true;
+            wrapper.classList.add('pulse-player-muted');
+            //button.classList.add('fa-volume-off');
+            //button.classList.remove('fa-volume-up');
+        }
+    }
 
-            function setStartTime() {
-                if (!$(video).attr('poster') && $(video).data('current-time')) {
-                    video.currentTime = $(video).data('current-time');
-                }
-            }
+    function bindVideoWrapper(video,wrapper,button) {
+        if (wrapper.length && !video.hasAttribute('autoplay')) {
+            wrapper.addEventListener('click', function(){
+                button.click();
+                return false;
+            });
+            wrapper.on('click', function(e) {
+                $video_play_button.click();
+            });
+        } else {
+            video.addEventListener('click', function(){
+                advClickThru();
+                return false;
+            });
+        }
+    }
 
-            function advClickThru(event) {
-                event.preventDefault();
-                window.open(click_thru);
-            }
+   function playVideo(video,wrapper,button) {
 
-            function muteBtnClick(event) {
-                event.preventDefault();
-                if (video.muted) {
-                    video.muted = false;
-                    _$(this).addClass('fa-volume-up');
-                    _$(this).removeClass('fa-volume-off');
-                } else {
-                    video.muted = true;
-                    _$(this).addClass('fa-volume-off');
-                    _$(this).removeClass('fa-volume-up');
-                }
-            }
+        if (isFirstClick) {
 
-            function playBtnClick(event) {
-                event.preventDefault();
-                if ($video_wrapper.length && isFirstClick) {
-                    $video_wrapper.off('click');
-                    isFirstClick = false;
-                    _$(video).on('click', advClickThru);
-                }
-                if (video.paused || video.ended) {
-                    setTrackPixel(track_play);
-                    video.play();
-                    video.setAttribute('playing', 'true');
-                    _$(video).parent().addClass('pulse-player-active');
-                    _$(video).css('visibility', 'visible');
-                    _$(this).addClass('fa-pause-circle-o pulse-player-pause');
-                } else {
-                    video.pause();
-                    video.removeAttribute('playing');
-                    _$(this).removeClass('fa-pause-circle-o pulse-player-pause');
-                }
-            }
+            wrapper.removeEventListener('click',function(){
+                button.click();
+            });
 
-            function videoEndEvents() {
-                setTrackPixel(track_end);
-                video.load();
-                if (!$(video).attr('poster') && $(video).data('current-time')) {
-                    video.currentTime = $(video).data('current-time');
-                }
-                if ($has_video_ctrls) {
-                    _$(video).parent().removeClass('pulse-player-active');
-                    $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
-                }
-            }
-
-            function videoBtnEffects() {
-                _$(".pulse-mobile-wrapper").on("mouseenter", ".pulse-player-active", function() {
-                    $video_play_button.fadeIn();
-                });
-                _$(".pulse-mobile-wrapper").on("mouseleave", ".pulse-player-active", function() {
-                    $video_play_button.fadeOut();
+            isFirstClick = false;
+            if ( click_thru!= null ){
+                video.addEventListener('click', function(){
+                    advClickThru();
+                    return false;
                 });
             }
+        }
+        if (video.paused || video.ended) {
+            var track_play = wrapper.getAttribute('data-video-track-play') || pluse_main.getAttribute('data-track') || false;
+            setTrackPixel(track_play);
+            video.play();
+            video.setAttribute('playing', 'true');
 
-            function bindVideoWrapper() {
-                if ($video_wrapper.length && !video.hasAttribute('autoplay')) {
-                    $video_wrapper.on('click', function(e) {
-                        $video_play_button.click();
-                    });
-                } else {
-                    _$(video).on('click', advClickThru);
-                }
-            }
+            video.parentNode.classList.add('pulse-player-active');
 
-            function bindFunctions() {
-                $video_mute_button.on('click', muteBtnClick);
-                $video_play_button.on('click', playBtnClick);
-                bindVideoWrapper();
-                setStartTime();
-                _$(video).on('ended', videoEndEvents);
-            }
+            
+        } else {
+            video.pause();
+            video.removeAttribute('playing');
+            video.parentNode.classList.remove('pulse-player-active');
+        }
+    }
 
-            function init() {
-                bindFunctions();
-                videoBtnEffects();
-            }
+    function setStartTime(video) {
+        if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
+            video.currentTime = video.getAttribute('data-current-time');
+        }
+    }
 
-            return {
-                init: init
-            };
+    function videoEndEvents(video,wrapper) {
+        var track_end = wrapper.getAttribute('data-video-track-end') || false;
+        setTrackPixel(track_end);
+        video.load();
+        if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
+            video.currentTime = video.getAttribute('data-current-time');
+        }
+        if (has_video_ctrls) {
+            video.parentNode.classList.remove('pulse-player-active');
+        }
+    }
 
-        })();
+    function bindFunctions() {
+        Array.prototype.forEach.call(pulse_wrapper, function(el) {
+            var video = el.getElementsByTagName('video')[0];
+            var btn_play = el.querySelector('.pulse-player-play-toggle');
+            var btn_mute = el.querySelector('.pulse-player-volume-toggle');
+            btn_play.addEventListener('click', function(){
+                playVideo(video,el,this)
+            });
+            btn_mute.addEventListener('click', function(){
+                muteVideo(video,el,this)
+            });
+            bindVideoWrapper(video,el,btn_play);
+            setStartTime(video);
+            video.addEventListener('ended', function(){
+                videoEndEvents(video,el);
+            });
+        });
+    }
 
-        PulsePlayer.init();
-    });
+    function init() {
+        bindFunctions();
+    }
+
+    return {
+        init: init
+    };
+
+})();

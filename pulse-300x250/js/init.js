@@ -1,7 +1,4 @@
-getScript([
-    'jquery'
-], function() {
-    // set jquery scope for ad iframe
-    var _$ = $.proxy($.fn.find, $(document));
+document.addEventListener("DOMContentLoaded", function(event) {
     PulseSlides.init();
+    PulsePlayer.init();
 });

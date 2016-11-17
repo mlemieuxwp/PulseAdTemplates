@@ -111,14 +111,13 @@ gulp.task('browser-sync', function() {
 **/
 gulp.task('scripts', function() {
   gulp.src([
-    'js/jsLoader.js', 
     'js/xmlHttp.js', 
     'js/utils.js', 
     'js/templates.js',
     'js/swiper.js',
     'js/carousel.js',
     'js/slides.js',
-    'js/video.js', 
+    'js/video.js',
     'js/videoTracking.js',
     'js/init.js'
   ])

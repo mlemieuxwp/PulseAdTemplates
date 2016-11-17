@@ -42,15 +42,15 @@ var Templates = (function() {
             '<p>none</p>' +
             '<%}%>',
 
-        html: '<div data-animate="true" class="pulse-slide">' +
+        html: '<div data-animate="true" class="pulse-slide pulse-slide--html">' +
             '<%this.ad.html%>' +
             '</div>',
 
-        iframe: '<div data-animate="true" class="pulse-slide">' +
+        iframe: '<div data-animate="true" class="pulse-slide pulse-slide--iframe">' +
             '<iframe src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
-        image: '<div data-animate="true" class="pulse-slide">' +
+        image: '<div data-animate="true" class="pulse-slide pulse-slide--image">' +
             '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
             '<%if(this.ad.src) {%>' +
             '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
@@ -58,11 +58,11 @@ var Templates = (function() {
             '</a>' +
             '</div>',
 
-        video: '<div data-animate="true" class="pulse-slide">' +
+        video: '<div data-animate="true" class="pulse-slide pulse-slide--video">' +
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
-            '<i class="fa fa-4x fa-play-circle-o pulse-player-play"></i>' +
-            '<i class="fa fa-volume-up pulse-player-volume"></i>' +
-            '<video id="pulse-player" class="pulse-player" data-current-time="0.25" poster="<% this.ad.poster_url %>">' +
+            '<i class="pulse-player-play-toggle"></i>' +
+            '<i class="pulse-player-volume-toggle"></i>' +
+            '<video class="pulse-player" data-current-time="0.25" poster="<% this.ad.poster_url %>">' +
             '<%if(this.ad.src) {%>' +
             '<source src="<%this.ad.src%>" type="video/mp4" />' +
             '<%}%>' +

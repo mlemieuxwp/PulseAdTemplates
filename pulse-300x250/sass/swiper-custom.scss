@@ -44,34 +44,44 @@
     position: absolute;
     z-index: 3;
     top: 50%;
-    left: 15px;
+    left: 10px;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -10px;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
 .pulse-next {
     left: auto;
-    right: 15px;
+    right: 10px;
 }
 .pulse-next:before,
 .pulse-next:after,
-.pulse-prev:after,
-.pulse-prev:before {
-    content: "";
-    background-color: #fff;
-    height: 20px;
-    width: 6px;
+.pulse-prev:before,
+.pulse-prev:after {
+    content: ""; 
     display: block;
-    border-radius: 2px;
+    height: 14px;
+    width: 14px;
+    border: solid 6px #fff;
+    transform: rotate(-45deg);
+    border-radius: 1px;
 }
 .pulse-next:before,
-.pulse-prev:after {
-    transform: rotate(-45deg);
+.pulse-prev:before {
+    border: solid 6px rgba(0,0,0,.6);
+    filter: blur(2px);
+    position: absolute;
+    top: 0;
+}
+.pulse-next:before,
+.pulse-next:after {
+    border-top: solid 0 transparent;
+    border-left: solid 0 transparent;
 }
 .pulse-prev:before,
-.pulse-next:after {
-    transform: rotate(45deg);
-}
-.pulse-prev:after,
-.pulse-next:after {
-    margin-top: -10px;
+.pulse-prev:after {
+    border-bottom: solid 0 transparent;
+    border-right: solid 0 transparent;
 }

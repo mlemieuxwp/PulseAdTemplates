@@ -14,7 +14,7 @@ var PulseSlides = (function() {
             var urlParam = articleDiv.getAttribute('data-urlparam');
 
             function initArticles(articles) {
-
+                
                 articles = JSON.parse(articles);
 
                 if (shuffle) {
@@ -77,17 +77,16 @@ var PulseSlides = (function() {
 
 
             if (articleFeed) {
-                //console.log(articleFeed);
+                
                 xmlHttp.get(articleFeed, function(xhr) {
-                    //console.log(xhr.responseText);
                     initArticles(xhr.responseText);
                     PulseCarousel.init();
-
                 });
 
             } else if (articles) {
 
                 initArticles(articles);
+                PulseCarousel.init();
 
             }
 

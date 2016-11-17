@@ -5,8 +5,6 @@
     height: 248px;
     position: relative;
     width: 298px;
-    /*height: 0;
-    padding-bottom: 56.25%;*/
 }
 
 .pulse-player {
@@ -17,45 +15,137 @@
     height: 100%;
 }
 
-.pulse-player-wrapper .pulse-player-play,
-.pulse-player-wrapper .pulse-player-pause {
-	color: #ffffff;
-	cursor: pointer;
-	display: block;
-	font-size: 4em;
-	margin: 0 auto;
-	opacity: 0.75;
-	position: relative;
-	text-align: center;
-	text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-	top: 50%;
-    transform: translateY(-50%);
-    width: 65px;
-    z-index: 2;
-}
-
-.pulse-player-active .pulse-player-volume {
-	bottom: 10px;
-	right: 10px;
-	color: #ffffff;
-	cursor: pointer;
-	display: block;
-	position: absolute;
-	z-index: 2;
-}
-
-.pulse-player-dark .pulse-player-play,
-.pulse-player-dark .pulse-player-pause,
-.pulse-player-dark .pulse-player-volume {
+.pulse-player-dark .pulse-player-play-toggle,
+.pulse-player-dark .pulse-player-volume-toggle {
 	color: #000000;
 }
 
-.lt-ie10 .pulse-player-play,
-.lt-ie10 .pulse-player-pause,
-.lt-ie10 .pulse-player-volume,
-.pulse-player-no-ctrls .pulse-player-play,
-.pulse-player-no-ctrls .pulse-player-pause,
-.pulse-player-no-ctrls .pulse-player-volume,
+.lt-ie10 .pulse-player-play-toggle,
+.lt-ie10 .pulse-player-volume-toggle,
+.pulse-player-no-ctrls .pulse-player-play-toggle,
+.pulse-player-no-ctrls .pulse-player-volume-toggle,
  {
     display: none;
+}
+
+.pulse-player-play-toggle {
+    border: solid 6px #fff;
+    display: block;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
+    z-index: 3;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,.6),inset 0 0 6px 0 rgba(0,0,0,.6);
+    box-shadow: 0 0 6px 0 rgba(0,0,0,.6), inset 0 0 6px 0 rgba(0,0,0,.6);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    .pulse-player-active & {
+        opacity: 0;
+    }
+
+    .pulse-player-active:hover & {
+        opacity: .6;
+    }
+
+    &:after,
+    &:before {
+        content: "";
+        display: block;
+        border: solid 20px #fff;
+        border-width: 1em 0 1em 1.6em;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        position: absolute;
+        width: 0;
+        left: 15px;
+        top: 9px;
+
+        .pulse-player-active & {
+            border: none;
+            height: 28px;
+            width: 8px;
+            background-color: #fff;
+            top: 10px;
+            left: 13px;
+            -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,.6);
+            box-shadow: 0 0 6px 0 rgba(0,0,0,.6);
+        }
+
+    }
+
+    &:before {
+        border-left-color: rgba(0,0,0,.6);
+        filter: blur(2px);
+
+        .pulse-player-active & {
+            left: 27px;
+            background-color: #fff;
+            filter: none;
+        }
+    }
+}
+
+.pulse-player-volume-toggle {
+    font-size: 8px;
+    display: block;
+    height: 1em;
+    width: .4em;
+    background-color: #fff;
+    position: absolute;
+    right: 24px;
+    bottom: 14px;
+    z-index: 3;
+
+    &:before {
+        content:"";
+        border: solid .5em #fff;
+        position:absolute;
+        margin-left: .05em;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        height: 1em;
+        top: 50%;
+        margin-top: -1em;
+    }
+
+    &:after {
+        content:"";
+        display:block;
+        height: .8em;
+        width: .8em;
+        border: double .8em #fff;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -1.1em;
+        font-weight: bold;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+
+        .pulse-player-muted & {
+            content:"\00d7";
+            position: absolute;
+            left: .9em;
+            top: 0;
+            font-size: 1.6em;
+            top: 50%;
+            margin-top: -.5em;
+            line-height: 1;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            font-style: normal;
+        }
+    }
+
 }

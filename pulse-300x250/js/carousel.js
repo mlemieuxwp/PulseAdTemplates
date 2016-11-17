@@ -1,52 +1,52 @@
 var PulseCarousel = (function() {
 
-    function headerFooterSlide($pulse,_$) {
+    function headerFooterSlide(swiper) {
 
-        var swiper = $pulse[0].swiper;
         var slide_count = swiper.slides.length - 1;
 
         var pulseHeader = document.getElementsByClassName('js-pulse-animate')[0];
         var pulseFooter = document.getElementsByClassName('js-pulse-animate')[1];
+        var pulseWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
 
         swiper.on('onSlideChangeStart', function(swiper) {
-            //console.log("start:"+swiper.activeIndex);
-            if (swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && !_$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
-                _$('.pulse-mobile-wrapper').addClass('pulse-sponsored');
+            
+            if (swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && !pulseWrapper.classList.contains('pulse-sponsored') ) {
+                pulseWrapper.classList.add('pulse-sponsored');
             }
 
-            if (_$('.js-pulse-animate').hasClass('closed')) {
-                //_$('.js-pulse-animate').slideDown();
+            if ( pulseHeader.classList.contains('closed') && pulseFooter.classList.contains('closed') ) {
                 pulseHeader.classList.toggle('closed');
                 pulseFooter.classList.toggle('closed');
             }
-
 
             if (swiper.slides[swiper.activeIndex].hasAttribute('data-animate')) {
-                //_$('.js-pulse-animate').slideUp();
                 pulseHeader.classList.toggle('closed');
                 pulseFooter.classList.toggle('closed');
-                
             }
 
         });
 
         swiper.on('onSlideChangeEnd', function(swiper) {
-            if (!swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && _$('.pulse-mobile-wrapper').hasClass('pulse-sponsored')) {
-                _$('.pulse-mobile-wrapper').removeClass('pulse-sponsored');
+            if (!swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && pulseWrapper.classList.contains('pulse-sponsored')) {
+                pulseWrapper.classList.remove('pulse-sponsored');
             }
         });
     }
 
-    function loadCarousel($pulse) {
-        /*$pulse.slick({
-            lazyLoad: 'ondemand',
-            rtl: false
-        })*/
+    function loadCarousel(pulse_selector) {
 
         // Adding next, prev buttons to slider 
-        $pulse.append('<a class="pulse-prev"></a><a class="pulse-next"></a>');
+        var pulse_wrapper = document.getElementsByClassName(pulse_selector)[0];
+        var next = document.createElement('a');
+        next.classList.add('pulse-next');
 
-        new Swiper($pulse,{
+        var prev = document.createElement('a');
+        prev.classList.add('pulse-prev');
+
+        pulse_wrapper.append(next);
+        pulse_wrapper.append(prev);
+
+        var swiper = new Swiper('.' + pulse_selector,{
             slideClass      : 'pulse-slide',
             wrapperClass    : 'pulse-mobile',
             preloadImages   : false,
@@ -55,105 +55,39 @@ var PulseCarousel = (function() {
             nextButton      : '.pulse-next',
             prevButton      : '.pulse-prev'
         });
+
+        return swiper;
     }
 
-    function autoPlayVideoOnSlide() {
-        var $pulseVideo = $pulse.find('.pulse-video').not(".slick-cloned");
-        if (!$pulseVideo.length) {
-            return;
-        }
-        var videoSlideIndex = $pulseVideo.data('slick-index'),
-            pulseVideo = $pulseVideo.find('#pulse-player').get(0);
-        $pulse.on('afterChange', function(event, slick, currentSlide) {
-            if (currentSlide === videoSlideIndex) {
-                pulseVideo.play();
-            } else {
-                pulseVideo.pause();
+
+    function videoSlide(swiper) {            
+        swiper.on('onSlideChangeStart', function(swiper) {
+            // Pause Videos when sliding
+            var videos = document.getElementsByTagName('video');
+            for ( i=0; i < videos.length ; i++  ) {
+                if ( !videos[i].pasued ) {
+                    videos[i].pause();
+                    videos[i].removeAttribute('playing');
+                    videos[i].parentNode.classList.remove('pulse-player-active');
+                }
             }
         });
-        $(pulseVideo).on('ended', function() {
-            pulseVideo.play();
-        });
     }
 
-    function setVideoPoster(video) {
-        var poster = _$(video).data('poster');
-        if (poster) {
-            video.setAttribute('poster', poster);
-        }
-    }
-
-    function setVideoSrc(video) {
-        var src = _$(video).data('src'),
-            source = document.createElement('source');
-        source.setAttribute('src', src);
-        video.appendChild(source);
-    }
-
-    function playVideoOnSlide() {
-        if (document.getElementById('pulse-player')) {
-
-            var video = document.getElementById('pulse-player'),
-                video_parent = video.parentNode.parentNode,
-                slick_index = _$(video_parent).data('slick-index');
-
-            $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                if (nextSlide === slick_index) {
-                    setVideoPoster(video);
-                    setVideoSrc(video);
-                    video.play();
-                    video.setAttribute('playing', 'true');
-                } else {
-                    if (video.hasAttribute('playing')) {
-                        video.pause();
-                        video.removeAttribute('playing');
-                    }
-                }
-            });
-
-        }
-
-    }
-
-    function videoSlide() {
-        if (document.getElementById('pulse-player')) {
-
-            var video = document.getElementById('pulse-player'),
-                video_parent = video.parentNode.parentNode,
-                slick_index = _$(video_parent).data('slick-index');
-
-            $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                if (nextSlide === slick_index) {
-                    setVideoPoster(video);
-                    setVideoSrc(video);
-                } else {
-                    if (video.hasAttribute('playing')) {
-                        video.pause();
-                        _$('.pulse-player-active').removeClass('pulse-player-active');
-                        _$('.pulse-player-pause').show();
-                        video.removeAttribute('playing');
-                    }
-                }
-            });
-
-        }
-
-    }
-
-    function iframeSlide() {
+    function iframeSlide(swiper) {
         if (document.getElementById('pulse-mobile-ad')) {
 
             var adv = document.getElementById('pulse-mobile-ad'),
                 adv_parent = adv.parentNode.parentNode,
-                slick_index = _$(adv_parent).data('slick-index');
+                slick_index = adv_parent.getAttribute('data-swiper-slide-index');
 
-            $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+            swiper.on('onSlideChangeStart', function(swiper) {
 
-                if (!_$(adv).hasClass('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
+                if (!adv.classList.contains('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
 
-                    var iframe_src = _$(adv).data('iframe');
-                    _$(adv).append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>').addClass('js-pulse-mobile-ad-active');
-
+                    var iframe_src = adv.getAttribute('data-iframe');
+                    adv.append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>');
+                    adv.classList.add('js-pulse-mobile-ad-active');
                 }
 
             });
@@ -165,27 +99,29 @@ var PulseCarousel = (function() {
     function imgAdSlide(click_thru) {
         if (click_thru && document.getElementById('js-pulse-mobile-img-ad')) {
             var ad = document.getElementById('pulse-mobile-ad'),
-                ad_click = _$('.pulse-mobile-wrapper').data('click');
+                ad_click = document.getElementsByClassName('pulse-mobile-wrapper')[0].getAttribute('data-click');
 
-            _$('#js-pulse-mobile-img-ad').on('click', Utils.advClickThru);
+            document.getElementById('js-pulse-mobile-img-ad').addEventListener('click',function(){
+                Utils.advClickThru;
+            });
 
         }
 
     }
 
-    function lazyLoadAdIframeTag() {
+    function lazyLoadAdIframeTag(swiper) {
         var adContainer = document.getElementById('pulse-mobile-ad-iframe');
         if (adContainer) {
-            var slick_index = _$(adContainer).data('slick-index'),
-                adContent = _$(adContainer).children(':first')[0],
-                isNoScriptContent = _$(adContent).is('NOSCRIPT') ? true : false,
+            var slide_index = adContainer.getAttribute('data-swiper-slide-index'),
+                adContent = adContainer.firstChild,
+                isNoScriptContent = adContent.tagName == 'NOSCRIPT' ? true : false,
                 isLoaded = false;
 
-            if (slick_index && isNoScriptContent) {
-                $pulse.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                    if (nextSlide === slick_index && !isLoaded) {
-                        var noscriptContent = _$(adContent).text();
-                        _$(adContainer).append(noscriptContent);
+            if (slide_index && isNoScriptContent) {
+                swiper.on('onSlideChangeStart', function(swiper) {
+                    if (swiper.activeIndex === slide_index && !isLoaded) {
+                        var noscriptContent = adContent.textContent;
+                        adContainer.append(noscriptContent);
                         isLoaded = true;
                     }
                 });
@@ -195,21 +131,20 @@ var PulseCarousel = (function() {
 
     function init() {
 
-        var _$ = $.proxy($.fn.find, $(document)),
-        $pulse = _$('.pulse-mobile-wrapper'),
-        click_thru = _$('.pulse-mobile-wrapper').data('click');
+        var pulse_selector = 'pulse-mobile-wrapper',
+            click_thru = document.getElementsByClassName(pulse_selector)[0].getAttribute('data-click');
 
-        loadCarousel($pulse);
-        headerFooterSlide($pulse,_$);
-        videoSlide();
-        iframeSlide();
+        var swiper = loadCarousel(pulse_selector);
+
+        headerFooterSlide(swiper);
+        videoSlide(swiper);
+        iframeSlide(swiper);
         imgAdSlide(click_thru);
-        lazyLoadAdIframeTag();
+        lazyLoadAdIframeTag(swiper);
     }
 
     return {
         init: init
     };
-
 
 })();
