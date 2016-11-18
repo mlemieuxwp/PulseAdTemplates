@@ -41,7 +41,7 @@ var PulsePlayer = (function() {
    function playVideo(video,wrapper,button) {
 
         if (isFirstClick) {
-
+            video.load(); // becase video src is set dynamically
             wrapper.removeEventListener('click',function(){
                 button.click();
             });
@@ -55,8 +55,6 @@ var PulsePlayer = (function() {
             }
         }
         if (video.paused || video.ended) {
-            //var track_play = wrapper.getAttribute('data-video-track-play') || pluse_main.getAttribute('data-track') || false;
-            //setTrackPixel(track_play);
             video.play();
             video.setAttribute('playing', 'true');
 

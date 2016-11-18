@@ -62,6 +62,17 @@ var PulseCarousel = (function() {
 
     function videoSlide(swiper) {            
         swiper.on('onSlideChangeStart', function(swiper) {
+            var slide = swiper.slides[swiper.activeIndex];
+            if ( slide.classList.contains('pulse-slide--video') ) {
+                var video = slide.getElementsByTagName('video')[0];
+                var poster_url = video.getAttribute('data-poster');
+                video.setAttribute('poster',poster_url);
+
+                // Get Video Source
+                var source = video.getElementsByTagName('source')[0];
+                var src = source.getAttribute('data-src');
+                source.setAttribute('src',src);
+            }
             // Pause Videos when sliding
             var videos = document.getElementsByTagName('video');
             for ( i=0; i < videos.length ; i++  ) {
@@ -75,38 +86,31 @@ var PulseCarousel = (function() {
     }
 
     function iframeSlide(swiper) {
-        if (document.getElementById('pulse-mobile-ad')) {
-
-            var adv = document.getElementById('pulse-mobile-ad'),
-                adv_parent = adv.parentNode.parentNode,
-                slick_index = adv_parent.getAttribute('data-swiper-slide-index');
-
-            swiper.on('onSlideChangeStart', function(swiper) {
-
-                if (!adv.classList.contains('js-pulse-mobile-ad-active') && nextSlide === slick_index) {
-
-                    var iframe_src = adv.getAttribute('data-iframe');
-                    adv.append('<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" height="250" width="300" src="' + iframe_src + '" topmargin="0" leftmargin="0" allowtransparency="1"></iframe>');
-                    adv.classList.add('js-pulse-mobile-ad-active');
-                }
-
-            });
-
-        }
-
+        swiper.on('onSlideChangeStart', function(swiper) {
+            var slide = swiper.slides[swiper.activeIndex];
+            if ( slide.classList.contains('pulse-slide--iframe') ) {
+                var iframe = slide.getElementsByTagName('iframe')[0];
+                var url = iframe.getAttribute('data-src');
+                iframe.setAttribute('src',url);
+            }
+            // when previously active slide is an iframe - reset URL
+            var prev_slide = swiper.slides[swiper.previousIndex];
+            if ( prev_slide.classList.contains('pulse-slide--iframe') ) {
+                var iframe = prev_slide.getElementsByTagName('iframe')[0];
+                iframe.setAttribute('src','');
+            }
+        });
     }
 
-    function imgAdSlide(click_thru) {
-        if (click_thru && document.getElementById('js-pulse-mobile-img-ad')) {
-            var ad = document.getElementById('pulse-mobile-ad'),
-                ad_click = document.getElementsByClassName('pulse-mobile-wrapper')[0].getAttribute('data-click');
-
-            document.getElementById('js-pulse-mobile-img-ad').addEventListener('click',function(){
-                Utils.advClickThru;
-            });
-
-        }
-
+    function imgAdSlide(swiper) {
+        swiper.on('onSlideChangeStart', function(swiper) {
+            var slide = swiper.slides[swiper.activeIndex];
+            if ( slide.classList.contains('pulse-slide--image') ) {
+                var image = slide.getElementsByTagName('img')[0];
+                var url = image.getAttribute('data-src');
+                image.setAttribute('src',url);
+            }
+        });
     }
 
     function lazyLoadAdIframeTag(swiper) {
@@ -139,7 +143,7 @@ var PulseCarousel = (function() {
         headerFooterSlide(swiper);
         videoSlide(swiper);
         iframeSlide(swiper);
-        imgAdSlide(click_thru);
+        imgAdSlide(swiper);
         lazyLoadAdIframeTag(swiper);
     }
 

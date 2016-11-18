@@ -47,13 +47,13 @@ var Templates = (function() {
             '</div>',
 
         iframe: '<div data-animate="true" class="pulse-slide pulse-slide--iframe">' +
-            '<iframe src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+            '<iframe data-src="<%this.ad.src%>?clickTag=<% this.setAdClick(this.ad.url) %>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div data-animate="true" class="pulse-slide pulse-slide--image">' +
             '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
             '<%if(this.ad.src) {%>' +
-            '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+            '<img data-src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +
             '</a>' +
             '</div>',
@@ -62,9 +62,9 @@ var Templates = (function() {
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="pulse-player-play-toggle"></i>' +
             '<i class="pulse-player-volume-toggle"></i>' +
-            '<video class="pulse-player" data-current-time="0.25" poster="<% this.ad.poster_url %>">' +
+            '<video class="pulse-player" data-current-time="0.25" data-poster="<% this.ad.poster_url %>">' +
             '<%if(this.ad.src) {%>' +
-            '<source src="<%this.ad.src%>" type="video/mp4" />' +
+            '<source data-src="<%this.ad.src%>" type="video/mp4" />' +
             '<%}%>' +
             '</video>' +
             '</div>' +
