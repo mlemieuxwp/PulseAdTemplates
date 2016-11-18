@@ -6,25 +6,6 @@ var PulsePlayer = (function() {
         click_thru = pluse_main.getAttribute('data-click'),
         has_video_ctrls = document.getElementsByClassName('pulse-player-no-ctrls').length > 0 ? false : true;
 
-    function setTrackPixel(url) {
-        if (url) {
-            url = url.replace(/%%CACHEBUSTER%%/gi, '');
-            url += Math.floor(1E12 * Math.random()) + '?';
-            var tracking_wrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
-
-            var img = document.createElement("img");
-            img.setAttribute("src", url );
-            img.setAttribute("height", "1");
-            img.setAttribute("width", "1");
-            img.setAttribute("border", "0");
-            img.setAttribute("style", "display:none;");
-
-            tracking_wrapper.appendChild(img);
-            console.log(img);
-
-        }
-    }
-
     function advClickThru() {
         window.open(click_thru);
     }
@@ -33,12 +14,10 @@ var PulsePlayer = (function() {
         if (video.muted) {
             video.muted = false;
             wrapper.classList.remove('pulse-player-muted');
-            //button.classList.remove('fa-volume-off');
+
         } else {
             video.muted = true;
             wrapper.classList.add('pulse-player-muted');
-            //button.classList.add('fa-volume-off');
-            //button.classList.remove('fa-volume-up');
         }
     }
 
@@ -76,8 +55,8 @@ var PulsePlayer = (function() {
             }
         }
         if (video.paused || video.ended) {
-            var track_play = wrapper.getAttribute('data-video-track-play') || pluse_main.getAttribute('data-track') || false;
-            setTrackPixel(track_play);
+            //var track_play = wrapper.getAttribute('data-video-track-play') || pluse_main.getAttribute('data-track') || false;
+            //setTrackPixel(track_play);
             video.play();
             video.setAttribute('playing', 'true');
 
@@ -98,8 +77,6 @@ var PulsePlayer = (function() {
     }
 
     function videoEndEvents(video,wrapper) {
-        var track_end = wrapper.getAttribute('data-video-track-end') || false;
-        setTrackPixel(track_end);
         video.load();
         if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
             video.currentTime = video.getAttribute('data-current-time');
