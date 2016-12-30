@@ -10,7 +10,7 @@ var PulsePlayer = (function() {
         window.open(click_thru);
     }
 
-    function muteVideo(video,wrapper,button) { 
+    function muteVideo(video,wrapper,button) {
         if (video.muted) {
             video.muted = false;
             wrapper.classList.remove('pulse-player-muted');
@@ -22,16 +22,20 @@ var PulsePlayer = (function() {
     }
 
     function bindVideoWrapper(video,wrapper,button) {
+        var eventName = "click";
+        if ( Utils.isTouchDevice() ) {
+            eventName = "touchstart";
+        }
         if (wrapper.length && !video.hasAttribute('autoplay')) {
-            wrapper.addEventListener('click', function(){
+            wrapper.addEventListener(eventName, function(){
                 button.click();
                 return false;
             });
-            wrapper.on('click', function(e) {
+            wrapper.on(eventName, function(e) {
                 $video_play_button.click();
             });
         } else {
-            video.addEventListener('click', function(){
+            video.addEventListener(eventName, function(){
                 advClickThru();
                 return false;
             });
@@ -47,12 +51,12 @@ var PulsePlayer = (function() {
             });
 
             isFirstClick = false;
-            if ( click_thru!= null ){
+            /*if ( click_thru!= null ){
                 video.addEventListener('click', function(){
                     advClickThru();
                     return false;
                 });
-            }
+            }*/
         }
         if (video.paused || video.ended) {
             video.play();
@@ -60,7 +64,7 @@ var PulsePlayer = (function() {
 
             video.parentNode.classList.add('pulse-player-active');
 
-            
+
         } else {
             video.pause();
             video.removeAttribute('playing');

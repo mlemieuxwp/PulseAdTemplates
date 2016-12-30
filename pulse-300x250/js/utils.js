@@ -5,6 +5,11 @@ var Utils = (function() {
         window.open(click_thru);
     }
 
+    function isTouchDevice() {
+      return 'ontouchstart' in window        // works on most browsers
+          || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+    };
+
     function checkImgSrc(src) {
         if (src && !/.gif/i.test(src)) {
             src = 'https://img.washingtonpost.com/wp-apps/imrs.php?src=' + src + '&h=250&w=300';
@@ -51,7 +56,8 @@ var Utils = (function() {
         checkImgSrc: checkImgSrc,
         clickTrackHandler: clickTrackHandler,
         setAdClick: setAdClick,
-        shuffleArray: shuffleArray
+        shuffleArray: shuffleArray,
+        isTouchDevice: isTouchDevice
     }
 
 
