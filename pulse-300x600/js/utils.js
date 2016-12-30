@@ -17,6 +17,11 @@ var Utils = (function() {
         };
     };
 
+    function isTouchDevice() {
+      return 'ontouchstart' in window        // works on most browsers
+          || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+    };
+
     function setArticleNum() {
         var articleWrapper = document.getElementById('articles');
         if (articleWrapper.querySelectorAll) {
@@ -42,7 +47,8 @@ var Utils = (function() {
     return {
         clickTrackHandler: clickTrackHandler,
         setArticleNum: setArticleNum,
-        shuffleArray: shuffleArray
+        shuffleArray: shuffleArray,
+        isTouchDevice: isTouchDevice
     }
 
 

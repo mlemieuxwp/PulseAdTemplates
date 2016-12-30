@@ -1,133 +1,124 @@
-getScript([
-    'jquery'
-], function() {
-    $ = typeof $ !== 'undefined' ? $ : top.jQuery;
-    var _$ = $.proxy($.fn.find, $(document));
+var PulsePlayer = (function() {
 
-    var PulsePlayer = (function() {
+    var pluse_main = document.getElementsByClassName('pulse-wrapper')[0],
+        pulse_wrapper = document.getElementsByClassName('pulse-player-wrapper'),
+        isFirstClick = true,
+        click_thru = pluse_main.getAttribute('data-click'),
+        has_video_ctrls = document.getElementsByClassName('pulse-player-no-ctrls').length > 0 ? false : true;
 
-        var video = document.getElementById('pulse-player'),
-            click_thru = _$('.pulse-wrapper').data('click');
+    function advClickThru() {
+        window.open(click_thru);
+    }
 
-        var track_play = (_$('.pulse-player-wrapper').data('video-track-play') || _$('.pulse-wrapper').data('track')) || false;
-        var track_end = _$('.pulse-player-wrapper').data('video-track-end') || false;
+    function muteVideo(video,wrapper) {
+        if (video.muted) {
+            video.muted = false;
+            wrapper.classList.remove('pulse-player-muted');
 
-        var $video_play_button = _$('.pulse-player-play'),
-            $video_mute_button = _$('.pulse-player-volume'),
-            $video_wrapper = _$('.pulse-player-wrapper'),
-            $has_video_ctrls = _$('.pulse-player-no-ctrls').length > 0 ? false : true,
-            isFirstClick = true;
-
-        function setTrackPixel(url) {
-            if (url) {
-                url = url.replace(/%%CACHEBUSTER%%/gi, '');
-                url += Math.floor(1E12 * Math.random()) + '?';
-                _$('.pulse-tracking-wrapper').append('<img src="' + url + '" alt="" border="0" height="1" width="1" style="display:none;" />');
-            }
+        } else {
+            video.muted = true;
+            wrapper.classList.add('pulse-player-muted');
         }
+    }
 
-        function setStartTime() {
-            if ($(video).data('current-time')) {
-                // video.play();
-                // video.pause();
-                video.currentTime = $(video).data('current-time');
-            }
+    function bindVideoWrapper(video,wrapper,button) {
+        var eventName = "click";
+        if ( Utils.isTouchDevice() ) {
+            eventName = "touchstart";
         }
-
-        function advClickThru(event) {
-            event.preventDefault();
-            window.open(click_thru);
-        }
-
-        function muteBtnClick(event) {
-            event.preventDefault();
-            if (video.muted) {
-                video.muted = false;
-                _$(this).removeClass('fa-volume-off');
-            } else {
-                video.muted = true;
-                _$(this).addClass('fa-volume-off');
-
-            }
-        }
-
-        function playBtnClick(event) {
-            event.preventDefault();
-            if ($video_wrapper.length && isFirstClick) {
-                $video_wrapper.off('click');
-                isFirstClick = false;
-                _$(video).on('click', advClickThru);
-            }
-
-            if (video.paused || video.ended) {
-                //setTrackPixel(track_play);
-                video.play();
-                _$(video).parent().addClass('pulse-player-active');
-                _$(video).css('visibility', 'visible');
-                _$(this).addClass('fa-pause-circle-o pulse-player-pause');
-            } else {
-                video.pause();
-                _$(this).removeClass('fa-pause-circle-o pulse-player-pause');
-            }
-        }
-
-        function videoEndEvents() {
-            //setTrackPixel(track_end);
-            video.load();
-            if ($has_video_ctrls) {
-                $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
-            }
-        }
-
-        function videoBtnEffects() {
-            _$(".pulse-wrapper").on("mouseenter", ".pulse-player-active", function() {
-                $video_play_button.fadeIn();
+        if (wrapper.length && !video.hasAttribute('autoplay')) {
+            wrapper.addEventListener(eventName, function(){
+                button.click();
+                return false;
             });
-            _$(".pulse-wrapper").on("mouseleave", ".pulse-player-active", function() {
-                $video_play_button.fadeOut();
+            wrapper.on(eventName, function(e) {
+                $video_play_button.click();
             });
+        } else {
+            video.addEventListener(eventName, function(){
+                advClickThru();
+                return false;
+            });
+            // Autoplay Video
+            video.setAttribute('playing', 'true');
+            video.parentNode.classList.add('pulse-player-active');
+            muteVideo(video,wrapper);
         }
+    }
 
-        function bindVideoWrapper() {
-            if ($video_wrapper.length && !video.hasAttribute('autoplay')) {
-                $video_wrapper.on('click', function(e) {
-                    $video_play_button.click();
+   function playVideo(video,wrapper,button) {
+
+        if (isFirstClick) {
+            video.load(); // becase video src is set dynamically
+            wrapper.removeEventListener('click',function(){
+                button.click();
+            });
+
+            isFirstClick = false;
+            /*if ( click_thru!= null ){
+                video.addEventListener('click', function(){
+                    advClickThru();
+                    return false;
                 });
-            } else {
-                _$(video).on('click', advClickThru);
-            }
+            }*/
         }
+        if (video.paused || video.ended) {
+            video.play();
+            video.setAttribute('playing', 'true');
 
-        function isAutoPlay(){ 
-            if(video && video.autoplay){
-                video.muted = true;
-                $video_wrapper.addClass('pulse-player-active');
-                $video_play_button.hide().addClass('fa-pause-circle-o pulse-player-pause');
-                $video_mute_button.addClass('fa-volume-off');
-            }
+            video.parentNode.classList.add('pulse-player-active');
+
+
+        } else {
+            video.pause();
+            video.removeAttribute('playing');
+            video.parentNode.classList.remove('pulse-player-active');
         }
+    }
 
-        function bindFunctions() {
-            _$('.pulse-player-poster').on('click', advClickThru);
-            $video_mute_button.on('click', muteBtnClick);
-            $video_play_button.on('click', playBtnClick);
-            setStartTime();
-            bindVideoWrapper();
-            isAutoPlay();
-            _$(video).on('ended', videoEndEvents);
+    function setStartTime(video) {
+        if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
+            video.currentTime = video.getAttribute('data-current-time');
         }
+    }
 
-        function init() {
-            bindFunctions();
-            videoBtnEffects();
+    function videoEndEvents(video,wrapper) {
+        video.load();
+        if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
+            video.currentTime = video.getAttribute('data-current-time');
         }
+        if (has_video_ctrls) {
+            video.parentNode.classList.remove('pulse-player-active');
+        }
+    }
 
-        return {
-            init: init
-        };
+    function bindFunctions() {
+        Array.prototype.forEach.call(pulse_wrapper, function(el) {
+            var video = el.getElementsByTagName('video')[0];
+            var btn_play = el.querySelector('.pulse-player-play-toggle');
+            var btn_mute = el.querySelector('.pulse-player-volume-toggle');
+            btn_play.addEventListener('click', function(){
+                playVideo(video,el,this)
+            });
+            btn_mute.addEventListener('click', function(){
+                muteVideo(video,el,this)
+            });
+            bindVideoWrapper(video,el,btn_play);
+            setStartTime(video);
+            video.addEventListener('ended', function(){
+                videoEndEvents(video,el);
+            });
+        });
+    }
 
-    })();
+    function init() {
+        bindFunctions();
+    }
 
-    PulsePlayer.init();
+    return {
+        init: init
+    };
 
-});
+})();
+
+document.addEventListener('DOMContentLoaded', PulsePlayer.init(), false);
