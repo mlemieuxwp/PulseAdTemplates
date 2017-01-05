@@ -73,7 +73,7 @@ getScript([
 
         function videoEndEvents() {
             //setTrackPixel(track_end);
-            video.load();
+            //video.load();
             if ($has_video_ctrls) {
                 $video_play_button.removeClass('fa-pause-circle-o pulse-player-pause').show();
             }
