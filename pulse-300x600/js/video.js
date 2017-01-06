@@ -85,7 +85,7 @@ var PulsePlayer = (function() {
     }
 
     function videoEndEvents(video,wrapper) {
-        video.load();
+        //video.load();
         if (!video.getAttribute('poster') && video.getAttribute('data-current-time')) {
             video.currentTime = video.getAttribute('data-current-time');
         }
