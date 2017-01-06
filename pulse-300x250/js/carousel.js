@@ -9,7 +9,7 @@ var PulseCarousel = (function() {
         var pulseWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
 
         swiper.on('onSlideChangeStart', function(swiper) {
-            
+
             if (swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && !pulseWrapper.classList.contains('pulse-sponsored') ) {
                 pulseWrapper.classList.add('pulse-sponsored');
             }
@@ -35,7 +35,7 @@ var PulseCarousel = (function() {
 
     function loadCarousel(pulse_selector) {
 
-        // Adding next, prev buttons to slider 
+        // Adding next, prev buttons to slider
         var pulse_wrapper = document.getElementsByClassName(pulse_selector)[0];
         var next = document.createElement('a');
         next.classList.add('pulse-next');
@@ -60,7 +60,7 @@ var PulseCarousel = (function() {
     }
 
 
-    function videoSlide(swiper) {            
+    function videoSlide(swiper) {
         swiper.on('onSlideChangeStart', function(swiper) {
             var slide = swiper.slides[swiper.activeIndex];
             if ( slide.classList.contains('pulse-slide--video') ) {
@@ -72,11 +72,19 @@ var PulseCarousel = (function() {
                 var source = video.getElementsByTagName('source')[0];
                 var src = source.getAttribute('data-src');
                 source.setAttribute('src',src);
+
+                // Autoplay videos
+                if ( video.hasAttribute('autoplay') ) {
+                    video.load();
+                    video.parentNode.classList.add('pulse-player-active');
+                    video.muted = true;
+                    video.parentNode.classList.add('pulse-player-muted');
+                }
             }
             // Pause Videos when sliding
             var videos = document.getElementsByTagName('video');
             for ( i=0; i < videos.length ; i++  ) {
-                if ( !videos[i].pasued ) {
+                if ( !videos[i].paused ) {
                     videos[i].pause();
                     videos[i].removeAttribute('playing');
                     videos[i].parentNode.classList.remove('pulse-player-active');

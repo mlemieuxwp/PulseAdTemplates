@@ -39,7 +39,9 @@ var PulsePlayer = (function() {
                 advClickThru();
                 return false;
             });
-            // Autoplay Video
+        }
+        // Autoplay Video
+        if (video.hasAttribute('autoplay')) {
             video.setAttribute('playing', 'true');
             video.parentNode.classList.add('pulse-player-active');
             muteVideo(video,wrapper);
