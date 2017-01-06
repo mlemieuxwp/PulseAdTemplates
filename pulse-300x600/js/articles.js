@@ -13,7 +13,6 @@ var PulseArticles = (function() {
             var shuffle = articlesElem.getAttribute('data-shuffle');
             var sponsorAll = articlesElem.getAttribute('data-sponsorall') || false;
             var urlParam = articlesElem.getAttribute('data-urlparam');
-
             function initArticles(articles) {
 
                 articles = JSON.parse(articles);
@@ -39,7 +38,7 @@ var PulseArticles = (function() {
                 if (articlesElem.querySelectorAll) {
                     var links = articlesElem.querySelectorAll("a");
                     for (i = 0; i < links.length; i++) {
-                        Utils.clickTrackHandler(links[i]);
+                        Utils.clickTrackHandler(links[i],linkClickPixel,pulseTrackingWrapper);
                     }
                 }
 

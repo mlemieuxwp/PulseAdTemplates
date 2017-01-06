@@ -2,7 +2,7 @@ var Utils = (function() {
 
 
     // Add tracker for clicks
-    function clickTrackHandler(link) {
+    function clickTrackHandler(link,linkClickPixel,trackingWrapper) {
         link.onclick = function(event) {
             if (linkClickPixel) {
                 var img = document.createElement("img");
@@ -12,7 +12,7 @@ var Utils = (function() {
                 img.style.width = "1px";
                 img.style.height = "1px";
                 img.style.display = "none";
-                pulseTrackingWrapper.appendChild(img);
+                trackingWrapper.appendChild(img);
             }
         };
     };
