@@ -17,7 +17,7 @@ var PulseSlides = (function() {
                 
                 articles = JSON.parse(articles);
 
-                if (shuffle) {
+                if (shuffle=='true') {
                     selArticles = Utils.shuffleArray(articles).slice(0, 3);
                 } else {
                     selArticles = articles.slice(0, 3);
