@@ -4,20 +4,22 @@ var PulseSlides = (function() {
 
         if (articleDiv) {
 
-            var articles = articleDiv.getAttribute('data-articles');
+            var articles = articleDiv.hasAttribute('data-feed') || articleDiv.getAttribute('data-articles');
             var articleFeed = articleDiv.getAttribute('data-feed');
             var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
             var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
             var selArticles;
             var shuffle = articleDiv.getAttribute('data-shuffle');
             var sponsorAll = articleDiv.getAttribute('data-sponsorall') || false;
-            var urlParam = articleDiv.getAttribute('data-urlparam');
+            var urlParam = articleDiv.getAttribute('data-urlparam') ? '?spon_con=' + articleDiv.getAttribute('data-urlparam') : '';
+
+
 
             function initArticles(articles) {
-                
+
                 articles = JSON.parse(articles);
 
-                if (shuffle=='true') {
+                if (shuffle == 'true') {
                     selArticles = Utils.shuffleArray(articles).slice(0, 3);
                 } else {
                     selArticles = articles.slice(0, 3);
@@ -31,7 +33,7 @@ var PulseSlides = (function() {
                     },
                     showArticles: true,
                     sponsorAll: sponsorAll,
-                    urlParam: urlParam ? '?spon_con=' + urlParam : ''
+                    url_param: urlParam
                 });
                 //console.log(html);
 
@@ -69,7 +71,7 @@ var PulseSlides = (function() {
                 if (articleDiv.querySelectorAll) {
                     var links = articleDiv.querySelectorAll("a");
                     for (i = 0; i < links.length; i++) {
-                        Utils.clickTrackHandler(links[i]);
+                        Utils.clickTrackHandler(links[i], linkClickPixel, pulseTrackingWrapper);
                     }
                 }
 
@@ -77,7 +79,7 @@ var PulseSlides = (function() {
 
 
             if (articleFeed) {
-                
+
                 xmlHttp.get(articleFeed, function(xhr) {
                     initArticles(xhr.responseText);
                     PulseCarousel.init();
