@@ -94,7 +94,7 @@ gulp.task('browser-sync', function() {
 **/
 gulp.task('scripts', function() {
   gulp.src([
-    'js/jsLoader.js', 
+    // 'js/jsLoader.js', 
     'js/xmlHttp.js', 
     'js/utils.js', 
     'js/templates.js', 

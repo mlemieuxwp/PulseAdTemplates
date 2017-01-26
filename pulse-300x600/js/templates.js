@@ -27,7 +27,7 @@ var Templates = (function() {
             '<li class="pulse-article-list-item">' +
             '<div class="pulse-article-wrapper cf">' +
             '<div class="pulse-article-thumb-wrapper">' +
-            '<a href="<%this.articles[index].url%><%this.urlParam%>" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link" target="<% this.linkTarget(index) %>">' +
             '<%if(this.articles[index].src) {%>' +
             '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=61&w=61" border="0" class="pulse-article-thumbnail" />' +
             '<%}%>' +
@@ -37,7 +37,7 @@ var Templates = (function() {
             '<div class="pulse-article-number"></div>' +
             '<div class="pulse-article-desc-wrapper">' +
             '<p class="pulse-article-desc">' +
-            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
             '<%this.articles[index].title%>' +
             '</a>' +
             '</p>' +
