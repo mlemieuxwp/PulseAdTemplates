@@ -46,6 +46,7 @@ var PulsePlayer = (function() {
         }
         // Autoplay Video
         if (video.hasAttribute('autoplay')) {
+            video.setAttribute('playsinline','')
             video.setAttribute('playing', 'true');
             video.parentNode.classList.add('pulse-player-active');
             muteVideo(video, wrapper);
