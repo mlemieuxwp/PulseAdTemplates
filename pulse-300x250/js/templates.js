@@ -28,7 +28,7 @@ var Templates = (function() {
             '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slick-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%><%this.url_param%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
             '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
