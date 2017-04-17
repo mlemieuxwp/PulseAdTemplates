@@ -144,7 +144,7 @@ var PulseCarousel = (function() {
     function init() {
 
         var pulse_selector = 'pulse-mobile-wrapper',
-            click_thru = document.getElementsByClassName(pulse_selector)[0].getAttribute('data-click');
+            click_thru = bsAd.clickThruURL;
 
         var swiper = loadCarousel(pulse_selector);
 

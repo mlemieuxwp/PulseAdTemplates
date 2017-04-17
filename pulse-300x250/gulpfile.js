@@ -22,6 +22,8 @@ var util         = require('gulp-util');
 var cssmin       = require('gulp-cssmin');
 var clean        = require('gulp-clean');
 var concat       = require('gulp-concat');
+var css2js       = require("gulp-css2js");
+var foreach      = require("gulp-foreach");
 
 /**
 *** Versioning
@@ -40,7 +42,7 @@ var concat       = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "3.0.4";
+var version = "4.0.0";
 
 /**
 *
@@ -57,12 +59,29 @@ gulp.task('sass', function() {
   .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
   .pipe(plumber())
   .pipe(concat('main.css'))
-  .pipe(rename({
+  /*.pipe(rename({
             dirname: "min",
             suffix: "-"+version+".min",
-  }))
+  }))*/
   .pipe(gulp.dest('css'));
 });
+
+gulp.task('css2js', function() {
+    gulp.src("css/main.css")
+        .pipe(foreach(function(stream, file){
+                var filename = file.path.replace(/^.*[\\\/]/, '');
+                filename = filename.replace(/\.[^/.]+$/, "");
+                return stream
+                .pipe(
+                    css2js({
+                        prefix: "Styles[\""+filename+"\"] = \"",
+                        suffix: "\";\n"
+                    })
+                );
+            })
+        )
+        .pipe(gulp.dest("js/css2js"));
+})
 
 // gulp.task('clean-scripts', function () {
 //   return gulp.src('css/*', {read: false})
@@ -111,9 +130,11 @@ gulp.task('browser-sync', function() {
 **/
 gulp.task('scripts', function() {
   gulp.src([
-    'js/xmlHttp.js', 
-    'js/utils.js', 
+    'js/xmlHttp.js',
+    'js/utils.js',
     'js/templates.js',
+    'js/css2js/main.js',
+    'js/ad.js',
     'js/swiper.js',
     'js/carousel.js',
     'js/slides.js',
@@ -154,8 +175,9 @@ gulp.task('images', function () {
 * - Watchs for file changes for images, scripts and sass/css
 *
 **/
-gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
+gulp.task('default', ['sass','css2js', 'browser-sync', 'scripts', 'images'], function () {
     gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('css/main.css', ['css2js']);
     gulp.watch('js/**/*.js', ['scripts']);
     gulp.watch('images/*', ['images']);
 });

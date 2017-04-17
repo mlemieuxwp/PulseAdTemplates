@@ -32,6 +32,15 @@ var Utils = (function() {
         }
     }
 
+    function appendStyle(css, _document) {
+        var head = _document.getElementsByTagName("head")[0];
+        var style = _document.createElement("style");
+        style.type = "text/css";
+
+        style.appendChild(_document.createTextNode(css));
+        head.appendChild(style);
+    };
+
     function shuffleArray(array) {
         if (array) {
             for (var i = array.length - 1; i > 0; i--) {
@@ -48,7 +57,8 @@ var Utils = (function() {
         clickTrackHandler: clickTrackHandler,
         setArticleNum: setArticleNum,
         shuffleArray: shuffleArray,
-        isTouchDevice: isTouchDevice
+        isTouchDevice: isTouchDevice,
+        appendStyle: appendStyle
     }
 
 

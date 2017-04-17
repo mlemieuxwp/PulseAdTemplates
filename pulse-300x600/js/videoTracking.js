@@ -7,7 +7,7 @@ var PulseTracking = (function() {
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
 
     var videoTracking = pulsePlayerWrapper && pulsePlayerWrapper.getAttribute('data-videotracking');
-    
+
     // set up tracking variables
 
     videoTracking = videoTracking && JSON.parse(videoTracking);
@@ -49,7 +49,7 @@ var PulseTracking = (function() {
         sessionStorage.setItem('three', (quarter * 3).toFixed(1))
     }
 
-    // check video time and set tracking pixels 
+    // check video time and set tracking pixels
 
     function videoTimeUpdate() {
 
@@ -106,5 +106,3 @@ var PulseTracking = (function() {
     };
 
 })();
-
-document.addEventListener('DOMContentLoaded', PulseTracking.init(), false);

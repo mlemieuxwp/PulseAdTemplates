@@ -23,6 +23,30 @@ var Templates = (function() {
     }
 
     var types = {
+        base: '<div class="pulse-mobile-wrapper <%if(this.sponsorFirst){%>pulse-sponsored<%}%>">' +
+            '<div class="pulse-mobile-header js-pulse-animate">' +
+            '<div class="pulse-article-label">' +
+            '<div class="pulse-article-label-small">Washington Post content selected by <% this.sponsorLabel %></div>' +
+            '</div>' +
+            '<%if(this.sponsorAny) {%>' +
+            '<div class="pulse-label-sponsor">' +
+            '<div class="pulse-article-label-small">Content from <% this.sponsorLabel %></div><i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>' +
+            '</div>' +
+            '<%}%>'+
+            '</div>' +
+            '<div class="pulse-mobile slick-slider" id="articles" data-urlparam="<% this.urlParam %>"></div>' +
+            '<div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate">' +
+            '<div class="pulse-mobile-footer-client-logo">'+
+            '<%if(this.sponsorLogo) {%>' +
+            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+
+            '<img src="<%this.sponsorLogo%>" alt="" class="pulse-mobile-footer-logo" style="border: 0px; width: <%this.sponsorLogoWidth%>%;">'+
+            '</a>'+
+            '<%}%>'+
+            '</div>' +
+            '</div>' +
+            '<div class="pulse-tracking-wrapper" style="display:none;"></div>' +
+            '</div>',
+
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
             '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slick-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
@@ -47,7 +71,7 @@ var Templates = (function() {
             '</div>',
 
         iframe: '<div data-animate="true" class="pulse-slide pulse-slide--iframe">' +
-            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' + 
+            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
             '<iframe data-src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
@@ -79,3 +103,5 @@ var Templates = (function() {
 
 
 })();
+
+var Styles = {};

@@ -1,106 +1,73 @@
 var PulseSlides = (function() {
 
-    function loadArticles(articleDiv) {
+    function loadArticles(articles) {
 
-        if (articleDiv) {
+        var linkClickPixel = bsAd.client_tracking;
+        var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
+        var selArticles;
+        var shuffle = bsAd.shuffle;
+        var sponsorAll = bsAd.sponsorAll || false;
+        var urlParam = bsAd.urlParam ? '?spon_con=' + bsAd.urlParam : '';
+        var ad = bsAd.ad;
+        var articleDiv = document.getElementById('articles');
 
-            var articles = articleDiv.hasAttribute('data-feed') || articleDiv.getAttribute('data-articles');
-            var articleFeed = articleDiv.getAttribute('data-feed');
-            var linkClickPixel = articleDiv.getAttribute('data-clicktrack');
-            var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
-            var selArticles;
-            var shuffle = articleDiv.getAttribute('data-shuffle');
-            var sponsorAll = articleDiv.getAttribute('data-sponsorall') || false;
-            var urlParam = articleDiv.getAttribute('data-urlparam') ? '?spon_con=' + articleDiv.getAttribute('data-urlparam') : '';
+        if (shuffle == 'true') {
+            selArticles = Utils.shuffleArray(articles).slice(0, 3);
+        } else {
+            selArticles = articles.slice(0, 3);
+            selArticles.reverse(); //need to reverse to keep article order when we insertBefore below.
+        }
 
+        var html = Templates.engine(Templates.types['articles'], {
+            articles: selArticles,
+            linkTarget: function(i) {
+                return !this.articles[i].sponsor ? '_top' : '_blank';
+            },
+            showArticles: true,
+            sponsorAll: sponsorAll,
+            url_param: urlParam
+        });
 
+        ad = JSON.parse(ad);
 
-            function initArticles(articles) {
+        if (ad && ad.type === 'video') {
+            ad.videoTracking = {};
+            ad.videoTracking.trackStart = ad.trackstart || null;
+            ad.videoTracking.track25 = ad.track25 || null;
+            ad.videoTracking.track50 = ad.track50 || null;
+            ad.videoTracking.track75 = ad.track75 || null;
+            ad.videoTracking.track100 = ad.track100 || null;
+            ad.videoTracking = JSON.stringify(ad.videoTracking);
+        }
 
-                articles = JSON.parse(articles);
+        if (ad) {
+            var adHtml = Templates.engine(Templates.types[ad.type], {
+                ad: ad,
+                setAdClick: Utils.setAdClick,
+                checkImgSrc: Utils.checkImgSrc
+            });
+            html = adHtml + html;
+        }
 
-                if (shuffle == 'true') {
-                    selArticles = Utils.shuffleArray(articles).slice(0, 3);
-                } else {
-                    selArticles = articles.slice(0, 3);
-                    selArticles.reverse(); //need to reverse to keep article order when we insertBefore below.
-                }
+        var elem = document.createElement('div');
+        elem.innerHTML = html;
 
-                var html = Templates.engine(Templates.types['articles'], {
-                    articles: selArticles,
-                    linkTarget: function(i) {
-                        return !this.articles[i].sponsor ? '_top' : '_blank';
-                    },
-                    showArticles: true,
-                    sponsorAll: sponsorAll,
-                    url_param: urlParam
-                });
-                //console.log(html);
+        for (i = 0; i < elem.childNodes.length;) {
+            el = elem.childNodes[i];
+            elem.removeChild(el);
+            articleDiv.insertBefore(el, articleDiv.firstChild);
+        }
 
-                var ad = articleDiv.getAttribute('data-ad');
-                ad = JSON.parse(ad);
-                //console.log(ad.type);
-                if (ad && ad.type === 'video') {
-                    ad.videoTracking = {};
-                    ad.videoTracking.trackStart = ad.trackstart || null;
-                    ad.videoTracking.track25 = ad.track25 || null;
-                    ad.videoTracking.track50 = ad.track50 || null;
-                    ad.videoTracking.track75 = ad.track75 || null;
-                    ad.videoTracking.track100 = ad.track100 || null;
-                    ad.videoTracking = JSON.stringify(ad.videoTracking);
-                }
-
-                if (ad) {
-                    var adHtml = Templates.engine(Templates.types[ad.type], {
-                        ad: ad,
-                        setAdClick: Utils.setAdClick,
-                        checkImgSrc: Utils.checkImgSrc
-                    });
-                    html = adHtml + html;
-                }
-
-                var elem = document.createElement('div');
-                elem.innerHTML = html;
-
-                for (i = 0; i < elem.childNodes.length;) {
-                    el = elem.childNodes[i];
-                    elem.removeChild(el);
-                    articleDiv.insertBefore(el, articleDiv.firstChild);
-                }
-
-                if (articleDiv.querySelectorAll) {
-                    var links = articleDiv.querySelectorAll("a");
-                    for (i = 0; i < links.length; i++) {
-                        Utils.clickTrackHandler(links[i], linkClickPixel, pulseTrackingWrapper);
-                    }
-                }
-
+        if (articleDiv.querySelectorAll) {
+            var links = articleDiv.querySelectorAll("a");
+            for (i = 0; i < links.length; i++) {
+                Utils.clickTrackHandler(links[i], linkClickPixel, pulseTrackingWrapper);
             }
-
-
-            if (articleFeed) {
-
-                xmlHttp.get(articleFeed, function(xhr) {
-                    initArticles(xhr.responseText);
-                    PulseCarousel.init();
-                });
-
-            } else if (articles) {
-
-                initArticles(articles);
-                PulseCarousel.init();
-
-            }
-
-
         }
     }
 
-    function init() {
-
-        var articles = document.getElementById('articles');
+    function init(articles) {
         loadArticles(articles);
-
     }
 
     return {

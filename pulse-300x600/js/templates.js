@@ -22,6 +22,29 @@ var Templates = (function() {
     }
 
     var types = {
+        base: '<div class="pulse-wrapper">' +
+            '<div class="pulse-media">' +
+            '</div>' +
+            '<div id="articles" class="pulse-article-list-wrapper" style="display:none;">' +
+            '<div class="pulse-label-sponsor">' +
+            '<div class="pulse-article-label-small">Content from <%this.sponsorLabel%></div><i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>' +
+            '</div>' +
+            '<ul id="sponsored-article-list" class="pulse-article-list pulse-sponsor-article-list"></ul>' +
+            '<div class="pulse-article-label">' +
+            '<div class="pulse-article-label-small">Washington Post content selected by <%this.sponsorLabel%></div>' +
+            '</div>' +
+            '<ul id="article-list" class="pulse-article-list"></ul>' +
+            '<div class="pulse-footer">'+
+            '<%if(this.sponsorLogo) {%>' +
+            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+
+            '<img src="<%this.sponsorLogo%>" alt="" class="pulse-mobile-footer-logo" style="border: 0px; width: <%this.sponsorLogoWidth%>%;">'+
+            '</a>'+
+            '<%}%>'+
+            '</div>' +
+            '</div>' +
+            '<div class="pulse-tracking-wrapper" style="display:none;"></div>' +
+            '</div>',
+
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
             '<li class="pulse-article-list-item">' +
@@ -33,7 +56,6 @@ var Templates = (function() {
             '<%}%>' +
             '</a>' +
             '</div>' +
-            //'<div class="pulse-article-number"><% this.addOne(index) %></div>' +
             '<div class="pulse-article-number"></div>' +
             '<div class="pulse-article-desc-wrapper">' +
             '<p class="pulse-article-desc">' +
@@ -47,7 +69,36 @@ var Templates = (function() {
             '<%}%>' +
             '<%} else {%>' +
             '<p>none</p>' +
-            '<%}%>'
+            '<%}%>',
+
+        html: '<div data-animate="true" class="pulse-slide pulse-slide--html">' +
+            '<%this.ad.html%>' +
+            '</div>',
+
+        iframe: '<div class="pulse-slide pulse-slide--iframe">' +
+            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
+            '<iframe data-src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+            '</div>',
+
+        image: '<div class="pulse-slide pulse-slide--image">' +
+            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
+            '<%if(this.ad.src) {%>' +
+            '<img data-src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+            '<%}%>' +
+            '</a>' +
+            '</div>',
+
+        video: '<div class="pulse-slide pulse-slide--video">' +
+            '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
+            '<i class="pulse-player-play-toggle"></i>' +
+            '<i class="pulse-player-volume-toggle"></i>' +
+            '<video class="pulse-player" data-current-time="0.25" data-poster="<% this.ad.poster_url %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
+            '<%if(this.ad.src) {%>' +
+            '<source src="<%this.ad.src%>" type="video/mp4" />' +
+            '<%}%>' +
+            '</video>' +
+            '</div>' +
+            '</div>'
 
     }
 
@@ -56,5 +107,6 @@ var Templates = (function() {
         types: types
     };
 
-
 })();
+
+var Styles = {};

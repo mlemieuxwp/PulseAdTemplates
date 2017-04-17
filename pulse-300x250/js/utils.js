@@ -27,6 +27,15 @@ var Utils = (function() {
         };
     }
 
+    function appendStyle(css, _document) {
+        var head = _document.getElementsByTagName("head")[0];
+        var style = _document.createElement("style");
+        style.type = "text/css";
+
+        style.appendChild(_document.createTextNode(css));
+        head.appendChild(style);
+    };
+
     function setAdClick(url) {
         if (!url) {
             var mobileWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
@@ -51,7 +60,8 @@ var Utils = (function() {
         checkImgSrc: checkImgSrc,
         clickTrackHandler: clickTrackHandler,
         setAdClick: setAdClick,
-        shuffleArray: shuffleArray
+        shuffleArray: shuffleArray,
+        appendStyle: appendStyle
     }
 
 

@@ -1,6 +1,6 @@
 var PulseTracking = (function() {
 
-    // get tracking object    
+    // get tracking object
     var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
     var videoTrackingUrl = new Array();
 
@@ -36,6 +36,7 @@ var PulseTracking = (function() {
             url += Math.floor(1E12 * Math.random()) + '?';
             img.src = url;
             pulseTrackingWrapper.appendChild(img);
+            console.log(pulseTrackingWrapper);
         }
 
     }
@@ -43,7 +44,7 @@ var PulseTracking = (function() {
     // calculate key frame quartiles and store using local storage
 
     function setKeyFrames(duration) {
-        
+
         sessionStorage.setItem('key', 'value');
         var quarter = (duration / 4).toFixed(1);
         sessionStorage.setItem('one', quarter);
@@ -51,7 +52,7 @@ var PulseTracking = (function() {
         sessionStorage.setItem('three', (quarter * 3).toFixed(1));
     }
 
-    // check video time and set tracking pixels 
+    // check video time and set tracking pixels
 
     function videoTimeUpdate(video) {
 
@@ -90,7 +91,7 @@ var PulseTracking = (function() {
     }
 
     function bindEvents(video) {
-        
+
         if (video) {
             video.addEventListener('ended', function(){videoEnd()}, false);
             video.addEventListener('timeupdate', function(){videoTimeUpdate(video)}, false);
@@ -99,12 +100,14 @@ var PulseTracking = (function() {
     }
 
     function init() {
-        var videos = document.getElementsByClassName('pulse-player-wrapper');
-        Array.prototype.forEach.call(videos, function(el) {
-            var video = el.getElementsByTagName('video')[0];
-            bindEvents(video);
-        })
-        initTrackingUrls();
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var videos = document.getElementsByClassName('pulse-player-wrapper');
+            Array.prototype.forEach.call(videos, function(el) {
+                var video = el.getElementsByTagName('video')[0];
+                bindEvents(video);
+            })
+            initTrackingUrls();
+        });
     }
 
     return {

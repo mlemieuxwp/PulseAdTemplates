@@ -3,7 +3,7 @@ var PulsePlayer = (function() {
     var pluse_main = document.getElementsByClassName('pulse-mobile-wrapper')[0],
         pulse_wrapper = document.getElementsByClassName('pulse-player-wrapper'),
         isFirstClick = true,
-        click_thru = pluse_main.getAttribute('data-click'),
+        click_thru = bsAd.clickThruURL,
         has_video_ctrls = document.getElementsByClassName('pulse-player-no-ctrls').length > 0 ? false : true;
 
     function advClickThru() {

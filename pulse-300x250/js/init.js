@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    PulseSlides.init();
+    PulseAd.init();
+    PulseCarousel.init();
     PulsePlayer.init();
     PulseTracking.init();
 });
