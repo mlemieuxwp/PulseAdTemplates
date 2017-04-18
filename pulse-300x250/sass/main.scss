@@ -48,15 +48,22 @@
 }
 
 .pulse-info-icon {
-    background-image: url("https://css.washingtonpost.com/wp-srv/ad/public/brandconnect/modulev3/images/glyphicons_195_circle_info_grey.png");
+    background-color: #333;
     height: 12px;
     width: 12px;
-    background-size: 12px 12px;
-    display: block;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    margin-right: 10px
+    top: 10px;
+    right: 10px;
+    z-index: 4;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 12px;
+}
+.pulse-info-icon:after {
+    content: "i";
+    font-family: serif;
+    font-size: 10px;
 }
 
 .pulse-info-popup {

@@ -5,8 +5,10 @@ var PulseAd = (function() {
     // if the first article is sponsored
     var sponsorFirst = false;
 
-    var articles = bsAd.feedUrl || bsAd.articles;
-    var articleFeed = bsAd.feedUrl;
+    var articles = bsAd.articles;
+    var articleFeed = bsAd.feedUrl == 'false' ? '' : bsAd.feedUrl ;
+
+
 
     function iniAdBase() {
         if (articleFeed) {
@@ -29,7 +31,7 @@ var PulseAd = (function() {
 
     function applyBaseTemplate(articles) {
 
-        if (articles[0].sponsor) {
+        if ( articles[0] != undefined && articles[0].sponsor == 'true' ) {
             sponsorFirst = true;
         }
         for (var i = 0; i < articles.length; i++) {

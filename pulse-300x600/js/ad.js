@@ -1,7 +1,7 @@
 var PulseAd = (function() {
 
-    var articles = bsAd.feedUrl || bsAd.articles;
-    var articleFeed = bsAd.feedUrl;
+    var articles = bsAd.articles;
+    var articleFeed = bsAd.feedUrl == 'false' ? '' : bsAd.feedUrl ;
 
     function iniAdBase() {
         if (articleFeed) {
@@ -9,16 +9,14 @@ var PulseAd = (function() {
                 // initializing slider base template
                 articles = JSON.parse(xhr.responseText);
                 applyBaseTemplate(articles);
-                // initializing slides
-                //PulseSlides.init(articles);
+                PulseArticles.init(articles);
             });
 
         } else if (articles) {
             // initializing slider base template
             articles = JSON.parse(articles);
             applyBaseTemplate(articles);
-            // initializing slides
-            //PulseSlides.init(articles);
+            PulseArticles.init(articles);
         }
     }
 

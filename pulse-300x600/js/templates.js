@@ -71,24 +71,24 @@ var Templates = (function() {
             '<p>none</p>' +
             '<%}%>',
 
-        html: '<div data-animate="true" class="pulse-slide pulse-slide--html">' +
+        html: '<div>' +
             '<%this.ad.html%>' +
             '</div>',
 
-        iframe: '<div class="pulse-slide pulse-slide--iframe">' +
-            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
-            '<iframe data-src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+        iframe: '<div>' +
+            '<a href="<% this.ad.url %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
+            '<iframe src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
-        image: '<div class="pulse-slide pulse-slide--image">' +
-            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
+        image: '<div>' +
+            '<a href="<% this.ad.url %>" target="_blank">' +
             '<%if(this.ad.src) {%>' +
-            '<img data-src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+            '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +
             '</a>' +
             '</div>',
 
-        video: '<div class="pulse-slide pulse-slide--video">' +
+        video: '<div>' +
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="pulse-player-play-toggle"></i>' +
             '<i class="pulse-player-volume-toggle"></i>' +

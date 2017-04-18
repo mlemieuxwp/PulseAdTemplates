@@ -1,9 +1,8 @@
 var PulseArticles = (function() {
 
-    var articles = bsAd.articles;
-    var articleFeed = bsAd.feedUrl;
-
     function initArticles(articles) {
+
+        //console.log(articles);
 
         var linkClickPixel = bsAd.client_tracking;
         var maxLength = bsAd.maxLength || 3;
@@ -18,15 +17,8 @@ var PulseArticles = (function() {
         var articlesListSponsored =  document.getElementById('sponsored-article-list');
         var articleWrapper =  document.getElementById('articles');
 
-        articles = JSON.parse(articles);
-        articles_spoonsored = new Array();
-
-        for (var i = 0; i < articles.length; i++) {
-            if ( articles[i].sponsor ){
-                articles_spoonsored.push(articles[i]);
-                articles.splice(i,1);
-            }
-        }
+        articles_spoonsored = Utils.filterSponsorContent(articles);
+        articles = Utils.removeSponContent(articles);
 
         if (shuffle) {
             selArticles = Utils.shuffleArray(articles).slice(0, maxLength);
@@ -92,17 +84,8 @@ var PulseArticles = (function() {
     }
 
 
-    function init() {
-
-        if (articleFeed) {
-            xmlHttp.get(articleFeed, function(xhr) {
-                initArticles(xhr.responseText);
-            });
-
-        } else if (articles) {
+    function init(articles) {
             initArticles(articles);
-        }
-
     }
 
     return {

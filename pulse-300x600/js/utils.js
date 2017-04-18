@@ -2,7 +2,7 @@ var Utils = (function() {
 
 
     // Add tracker for clicks
-    function clickTrackHandler(link,linkClickPixel,trackingWrapper) {
+    function clickTrackHandler(link, linkClickPixel, trackingWrapper) {
         link.onclick = function(event) {
             if (linkClickPixel) {
                 var img = document.createElement("img");
@@ -18,8 +18,9 @@ var Utils = (function() {
     };
 
     function isTouchDevice() {
-      return 'ontouchstart' in window        // works on most browsers
-          || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+        return 'ontouchstart' in window // works on most browsers
+            ||
+            navigator.maxTouchPoints; // works on IE10/11 and Surface
     };
 
     function setArticleNum() {
@@ -53,12 +54,42 @@ var Utils = (function() {
         }
     }
 
+    function checkImgSrc(src) {
+        if (src && !/.gif/i.test(src)) {
+            src = 'https://img.washingtonpost.com/wp-apps/imrs.php?src=' + src + '&h=250&w=300';
+        }
+        return src;
+    }
+
+    function filterSponsorContent(contents) {
+        var sponsorArray = [];
+        contents.forEach(function(item, index) {
+            if (item.hasOwnProperty('sponsor') && item.sponsor == true) {
+                sponsorArray.push(item);
+            }
+        });
+        return sponsorArray;
+    }
+
+    function removeSponContent(content) {
+        var contentArray = [];
+        content.forEach(function(item, index) {
+            if (!item.hasOwnProperty('sponsor') || item.sponsor != true) {
+                contentArray.push(item);
+            }
+        });
+        return contentArray;
+    }
+
     return {
         clickTrackHandler: clickTrackHandler,
         setArticleNum: setArticleNum,
         shuffleArray: shuffleArray,
         isTouchDevice: isTouchDevice,
-        appendStyle: appendStyle
+        appendStyle: appendStyle,
+        checkImgSrc: checkImgSrc,
+        filterSponsorContent: filterSponsorContent,
+        removeSponContent: removeSponContent
     }
 
 

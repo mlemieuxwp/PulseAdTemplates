@@ -1,7 +1,7 @@
 var PulseSlides = (function() {
 
     function loadArticles(articles) {
-
+        
         var linkClickPixel = bsAd.client_tracking;
         var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
         var selArticles;
