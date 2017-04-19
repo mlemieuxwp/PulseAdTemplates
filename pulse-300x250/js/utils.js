@@ -55,13 +55,23 @@ var Utils = (function() {
         return array;
     }
 
+    function htmlUnescape(str){
+        return str
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+    }
+
     return {
         advClickThru: advClickThru,
         checkImgSrc: checkImgSrc,
         clickTrackHandler: clickTrackHandler,
         setAdClick: setAdClick,
         shuffleArray: shuffleArray,
-        appendStyle: appendStyle
+        appendStyle: appendStyle,
+        htmlUnescape : htmlUnescape
     }
 
 

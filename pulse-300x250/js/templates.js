@@ -24,6 +24,9 @@ var Templates = (function() {
 
     var types = {
         base: '<div class="pulse-mobile-wrapper <%if(this.sponsorFirst){%>pulse-sponsored<%}%>">' +
+            '<%if(this.headerScripts) {%>' +
+            '<div className="pulse-header-scripts" style="display:none"><%this.headerScripts%></div>'+
+            '<%}%>'+
             '<i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>'+
             '<div class="pulse-mobile-header js-pulse-animate">' +
             '<div class="pulse-article-label">' +
@@ -45,7 +48,11 @@ var Templates = (function() {
             '<%}%>'+
             '</div>' +
             '</div>' +
-            '<div class="pulse-tracking-wrapper" style="display:none;"></div>' +
+            '<div class="pulse-tracking-wrapper" style="display:none;">'+
+            '<%if(this.trackingScripts) {%>' +
+            '<%this.trackingScripts%>'+
+            '<%}%>'+
+            '</div>' +
             '</div>',
 
         articles: '<%if(this.showArticles) {%>' +
@@ -54,7 +61,7 @@ var Templates = (function() {
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
-            '<p class="pulse-mobile-desc-text"><%this.articles[index].title%></p>' +
+            '<p class="pulse-mobile-desc-text"><% unescape(this.articles[index].title)%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
             '</div>' +

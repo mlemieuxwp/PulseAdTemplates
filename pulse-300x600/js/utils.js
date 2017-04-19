@@ -33,6 +33,15 @@ var Utils = (function() {
         }
     }
 
+    function htmlUnescape(str){
+        return str
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+    }
+
     function appendStyle(css, _document) {
         var head = _document.getElementsByTagName("head")[0];
         var style = _document.createElement("style");
@@ -89,7 +98,8 @@ var Utils = (function() {
         appendStyle: appendStyle,
         checkImgSrc: checkImgSrc,
         filterSponsorContent: filterSponsorContent,
-        removeSponContent: removeSponContent
+        removeSponContent: removeSponContent,
+        htmlUnescape : htmlUnescape
     }
 
 

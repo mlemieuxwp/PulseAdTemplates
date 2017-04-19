@@ -23,6 +23,9 @@ var Templates = (function() {
 
     var types = {
         base: '<div class="pulse-wrapper">' +
+            '<%if(this.headerScripts) {%>' +
+            '<div className="pulse-header-scripts" style="display:none"><%this.headerScripts%></div>'+
+            '<%}%>'+
             '<div class="pulse-media">' +
             '</div>' +
             '<div id="articles" class="pulse-article-list-wrapper" style="display:none;">' +
@@ -42,7 +45,11 @@ var Templates = (function() {
             '<%}%>'+
             '</div>' +
             '</div>' +
-            '<div class="pulse-tracking-wrapper" style="display:none;"></div>' +
+            '<div class="pulse-tracking-wrapper" style="display:none;">'+
+            '<%if(this.trackingScripts) {%>' +
+            '<%this.trackingScripts%>'+
+            '<%}%>'+
+            '</div>' +
             '</div>',
 
         articles: '<%if(this.showArticles) {%>' +
@@ -60,7 +67,7 @@ var Templates = (function() {
             '<div class="pulse-article-desc-wrapper">' +
             '<p class="pulse-article-desc">' +
             '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
-            '<%this.articles[index].title%>' +
+            '<% unescape(this.articles[index].title)%>' +
             '</a>' +
             '</p>' +
             '</div>' +

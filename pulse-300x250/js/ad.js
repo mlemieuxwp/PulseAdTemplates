@@ -7,7 +7,8 @@ var PulseAd = (function() {
 
     var articles = bsAd.articles;
     var articleFeed = bsAd.feedUrl == 'false' ? '' : bsAd.feedUrl ;
-
+    bsAd.headerScripts = bsAd.headerScripts ? Utils.htmlUnescape(bsAd.headerScripts) : '';
+    bsAd.trackingScripts = bsAd.trackingScripts ? Utils.htmlUnescape(bsAd.trackingScripts) : '';
 
 
     function iniAdBase() {
