@@ -28,7 +28,7 @@ var Templates = (function() {
             '<div className="pulse-header-scripts" style="display:none"><%this.headerScripts%></div>'+
             '<%}%>'+
             '<i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>'+
-            '<div class="pulse-mobile-header js-pulse-animate">' +
+            '<div class="pulse-mobile-header js-pulse-animate <%if(this.adPosition=="first") {%>closed<%}%>">' +
             '<div class="pulse-article-label">' +
             '<div class="pulse-article-label-small">Washington Post content selected by <% this.sponsorLabel %></div>' +
             '</div>' +
@@ -39,7 +39,7 @@ var Templates = (function() {
             '<%}%>'+
             '</div>' +
             '<div class="pulse-mobile slick-slider" id="articles" data-urlparam="<% this.urlParam %>"></div>' +
-            '<div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate">' +
+            '<div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate <%if(this.adPosition=="first") {%>closed<%}%>">' +
             '<div class="pulse-mobile-footer-client-logo">'+
             '<%if(this.sponsorLogo) {%>' +
             '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+

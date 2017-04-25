@@ -114,7 +114,7 @@ gulp.task('css2js', function() {
 *
 **/
 gulp.task('browser-sync', function() {
-  browserSync.init(['css/*.css', 'js/**/*.js', 'slick/*.css', 'slick/*.js', 'index.html','templates/*.html'], {
+  browserSync.init(['sass/*.scss', 'js/*.js', 'index.html','templates/*.html'], {
     server: {
       baseDir: './'
     }
@@ -142,7 +142,7 @@ gulp.task('scripts', function() {
     'js/videoTracking.js',
     'js/init.js'
   ])
-  .pipe(uglify())
+  //.pipe(uglify())
   // .pipe(rename({
   //   dirname: "min",
   //   suffix: ".min",
@@ -176,8 +176,8 @@ gulp.task('images', function () {
 *
 **/
 gulp.task('default', ['sass','css2js', 'browser-sync', 'scripts', 'images'], function () {
-    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('sass/*.scss', ['sass']);
     gulp.watch('css/main.css', ['css2js']);
-    gulp.watch('js/**/*.js', ['scripts']);
+    gulp.watch('js/*.js', ['scripts']);
     gulp.watch('images/*', ['images']);
 });

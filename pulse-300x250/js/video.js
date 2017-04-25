@@ -29,9 +29,9 @@ var PulsePlayer = (function() {
                 button.click();
                 return false;
             });
-            wrapper.on('click', function(e) {
+            /*wrapper.on('click', function(e) {
                 $video_play_button.click();
-            });
+            });*/
         } else {
             video.addEventListener('click', function() {
                 advClickThru();
@@ -43,7 +43,6 @@ var PulsePlayer = (function() {
     function playVideo(video, wrapper, button) {
 
         if (isFirstClick) {
-            video.load(); // becase video src is set dynamically
             wrapper.removeEventListener('click', function() {
                 button.click();
             });
@@ -57,13 +56,10 @@ var PulsePlayer = (function() {
             }
         }
         if (video.paused || video.ended) {
+            console.log("play the video");
             video.play();
-            video.setAttribute('playing', 'true');
-
-            video.parentNode.classList.add('pulse-player-active');
-
-
         } else {
+            console.log("pause the video");
             video.pause();
             video.removeAttribute('playing');
             video.parentNode.classList.remove('pulse-player-active');
@@ -82,8 +78,14 @@ var PulsePlayer = (function() {
             video.currentTime = video.getAttribute('data-current-time');
         }
         if (has_video_ctrls) {
+            video.removeAttribute('playing');
             video.parentNode.classList.remove('pulse-player-active');
         }
+    }
+
+    function videoPlayingEvents(video,wrapper) {
+        video.setAttribute('playing', 'true');
+        video.parentNode.classList.add('pulse-player-active');
     }
 
     function bindFunctions() {
@@ -92,15 +94,18 @@ var PulsePlayer = (function() {
             var btn_play = el.querySelector('.pulse-player-play-toggle');
             var btn_mute = el.querySelector('.pulse-player-volume-toggle');
             btn_play.addEventListener('click', function() {
-                playVideo(video, el, this)
+                playVideo(video, el, this);
             });
             btn_mute.addEventListener('click', function() {
-                muteVideo(video, el, this)
+                muteVideo(video, el, this);
             });
             bindVideoWrapper(video, el, btn_play);
             setStartTime(video);
             video.addEventListener('ended', function() {
                 videoEndEvents(video, el);
+            });
+            video.addEventListener('playing', function() {
+                videoPlayingEvents(video, el);
             });
         });
     }

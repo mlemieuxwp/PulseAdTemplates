@@ -1,7 +1,7 @@
 var PulseSlides = (function() {
 
     function loadArticles(articles) {
-        
+
         var linkClickPixel = bsAd.client_tracking;
         var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
         var selArticles;
@@ -10,6 +10,7 @@ var PulseSlides = (function() {
         var urlParam = bsAd.urlParam ? '?spon_con=' + bsAd.urlParam : '';
         var ad = bsAd.ad;
         var articleDiv = document.getElementById('articles');
+        var adPosition = bsAd.adPosition || 'last';
 
         if (shuffle == 'true') {
             selArticles = Utils.shuffleArray(articles).slice(0, 3);
@@ -46,7 +47,12 @@ var PulseSlides = (function() {
                 setAdClick: Utils.setAdClick,
                 checkImgSrc: Utils.checkImgSrc
             });
-            html = adHtml + html;
+            if (adPosition=='last') {
+                html = adHtml + html;
+            }
+            else {
+                html = html + adHtml;
+            }
         }
 
         var elem = document.createElement('div');
