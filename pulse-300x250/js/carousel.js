@@ -64,9 +64,14 @@ var PulseCarousel = (function() {
             lazyLoading     : true,
             loop            : true,
             nextButton      : '.pulse-next',
-            prevButton      : '.pulse-prev',
-            autoplay        : autoPlay
+            prevButton      : '.pulse-prev'
         });
+
+        if (autoPlay){
+            setTimeout(function(){
+                swiper.slideNext();
+            }, autoPlay)
+        }
 
 
 
