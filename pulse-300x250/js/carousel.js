@@ -67,13 +67,22 @@ var PulseCarousel = (function() {
             prevButton      : '.pulse-prev'
         });
 
+
+        var timer = false,
+            parent = window.parent,
+            frame = window.frameElement;
+
         if (autoPlay){
-            setTimeout(function(){
-                swiper.slideNext();
-            }, autoPlay)
+            parent.addEventListener('scroll',function(){
+                 if ( Utils.elementInViewport(frame,parent) && !timer ) {
+                     setTimeout(function(){
+                         swiper.slideNext();
+                     }, autoPlay);
+                     timer = true;
+                 }
+
+            });
         }
-
-
 
         return swiper;
     }

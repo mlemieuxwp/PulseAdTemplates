@@ -64,6 +64,26 @@ var Utils = (function() {
             .replace(/&amp;/g, '&');
     }
 
+    function elementInViewport(el,parent) {
+          var top = el.offsetTop;
+          var left = el.offsetLeft;
+          var width = el.offsetWidth;
+          var height = el.offsetHeight;
+
+          while(el.offsetParent) {
+            el = el.offsetParent;
+            top += el.offsetTop;
+            left += el.offsetLeft;
+          }
+
+          return (
+            top >= parent.pageYOffset &&
+            left >= parent.pageXOffset &&
+            (top + height) <= (parent.pageYOffset + parent.innerHeight) &&
+            (left + width) <= (parent.pageXOffset + parent.innerWidth)
+          );
+    }
+
     return {
         advClickThru: advClickThru,
         checkImgSrc: checkImgSrc,
@@ -71,7 +91,8 @@ var Utils = (function() {
         setAdClick: setAdClick,
         shuffleArray: shuffleArray,
         appendStyle: appendStyle,
-        htmlUnescape : htmlUnescape
+        htmlUnescape : htmlUnescape,
+        elementInViewport : elementInViewport
     }
 
 
