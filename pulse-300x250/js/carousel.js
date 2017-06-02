@@ -13,12 +13,8 @@ var PulseCarousel = (function() {
             toggleHeaderFooter(swiper);
         });
 
-        swiper.on('onInit', function(swiper) {
-            console.log("init");
-        });
-
         swiper.on('onSlideChangeEnd', function(swiper) {
-            if (!swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && pulseWrapper.classList.contains('pulse-sponsored')) {
+            if (!swiper.slides[swiper.activeIndex].classList.contains('slide-sponsor') && pulseWrapper.classList.contains('pulse-sponsored')) {
                 pulseWrapper.classList.remove('pulse-sponsored');
             }
         });
@@ -28,7 +24,7 @@ var PulseCarousel = (function() {
         var pulseHeader = document.getElementsByClassName('js-pulse-animate')[0];
         var pulseFooter = document.getElementsByClassName('js-pulse-animate')[1];
         var pulseWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
-        if (swiper.slides[swiper.activeIndex].classList.contains('slick-sponsor') && !pulseWrapper.classList.contains('pulse-sponsored') ) {
+        if (swiper.slides[swiper.activeIndex].classList.contains('slide-sponsor') && !pulseWrapper.classList.contains('pulse-sponsored') ) {
             pulseWrapper.classList.add('pulse-sponsored');
         }
 

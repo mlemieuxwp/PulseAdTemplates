@@ -44,44 +44,48 @@
     position: absolute;
     z-index: 3;
     top: 50%;
-    left: 10px;
+    left: 0;
     cursor: pointer;
-    margin-top: -10px;
+    margin-top: -22px;
     -webkit-transition: all 200ms ease-in-out;
     -moz-transition: all 200ms ease-in-out;
     -o-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out;
+    height: 44px;
+    width: 44px;
 }
 .pulse-next {
     left: auto;
-    right: 10px;
+    right: 0;
 }
 .pulse-next:before,
 .pulse-next:after,
 .pulse-prev:before,
 .pulse-prev:after {
-    content: ""; 
+    content: "";
     display: block;
     height: 14px;
     width: 14px;
     border: solid 6px #fff;
     transform: rotate(-45deg);
     border-radius: 1px;
+    position: absolute;
+    top: 12px;
 }
 .pulse-next:before,
 .pulse-prev:before {
     border: solid 6px rgba(0,0,0,.6);
     filter: blur(2px);
-    position: absolute;
-    top: 0;
 }
 .pulse-next:before,
 .pulse-next:after {
     border-top: solid 0 transparent;
     border-left: solid 0 transparent;
+    left: 9px;
 }
 .pulse-prev:before,
 .pulse-prev:after {
     border-bottom: solid 0 transparent;
     border-right: solid 0 transparent;
+    right: 9px;
 }

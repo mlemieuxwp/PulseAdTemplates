@@ -30,13 +30,9 @@ var Templates = (function() {
             '<i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>'+
             '<div class="pulse-mobile-header js-pulse-animate <%if(this.adPosition=="first") {%>closed<%}%>">' +
             '<div class="pulse-article-label">' +
-            '<div class="pulse-article-label-small">Washington Post content selected by <% this.sponsorLabel %></div>' +
+            '<div class="pulse-article-label-text pulse-label-nonsponsor">Washington Post content selected by <% this.sponsorLabel %></div>' +
+            '<div class="pulse-article-label-text pulse-label-sponsor">Content from <% this.sponsorLabel %></div>' +
             '</div>' +
-            '<%if(this.sponsorAny) {%>' +
-            '<div class="pulse-label-sponsor">' +
-            '<div class="pulse-article-label-small">Content from <% this.sponsorLabel %></div>' +
-            '</div>' +
-            '<%}%>'+
             '</div>' +
             '<div class="pulse-mobile slick-slider" id="articles" data-urlparam="<% this.urlParam %>"></div>' +
             '<div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate <%if(this.adPosition=="first") {%>closed<%}%>">' +
@@ -57,7 +53,7 @@ var Templates = (function() {
 
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slick-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
+            '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slide-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
             '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
