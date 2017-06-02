@@ -72,16 +72,26 @@ var PulseCarousel = (function() {
             parent = window.parent,
             frame = window.frameElement;
 
-        if (autoPlay){
-            parent.addEventListener('scroll',function(){
-                 if ( Utils.elementInViewport(frame,parent) && !timer ) {
-                     setTimeout(function(){
-                         swiper.slideNext();
-                     }, autoPlay);
-                     timer = true;
-                 }
 
-            });
+
+        if (autoPlay){
+            try{
+                parent.document;
+                parent.addEventListener('scroll',function(){
+                     if ( Utils.elementInViewport(frame,parent) && !timer ) {
+                         setTimeout(function(){
+                             swiper.slideNext();
+                         }, autoPlay);
+                         timer = true;
+                     }
+
+                });
+            }catch(e){
+                console.log("no parent access - start autoplay")
+                setTimeout(function(){
+                    swiper.slideNext();
+                }, autoPlay);
+            }
         }
 
         return swiper;
@@ -145,14 +155,21 @@ var PulseCarousel = (function() {
         });
     }
 
+    function initActiveSlideImage (swiper){
+        var slide = swiper.slides[swiper.activeIndex];
+        if ( slide.classList.contains('pulse-slide--image') ) {
+            var image = slide.getElementsByTagName('img')[0];
+            var url = image.getAttribute('data-src');
+            image.setAttribute('src',url);
+        }
+    }
+
     function imgAdSlide(swiper) {
+        if (adPosition=='first') {
+            initActiveSlideImage(swiper);
+        }
         swiper.on('onSlideChangeStart', function(swiper) {
-            var slide = swiper.slides[swiper.activeIndex];
-            if ( slide.classList.contains('pulse-slide--image') ) {
-                var image = slide.getElementsByTagName('img')[0];
-                var url = image.getAttribute('data-src');
-                image.setAttribute('src',url);
-            }
+            initActiveSlideImage(swiper);
         });
     }
 
