@@ -40,7 +40,7 @@ var concat       = require('gulp-concat');
     patch: 0.0.2
     prerelease: 0.0.1-2
 **/
-var version = "3.0.4";
+var version = "3.0.5";
 
 /**
 *
@@ -111,8 +111,8 @@ gulp.task('browser-sync', function() {
 **/
 gulp.task('scripts', function() {
   gulp.src([
-    'js/xmlHttp.js', 
-    'js/utils.js', 
+    'js/xmlHttp.js',
+    'js/utils.js',
     'js/templates.js',
     'js/swiper.js',
     'js/carousel.js',
@@ -156,6 +156,6 @@ gulp.task('images', function () {
 **/
 gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
     gulp.watch('sass/**/*.scss', ['sass']);
-    gulp.watch('js/**/*.js', ['scripts']);
+    gulp.watch('js/*.js', ['scripts']);
     gulp.watch('images/*', ['images']);
 });

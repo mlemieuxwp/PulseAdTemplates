@@ -86,6 +86,12 @@ var PulsePlayer = (function() {
         }
     }
 
+    function videoStartEvents(video, wrapper) {
+        if (has_video_ctrls) {
+            video.parentNode.classList.add('pulse-player-active');
+        }
+    }
+
     function bindFunctions() {
         Array.prototype.forEach.call(pulse_wrapper, function(el) {
             var video = el.getElementsByTagName('video')[0];
@@ -101,6 +107,9 @@ var PulsePlayer = (function() {
             setStartTime(video);
             video.addEventListener('ended', function() {
                 videoEndEvents(video, el);
+            });
+            video.addEventListener('playing', function() {
+                videoStartEvents(video, el);
             });
         });
     }
