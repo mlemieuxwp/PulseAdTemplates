@@ -12,6 +12,8 @@ var PulseCarousel = (function() {
         swiper.on('onSlideChangeStart', function(swiper) {
             toggleHeaderFooter(swiper);
         });
+        // when 1st slide is a sponsored slide
+        toggleHeaderFooter(swiper);
 
         swiper.on('onSlideChangeEnd', function(swiper) {
             if (!swiper.slides[swiper.activeIndex].classList.contains('slide-sponsor') && pulseWrapper.classList.contains('pulse-sponsored')) {

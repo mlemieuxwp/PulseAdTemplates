@@ -50,9 +50,7 @@
     }
 
     .pulse-player-active:hover & {
-        @media (min-width: 768px) {
-            opacity: .6;
-        }
+        opacity: .6;
     }
 
     &:after,

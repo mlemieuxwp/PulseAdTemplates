@@ -54,7 +54,7 @@ var version = "4.0.0";
 *
 **/
 gulp.task('sass', function() {
-  gulp.src('sass/**/*.scss')
+  gulp.src(['sass/fonts.scss','sass/main.scss','sass/animations.scss','sass/swiper-custom.scss','sass/player.scss'])
   .pipe(sass({outputStyle: 'compressed'}))
   .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
   .pipe(plumber())

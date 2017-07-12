@@ -11,8 +11,8 @@
     width: 300px;
 }
 
-.pulse-mobile-header,
-.pulse-mobile-footer {
+.pulse-mobile-footer,
+.pulse-mobile-header {
     height: 50px;
     position: absolute;
     width: 100%;
@@ -26,7 +26,7 @@
 }
 
 .pulse-article-label {
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 0;
 }
 
 .pulse-article-label:before {
@@ -77,18 +77,18 @@
 }
 
 .pulse-info-popup:hover {
-    display:block
+    display: block;
 }
 
 .pulse-info-icon:hover ~ span.pulse-info-popup {
-    display:block
+    display: block;
 }
 
 .pulse-info-popup a,
 .pulse-info-popup a:visited {
     color: #000000;
     text-decoration: underline;
- }
+}
 
 .pulse-article-logo {
     display: inline-block;
@@ -108,18 +108,21 @@
     font-size: 11px;
     padding-right: 5px;
 }
+
 .pulse-label-sponsor {
     display: none;
 }
+
 .pulse-sponsored .pulse-label-sponsor {
     display: block;
 }
+
 .pulse-sponsored .pulse-label-nonsponsor {
     display: none;
 }
 
 .pulse-mobile-logo {
-    background-image: url(https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/Logo-TWP-White.png);
+    background-image: url("https://www.washingtonpost.com/wp-stat/advertising/PostPulse/images/Logo-TWP-White.png");
     background-position: center center;
     background-repeat: no-repeat;
     position: absolute;
@@ -141,25 +144,23 @@
 
 .pulse-label-sponsor {
     display: none;
- }
+}
 
-.pulse-sponsored .pulse-mobile-header,
-.pulse-sponsored .pulse-mobile-footer {
+.pulse-sponsored .pulse-mobile-footer,
+.pulse-sponsored .pulse-mobile-header {
     background-color: #eaeaea;
 }
 
- .pulse-sponsored .pulse-mobile-logo {
+.pulse-sponsored .pulse-mobile-logo {
     display: none;
- }
-
+}
 /*.pulse-mobile-footer-logo {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
 }*/
-
 .pulse-mobile-footer-client-logo {
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
     position: relative;
     text-align: center;
     top: 50%;
@@ -203,8 +204,8 @@
     color: inherit;
 }
 
-.pulse-mobile-desc-text,
-.pulse-mobile-article-readmore {
+.pulse-mobile-article-readmore,
+.pulse-mobile-desc-text {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -230,17 +231,17 @@
 }
 
 .pulse-mobile-ad-slide-wrapper {
-    height:250px;
-    position:relative;
+    height: 250px;
+    position: relative;
 }
 
 .pulse-mobile-ad-slide-inner {
-    height:249px;
-    left:-1px;
-    overflow:hidden;
-    position:absolute;
-    width:300px;
-    top:-1px;
+    height: 249px;
+    left: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 300px;
+    top: -1px;
 }
 
 .pulse-mobile-footer {
