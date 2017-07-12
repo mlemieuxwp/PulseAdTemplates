@@ -2,7 +2,7 @@ var PulseArticles = (function() {
 
     function initArticles(articles) {
 
-        //console.log(articles);
+        console.log(articles);
 
         var linkClickPixel = bsAd.client_tracking;
         var maxLength = bsAd.maxLength || 3;
@@ -20,7 +20,7 @@ var PulseArticles = (function() {
         articles_spoonsored = Utils.filterSponsorContent(articles);
         articles = Utils.removeSponContent(articles);
 
-        if (shuffle) {
+        if (shuffle=='true') {
             selArticles = Utils.shuffleArray(articles).slice(0, maxLength);
         } else {
             selArticles = articles.slice(0, maxLength);

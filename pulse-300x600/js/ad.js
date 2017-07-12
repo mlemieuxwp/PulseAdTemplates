@@ -17,12 +17,12 @@ var PulseAd = (function() {
         } else if (articles) {
             // initializing slider base template
             articles = JSON.parse(articles);
-            applyBaseTemplate(articles);
+            applyBaseTemplate();
             PulseArticles.init(articles);
         }
     }
 
-    function applyBaseTemplate(articles) {
+    function applyBaseTemplate() {
         var html = Templates.engine(Templates.types['base'],bsAd);
         document.body.insertAdjacentHTML("beforeend", html);
     }
