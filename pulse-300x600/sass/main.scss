@@ -81,7 +81,7 @@
     font-family: "FranklinITCProBold", "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     margin: 0;
     overflow: hidden;
-    padding: 10px 10px 5px 10px;
+    padding: 10px;
 }
 
 .pulse-article-label:before {
@@ -111,7 +111,6 @@
 }
 
 .pulse-article-label-small {
-    float: left;
     font-family: "FranklinITCProMedium", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 10px;
 }
@@ -361,6 +360,10 @@ i.pulse-info-icon {
 .pulse-footer {
     padding: 5px 0;
     text-align: center;
+}
+
+.sponsor-all .pulse-footer {
+    background-color: #eaeaea;
 }
 
 .pulse-footer-logo {

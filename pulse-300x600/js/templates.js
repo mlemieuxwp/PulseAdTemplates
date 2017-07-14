@@ -22,28 +22,32 @@ var Templates = (function() {
     }
 
     var types = {
-        base: '<div class="pulse-wrapper">' +
+        base: '<div class="pulse-wrapper <%if(this.sponsorAll) {%>sponsor-all<%}%>">' +
             '<%if(this.headerScripts) {%>' +
             '<div className="pulse-header-scripts" style="display:none"><%this.headerScripts%></div>'+
             '<%}%>'+
             '<div class="pulse-media">' +
             '</div>' +
             '<div id="articles" class="pulse-article-list-wrapper" style="display:none;">' +
+            '<%if(this.sponsorAny) {%>' +
             '<div class="pulse-label-sponsor">' +
             '<div class="pulse-article-label-small">Content from <%this.sponsorLabel%></div><i class="pulse-info-icon"></i><span class="pulse-info-popup">This content is paid for by an advertiser and published by WP BrandStudio. The Washington Post newsroom was not involved in the creation of this content. <a href="http://www.washingtonpost.com/sf/brand-connect/" rel="nofollow" target="_blank">Learn more about WP BrandStudio.</a></span>' +
             '</div>' +
+            '<%}%>'+
             '<ul id="sponsored-article-list" class="pulse-article-list pulse-sponsor-article-list"></ul>' +
+            '<%if(!this.sponsorAll) {%>' +
             '<div class="pulse-article-label">' +
             '<div class="pulse-article-label-small">Washington Post content selected by <%this.sponsorLabel%></div>' +
             '</div>' +
+            '<%}%>'+
             '<ul id="article-list" class="pulse-article-list"></ul>' +
+            '<%if(this.sponsorLogo && ( this.sponsorAll || this.sponsorNone ) ) {%>' +
             '<div class="pulse-footer">'+
-            '<%if(this.sponsorLogo) {%>' +
             '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+
             '<img src="<%this.sponsorLogo%>" alt="" class="pulse-mobile-footer-logo" style="border: 0px; width: <%this.sponsorLogoWidth%>%;">'+
             '</a>'+
-            '<%}%>'+
             '</div>' +
+            '<%}%>'+
             '</div>' +
             '<div class="pulse-tracking-wrapper" style="display:none;">'+
             '<%if(this.trackingScripts) {%>' +

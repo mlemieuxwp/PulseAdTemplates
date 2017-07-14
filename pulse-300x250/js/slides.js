@@ -5,14 +5,14 @@ var PulseSlides = (function() {
         var linkClickPixel = bsAd.client_tracking;
         var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
         var selArticles;
-        var shuffle = bsAd.shuffle;
+        var shuffle = bsAd.shuffle=="true" || bsAd.shuffle==true ? true : false ;
         var sponsorAll = bsAd.sponsorAll || false;
         var urlParam = bsAd.urlParam ? '?spon_con=' + bsAd.urlParam : '';
         var ad = bsAd.ad;
         var articleDiv = document.getElementById('articles');
         var adPosition = bsAd.adPosition || 'last';
 
-        if (shuffle == 'true') {
+        if (shuffle) {
             selArticles = Utils.shuffleArray(articles).slice(0, 3);
         } else {
             selArticles = articles.slice(0, 3);

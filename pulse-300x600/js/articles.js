@@ -2,14 +2,14 @@ var PulseArticles = (function() {
 
     function initArticles(articles) {
 
-        console.log(articles);
+        //console.log(articles);
 
         var linkClickPixel = bsAd.client_tracking;
         var maxLength = bsAd.maxLength || 3;
         var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
         var pulseMediaContainer = document.getElementsByClassName('pulse-media')[0];
         var selArticles;
-        var shuffle = bsAd.shuffle;
+        var shuffle = bsAd.shuffle=="true" || bsAd.shuffle==true ? true : false ;
         var sponsorAll = bsAd.sponsorAll || false;
         var urlParam = bsAd.urlParam;
         var ad = bsAd.ad;
@@ -20,7 +20,10 @@ var PulseArticles = (function() {
         articles_spoonsored = Utils.filterSponsorContent(articles);
         articles = Utils.removeSponContent(articles);
 
-        if (shuffle=='true') {
+        var sponsorAny = bsAd.sponsorAny;
+        var sponsorNone = bsAd.sponsorNone;
+
+        if (shuffle) {
             selArticles = Utils.shuffleArray(articles).slice(0, maxLength);
         } else {
             selArticles = articles.slice(0, maxLength);
