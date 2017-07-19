@@ -40,6 +40,9 @@ var PulseSlides = (function() {
             ad.videoTracking.track100 = ad.track100 || null;
             ad.videoTracking = JSON.stringify(ad.videoTracking);
         }
+        if (ad && ad.type === 'html') {
+            ad.html = Utils.htmlDecode(ad.html);
+        }
 
         if (ad) {
             var adHtml = Templates.engine(Templates.types[ad.type], {

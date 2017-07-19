@@ -90,6 +90,12 @@ var Utils = (function() {
         return contentArray;
     }
 
+    function htmlDecode(input){
+      var e = document.createElement('div');
+      e.innerHTML = input;
+      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
     return {
         clickTrackHandler: clickTrackHandler,
         setArticleNum: setArticleNum,
@@ -99,7 +105,8 @@ var Utils = (function() {
         checkImgSrc: checkImgSrc,
         filterSponsorContent: filterSponsorContent,
         removeSponContent: removeSponContent,
-        htmlUnescape : htmlUnescape
+        htmlUnescape : htmlUnescape,
+        htmlDecode : htmlDecode
     }
 
 

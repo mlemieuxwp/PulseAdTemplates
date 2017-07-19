@@ -84,6 +84,12 @@ var Utils = (function() {
           );
     }
 
+    function htmlDecode(input){
+      var e = document.createElement('div');
+      e.innerHTML = input;
+      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
     return {
         advClickThru: advClickThru,
         checkImgSrc: checkImgSrc,
@@ -92,7 +98,8 @@ var Utils = (function() {
         shuffleArray: shuffleArray,
         appendStyle: appendStyle,
         htmlUnescape : htmlUnescape,
-        elementInViewport : elementInViewport
+        elementInViewport : elementInViewport,
+        htmlDecode : htmlDecode
     }
 
 
