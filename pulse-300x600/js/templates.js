@@ -43,7 +43,7 @@ var Templates = (function() {
             '<ul id="article-list" class="pulse-article-list"></ul>' +
             '<%if(this.sponsorLogo && ( this.sponsorAll || this.sponsorNone ) ) {%>' +
             '<div class="pulse-footer">'+
-            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+
+            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link track-click" data-track="<% this.track_pixel %>" target="_blank">'+
             '<img src="<%this.sponsorLogo%>" alt="" class="pulse-mobile-footer-logo" style="border: 0px; width: <%this.sponsorLogoWidth%>%;">'+
             '</a>'+
             '</div>' +
@@ -61,7 +61,7 @@ var Templates = (function() {
             '<li class="pulse-article-list-item">' +
             '<div class="pulse-article-wrapper cf">' +
             '<div class="pulse-article-thumb-wrapper">' +
-            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link track-click" data-track="<% this.client_tracking %>" target="<% this.linkTarget(index) %>">' +
             '<%if(this.articles[index].src) {%>' +
             '<img src="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&h=61&w=61" border="0" class="pulse-article-thumbnail" />' +
             '<%}%>' +
@@ -70,7 +70,7 @@ var Templates = (function() {
             '<div class="pulse-article-number"></div>' +
             '<div class="pulse-article-desc-wrapper">' +
             '<p class="pulse-article-desc">' +
-            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link pulse-article-desc-link" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%this.urlParam%>" class="pulse-article-link pulse-article-desc-link track-click" data-track="<% this.client_tracking %>" target="<% this.linkTarget(index) %>">' +
             '<% unescape(this.articles[index].title)%>' +
             '</a>' +
             '</p>' +
@@ -87,12 +87,12 @@ var Templates = (function() {
             '</div>',
 
         iframe: '<div>' +
-            '<a href="<% this.ad.url %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
+            '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" target="_blank" class="track-click" style="width: 300px; height: 250px; position: absolute;"></a>' +
             '<iframe src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div>' +
-            '<a href="<% this.ad.url %>" target="_blank">' +
+            '<a href="<% this.ad.url %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
             '<%if(this.ad.src) {%>' +
             '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +

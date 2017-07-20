@@ -33,6 +33,7 @@ var PulseArticles = (function() {
             articles: selArticles,
             showArticles: true,
             sponsorAll: sponsorAll,
+            client_tracking : bsAd.client_tracking,
             linkTarget: function(i) {
                 return sponsorAll || this.articles[i].sponsor ? '_blank' : '_top';
             },
@@ -43,6 +44,7 @@ var PulseArticles = (function() {
             articles: articles_spoonsored,
             showArticles: true,
             sponsorAll: sponsorAll,
+            client_tracking : bsAd.client_tracking,
             linkTarget: function(i) {
                 return sponsorAll || this.articles[i].sponsor ? '_blank' : '_top';
             },
@@ -51,13 +53,6 @@ var PulseArticles = (function() {
 
         articlesList.innerHTML = html;
         articlesListSponsored.innerHTML = html_sponsored;
-
-        if (articleWrapper.querySelectorAll) {
-            var links = articleWrapper.querySelectorAll("a");
-            for (i = 0; i < links.length; i++) {
-                Utils.clickTrackHandler(links[i],linkClickPixel,pulseTrackingWrapper);
-            }
-        }
 
         articleWrapper.style.display = "block";
         Utils.setArticleNum();
@@ -81,14 +76,22 @@ var PulseArticles = (function() {
             var adHtml = Templates.engine(Templates.types[ad.type], {
                 ad: ad,
                 setAdClick: Utils.setAdClick,
-                checkImgSrc: Utils.checkImgSrc
+                checkImgSrc: Utils.checkImgSrc,
+                client_tracking : bsAd.client_tracking
             });
             pulseMediaContainer.innerHTML = adHtml;
         }
 
+        // Tracking
+        var trackItems = document.querySelectorAll('.track-click');
+        for (var i = 0; i < trackItems.length; i++) {
+            var pixel = trackItems[i].getAttribute('data-track');
+            trackItems[i].addEventListener('click',function(){
+                Utils.trackingPixel(pixel);
+            })
+        }
 
     }
-
 
     function init(articles) {
             initArticles(articles);

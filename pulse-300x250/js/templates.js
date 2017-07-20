@@ -38,7 +38,7 @@ var Templates = (function() {
             '<div class="pulse-mobile-footer pulse-mobile-footer-wrapper js-pulse-animate <%if(this.adPosition=="first") {%>closed<%}%>">' +
             '<div class="pulse-mobile-footer-client-logo">'+
             '<%if(this.sponsorLogo) {%>' +
-            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link" target="_blank">'+
+            '<a href="<% this.clickThruURL %>" class="pulse-mobile-desc-link track-click" data-track="<% this.track_pixel %>" target="_blank">'+
             '<img src="<%this.sponsorLogo%>" alt="" class="pulse-mobile-footer-logo" style="border: 0px; width: <%this.sponsorLogoWidth%>%;">'+
             '</a>'+
             '<%}%>'+
@@ -56,7 +56,7 @@ var Templates = (function() {
             '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slide-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link" target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link track-click" data-track="<% this.client_tracking %>"  target="<% this.linkTarget(index) %>">' +
             '<p class="pulse-mobile-desc-text"><% unescape(this.articles[index].title)%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
@@ -75,12 +75,12 @@ var Templates = (function() {
             '</div>',
 
         iframe: '<div data-animate="true" class="pulse-slide pulse-slide--iframe">' +
-            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
+            '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
             '<iframe data-src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div data-animate="true" class="pulse-slide pulse-slide--image">' +
-            '<a href="<% this.setAdClick(this.ad.url) %>" target="_blank">' +
+            '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
             '<%if(this.ad.src) {%>' +
             '<img data-src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +

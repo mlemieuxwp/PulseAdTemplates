@@ -12,20 +12,16 @@ var Utils = (function() {
         return src;
     }
 
-    function clickTrackHandler(link, linkClickPixel, trackingWrapper) {
-        link.onclick = function(event) {
-            if (linkClickPixel) {
-                var img = document.createElement("img");
-                img.alt = "";
-                img.border = 0;
-                img.src = linkClickPixel;
-                img.style.width = "1px";
-                img.style.height = "1px";
-                img.style.display = "none";
-                trackingWrapper.appendChild(img);
-            }
-        };
-    }
+    function trackingPixel(url) {
+        var img = document.createElement('img');
+        img.src = url + '?' + Math.floor(Math.random() * 10000000000);
+        img.alt = "";
+        img.border = 0;
+        img.height = 1;
+        img.width = 1;
+        img.style.display = "none";
+        document.body.appendChild(img);
+    };
 
     function appendStyle(css, _document) {
         var head = _document.getElementsByTagName("head")[0];
@@ -35,15 +31,6 @@ var Utils = (function() {
         style.appendChild(_document.createTextNode(css));
         head.appendChild(style);
     };
-
-    function setAdClick(url) {
-        if (!url) {
-            var mobileWrapper = document.getElementsByClassName('pulse-mobile-wrapper')[0];
-            url = mobileWrapper.getAttribute('data-click');
-        }
-        return url;
-
-    }
 
     function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
@@ -93,8 +80,7 @@ var Utils = (function() {
     return {
         advClickThru: advClickThru,
         checkImgSrc: checkImgSrc,
-        clickTrackHandler: clickTrackHandler,
-        setAdClick: setAdClick,
+        trackingPixel: trackingPixel,
         shuffleArray: shuffleArray,
         appendStyle: appendStyle,
         htmlUnescape : htmlUnescape,

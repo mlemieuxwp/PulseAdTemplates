@@ -1,22 +1,5 @@
 var Utils = (function() {
 
-
-    // Add tracker for clicks
-    function clickTrackHandler(link, linkClickPixel, trackingWrapper) {
-        link.onclick = function(event) {
-            if (linkClickPixel) {
-                var img = document.createElement("img");
-                img.alt = "";
-                img.border = 0;
-                img.src = linkClickPixel;
-                img.style.width = "1px";
-                img.style.height = "1px";
-                img.style.display = "none";
-                trackingWrapper.appendChild(img);
-            }
-        };
-    };
-
     function isTouchDevice() {
         return 'ontouchstart' in window // works on most browsers
             ||
@@ -80,6 +63,17 @@ var Utils = (function() {
         return sponsorArray;
     }
 
+    function trackingPixel(url) {
+        var img = document.createElement('img');
+        img.src = url + '?' + Math.floor(Math.random() * 10000000000);
+        img.alt = "";
+        img.border = 0;
+        img.height = 1;
+        img.width = 1;
+        img.style.display = "none";
+        document.body.appendChild(img);
+    };
+
     function removeSponContent(content) {
         var contentArray = [];
         content.forEach(function(item, index) {
@@ -97,11 +91,11 @@ var Utils = (function() {
     }
 
     return {
-        clickTrackHandler: clickTrackHandler,
         setArticleNum: setArticleNum,
         shuffleArray: shuffleArray,
         isTouchDevice: isTouchDevice,
         appendStyle: appendStyle,
+        trackingPixel: trackingPixel,
         checkImgSrc: checkImgSrc,
         filterSponsorContent: filterSponsorContent,
         removeSponContent: removeSponContent,

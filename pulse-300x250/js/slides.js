@@ -26,7 +26,8 @@ var PulseSlides = (function() {
             },
             showArticles: true,
             sponsorAll: sponsorAll,
-            url_param: urlParam
+            url_param: urlParam,
+            client_tracking: bsAd.client_tracking
         });
 
         ad = JSON.parse(ad);
@@ -40,6 +41,7 @@ var PulseSlides = (function() {
             ad.videoTracking.track100 = ad.track100 || null;
             ad.videoTracking = JSON.stringify(ad.videoTracking);
         }
+
         if (ad && ad.type === 'html') {
             ad.html = Utils.htmlDecode(ad.html);
         }
@@ -47,8 +49,9 @@ var PulseSlides = (function() {
         if (ad) {
             var adHtml = Templates.engine(Templates.types[ad.type], {
                 ad: ad,
-                setAdClick: Utils.setAdClick,
-                checkImgSrc: Utils.checkImgSrc
+                checkImgSrc: Utils.checkImgSrc,
+                client_tracking : bsAd.client_tracking,
+                clickThruURL : bsAd.clickThruURL
             });
             if (adPosition=='last') {
                 html = adHtml + html;
@@ -67,12 +70,16 @@ var PulseSlides = (function() {
             articleDiv.insertBefore(el, articleDiv.firstChild);
         }
 
-        if (articleDiv.querySelectorAll) {
-            var links = articleDiv.querySelectorAll("a");
-            for (i = 0; i < links.length; i++) {
-                Utils.clickTrackHandler(links[i], linkClickPixel, pulseTrackingWrapper);
-            }
+
+        // Tracking
+        var trackItems = document.querySelectorAll('.track-click');
+        for (var i = 0; i < trackItems.length; i++) {
+            var pixel = trackItems[i].getAttribute('data-track');
+            trackItems[i].addEventListener('click',function(){
+                Utils.trackingPixel(pixel);
+            })
         }
+
     }
 
     function init(articles) {

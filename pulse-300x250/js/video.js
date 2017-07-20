@@ -5,6 +5,7 @@ var PulsePlayer = (function() {
         isFirstClick = true,
         click_thru = bsAd.clickThruURL,
         has_video_ctrls = document.getElementsByClassName('pulse-player-no-ctrls').length > 0 ? false : true;
+        video_length = 0;
 
     function advClickThru() {
         if (click_thru && click_thru !== "") {
@@ -56,10 +57,8 @@ var PulsePlayer = (function() {
             }
         }
         if (video.paused || video.ended) {
-            console.log("play the video");
             video.play();
         } else {
-            console.log("pause the video");
             video.pause();
             video.removeAttribute('playing');
             video.parentNode.classList.remove('pulse-player-active');
@@ -88,6 +87,37 @@ var PulsePlayer = (function() {
         video.parentNode.classList.add('pulse-player-active');
     }
 
+    function initTracking(v,data) {
+        var tracked_25 = tracked_50 = tracked_75 = false;
+        if (data.trackStart){
+            v.addEventListener('playing',function(){
+                Utils.trackingPixel(data.trackStart);
+                tracked_25 = tracked_50 = tracked_75 = false;
+            });
+        }
+        if (data.track100){
+            v.addEventListener('ended',function(){
+                Utils.trackingPixel(data.track100);
+            })
+        }
+        v.addEventListener('timeupdate',function(){
+            var time = v.currentTime;
+
+            if ( time/video_length > .25  && data.track25 && !tracked_25 ) {
+                tracked_25 = true;
+                Utils.trackingPixel(data.track25);
+            }
+            if ( time/video_length > .5  && data.track50 && !tracked_50 ) {
+                tracked_50 = true;
+                Utils.trackingPixel(data.track50);
+            }
+            if ( time/video_length > .75  && data.track75 && !tracked_75 ) {
+                tracked_75 = true;
+                Utils.trackingPixel(data.track75);
+            }
+        });
+    }
+
     function bindFunctions() {
         Array.prototype.forEach.call(pulse_wrapper, function(el) {
             var video = el.getElementsByTagName('video')[0];
@@ -107,6 +137,14 @@ var PulsePlayer = (function() {
             video.addEventListener('playing', function() {
                 videoPlayingEvents(video, el);
             });
+
+            video.addEventListener('loadedmetadata', function() {
+                video_length = video.duration;
+            });
+
+            var trackingData = JSON.parse(el.getAttribute('data-videotracking'));
+            initTracking(video,trackingData);
+
         });
     }
 
