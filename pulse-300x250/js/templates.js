@@ -91,7 +91,7 @@ var Templates = (function() {
             '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
             '<i class="pulse-player-play-toggle"></i>' +
             '<i class="pulse-player-volume-toggle"></i>' +
-            '<video class="pulse-player" data-current-time="0.25" data-poster="<% this.ad.poster_url %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
+            '<video class="pulse-player track-click" data-current-time="0.25" data-poster="<% this.ad.poster_url %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
             '<%if(this.ad.src) {%>' +
             '<source data-src="<%this.ad.src%>" type="video/mp4" />' +
             '<%}%>' +

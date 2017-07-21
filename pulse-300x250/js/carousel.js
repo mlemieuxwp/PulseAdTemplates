@@ -125,10 +125,10 @@ var PulseCarousel = (function() {
             var source = video.getElementsByTagName('source')[0];
             var src = source.getAttribute('data-src');
             source.setAttribute('src',src);
+            video.load();
 
             // Autoplay videos
             if ( video.hasAttribute('autoplay') ) {
-                video.load();
                 video.parentNode.classList.add('pulse-player-active');
                 video.muted = true;
                 video.parentNode.classList.add('pulse-player-muted');

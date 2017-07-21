@@ -123,7 +123,7 @@ gulp.task('scripts', function() {
     'js/videoTracking.js',
     'js/init.js',
   ])
-  //.pipe(uglify())
+  .pipe(uglify())
   // .pipe(rename({
   //   dirname: "min",
   //   suffix: ".min",
