@@ -53,10 +53,10 @@ var Templates = (function() {
 
         articles: '<%if(this.showArticles) {%>' +
             '<%for(var index in this.articles) {%>' +
-            '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].sponsor) {%>slide-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
+            '<div class="js-pulse-mobile-article pulse-slide swiper-lazy <%if(this.sponsorAll=="true" || this.articles[index].isSponsorContentEnabled) {%>slide-sponsor<%}%>" data-background="https://img.washingtonpost.com/wp-apps/imrs.php?src=<%this.articles[index].src%>&w=300" >' +
             '<div class="pulse-mobile-desc-wrapper">' +
             '<div class="pulse-mobile-desc">' +
-            '<a href="<%this.articles[index].url%><%if(!this.articles[index].sponsor){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link track-click" data-track="<% this.client_tracking %>"  target="<% this.linkTarget(index) %>">' +
+            '<a href="<%this.articles[index].url%><%if(!this.articles[index].isSponsorContentEnabled){%><%this.url_param%><%}%>" class="pulse-mobile-desc-link track-click" data-track="<% this.client_tracking %>"  target="<% this.linkTarget(index) %>">' +
             '<p class="pulse-mobile-desc-text"><% unescape(this.articles[index].title)%></p>' +
             '<p class="pulse-mobile-article-readmore">READ MORE <i class="fa fa-angle-double-right fa-1"></i></p>' +
             '</a>' +
@@ -71,29 +71,29 @@ var Templates = (function() {
             '<%}%>',
 
         html: '<div data-animate="true" class="pulse-slide pulse-slide--html">' +
-            '<%this.ad.html%>' +
+            '<%this.ad.snippet%>' +
             '</div>',
 
         iframe: '<div data-animate="true" class="pulse-slide pulse-slide--iframe">' +
             '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank" style="width: 300px; height: 250px; position: absolute;"></a>' +
-            '<iframe data-src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+            '<iframe data-src="<%this.ad.iframeURL%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div data-animate="true" class="pulse-slide pulse-slide--image">' +
-            '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
-            '<%if(this.ad.src) {%>' +
-            '<img data-src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+            '<a href="<% this.ad.imageURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
+            '<%if(this.ad.imageSrc) {%>' +
+            '<img data-src="<% this.checkImgSrc(this.ad.imageSrc) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +
             '</a>' +
             '</div>',
 
         video: '<div data-animate="true" class="pulse-slide pulse-slide--video">' +
-            '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
+            '<div class="pulse-player-wrapper" data-videotracking=\'<% JSON.stringify(this.ad.trackingInfo) %>\'>' +
             '<i class="pulse-player-play-toggle"></i>' +
             '<i class="pulse-player-volume-toggle"></i>' +
-            '<video class="pulse-player track-click" data-current-time="0.25" data-poster="<% this.ad.poster_url %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
-            '<%if(this.ad.src) {%>' +
-            '<source data-src="<%this.ad.src%>" type="video/mp4" />' +
+            '<video class="pulse-player track-click" data-current-time="0.25" data-poster="<% this.ad.posterImage %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
+            '<%if(this.ad.video) {%>' +
+            '<source data-src="<%this.ad.video%>" type="video/mp4" />' +
             '<%}%>' +
             '</video>' +
             '</div>' +

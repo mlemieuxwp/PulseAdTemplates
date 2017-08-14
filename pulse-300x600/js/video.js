@@ -92,9 +92,9 @@ var PulsePlayer = (function() {
 
     function initTracking(v,data) {
         var tracked_25 = tracked_50 = tracked_75 = false;
-        if (data.trackStart){
+        if (data.startTrack){
             v.addEventListener('playing',function(){
-                Utils.trackingPixel(data.trackStart);
+                Utils.trackingPixel(data.startTrack);
                 tracked_25 = tracked_50 = tracked_75 = false;
             });
         }

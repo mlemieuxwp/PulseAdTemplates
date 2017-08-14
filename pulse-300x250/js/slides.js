@@ -22,7 +22,7 @@ var PulseSlides = (function() {
         var html = Templates.engine(Templates.types['articles'], {
             articles: selArticles,
             linkTarget: function(i) {
-                return !this.articles[i].sponsor ? '_top' : '_blank';
+                return !this.articles[i].isSponsorContentEnabled ? '_top' : '_blank';
             },
             showArticles: true,
             sponsorAll: sponsorAll,
@@ -43,7 +43,7 @@ var PulseSlides = (function() {
         }
 
         if (ad && ad.type === 'html') {
-            ad.html = Utils.htmlDecode(ad.html);
+            ad.snippet = Utils.htmlDecode(ad.snippet);
         }
 
         if (ad) {

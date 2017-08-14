@@ -56,7 +56,7 @@ var Utils = (function() {
     function filterSponsorContent(contents) {
         var sponsorArray = [];
         contents.forEach(function(item, index) {
-            if (item.hasOwnProperty('sponsor') && item.sponsor == true) {
+            if (item.hasOwnProperty('isSponsorContentEnabled') && item.isSponsorContentEnabled == true) {
                 sponsorArray.push(item);
             }
         });
@@ -77,7 +77,7 @@ var Utils = (function() {
     function removeSponContent(content) {
         var contentArray = [];
         content.forEach(function(item, index) {
-            if (!item.hasOwnProperty('sponsor') || item.sponsor != true) {
+            if (!item.hasOwnProperty('isSponsorContentEnabled') || item.isSponsorContentEnabled != true) {
                 contentArray.push(item);
             }
         });

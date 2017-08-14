@@ -1,8 +1,8 @@
 var PulseTracking = (function() {
 
     // get tracking object
-    var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
     var videoTrackingUrl = new Array();
+    var trackFlag = new Array();
 
     // set up tracking variables
 
@@ -14,15 +14,23 @@ var PulseTracking = (function() {
         var videoTracking = pulsePlayerWrapper && pulsePlayerWrapper.getAttribute('data-videotracking');
         videoTracking = videoTracking && JSON.parse(videoTracking);
         if (typeof videoTracking !== 'undefined' && videoTracking) {
-            videoTrackingUrl[0] = videoTracking.trackStart || null,
+            videoTrackingUrl[0] = videoTracking.startTrack || null,
+
             videoTrackingUrl[100] = videoTracking.track100 || null,
+
             videoTrackingUrl[25] = videoTracking.track25 || null,
+            trackFlag[25] = false;
+
             videoTrackingUrl[50] = videoTracking.track50 || null,
+            trackFlag[50] = false;
+
             videoTrackingUrl[75] = videoTracking.track75 || null;
+            trackFlag[75] = false;
         }
     }
 
     function setTrackPixel(position) {
+        var pulseTrackingWrapper = document.getElementsByClassName('pulse-tracking-wrapper')[0];
         var url = videoTrackingUrl[position];
         var img = new Image();
         img.alt = '';
@@ -36,7 +44,6 @@ var PulseTracking = (function() {
             url += Math.floor(1E12 * Math.random()) + '?';
             img.src = url;
             pulseTrackingWrapper.appendChild(img);
-            console.log(pulseTrackingWrapper);
         }
 
     }
@@ -58,15 +65,18 @@ var PulseTracking = (function() {
 
         var curTime = video.currentTime.toFixed(1);
 
-        if (curTime >= parseInt(sessionStorage.getItem('one'))) {
+        if (curTime >= parseInt(sessionStorage.getItem('one')) && !trackFlag[25] ) {
             setTrackPixel(25);
             sessionStorage.setItem('one', null);
-        } else if ( curTime >= parseInt(sessionStorage.getItem('two')) ) {
+            trackFlag[25] = true;
+        } else if ( curTime >= parseInt(sessionStorage.getItem('two')) && !trackFlag[50] ) {
             setTrackPixel(50);
             sessionStorage.setItem('two', null);
-        } else if ( curTime >= parseInt(sessionStorage.getItem('three')) ) {
+            trackFlag[50] = true;
+        } else if ( curTime >= parseInt(sessionStorage.getItem('three')) && !trackFlag[75] ) {
             setTrackPixel(75);
             sessionStorage.setItem('three', null);
+            trackFlag[75] = true;
         }
 
     }
@@ -81,7 +91,6 @@ var PulseTracking = (function() {
 
     function videoPlay(video) {
         setTrackPixel(0);
-        setKeyFrames(video.duration);
     }
 
     // event: video pause
@@ -100,14 +109,14 @@ var PulseTracking = (function() {
     }
 
     function init() {
-        document.addEventListener("DOMContentLoaded", function(event) {
+        //document.addEventListener("DOMContentLoaded", function(event) {
             var videos = document.getElementsByClassName('pulse-player-wrapper');
             Array.prototype.forEach.call(videos, function(el) {
                 var video = el.getElementsByTagName('video')[0];
                 bindEvents(video);
             })
             initTrackingUrls();
-        });
+        //});
     }
 
     return {

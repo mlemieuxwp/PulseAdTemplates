@@ -31,8 +31,8 @@ var PulseAd = (function() {
 
     function applyBaseTemplate(articles) {
         var articles_sponsored = Utils.filterSponsorContent(articles);
-        var sponsorAny = articles_sponsored.length>0 ? true : false;
-        var sponsorNone = articles_sponsored.length==0 ? true : false;
+        var sponsorAny = articles_sponsored.length > 0 ? true : false;
+        var sponsorNone = articles_sponsored.length == 0 ? true : false;
 
         bsAd.sponsorAny = sponsorAny;
         bsAd.sponsorNone = sponsorNone;

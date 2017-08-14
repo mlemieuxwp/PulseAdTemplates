@@ -83,29 +83,29 @@ var Templates = (function() {
             '<%}%>',
 
         html: '<div>' +
-            '<%this.ad.html%>' +
+            '<%this.ad.snippet%>' +
             '</div>',
 
         iframe: '<div>' +
             '<a href="<% this.clickThruURL %>" data-track="<% this.client_tracking %>" target="_blank" class="track-click" style="width: 300px; height: 250px; position: absolute;"></a>' +
-            '<iframe src="<%this.ad.src%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
+            '<iframe src="<%this.ad.iframeURL%>" border="0" frameBorder="0" height="250" scrolling="no" width="300" style="border:0"></iframe>' +
             '</div>',
 
         image: '<div>' +
-            '<a href="<% this.ad.url %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
-            '<%if(this.ad.src) {%>' +
-            '<img src="<% this.checkImgSrc(this.ad.src) %>" alt="" border="0" style="border:0" />' +
+            '<a href="<% this.ad.imageURL %>" data-track="<% this.client_tracking %>" class="track-click" target="_blank">' +
+            '<%if(this.ad.imageSrc) {%>' +
+            '<img src="<% this.checkImgSrc(this.ad.imageSrc) %>" alt="" border="0" style="border:0" />' +
             '<%}%>' +
             '</a>' +
             '</div>',
 
         video: '<div>' +
-            '<div class="pulse-player-wrapper" data-videotracking=\'<% this.ad.videoTracking %>\'>' +
+            '<div class="pulse-player-wrapper" data-videotracking=\'<% JSON.stringify(this.ad.trackingInfo) %>\'>' +
             '<i class="pulse-player-play-toggle"></i>' +
             '<i class="pulse-player-volume-toggle"></i>' +
-            '<video class="pulse-player track-click" data-current-time="0.25" data-poster="<% this.ad.poster_url %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
-            '<%if(this.ad.src) {%>' +
-            '<source src="<%this.ad.src%>" type="video/mp4" />' +
+            '<video class="pulse-player track-click" data-current-time="0.25" data-poster="<% this.ad.posterImage %>" <%if(this.ad.autoplay){%>autoplay playsinline<%}%> >' +
+            '<%if(this.ad.video) {%>' +
+            '<source src="<%this.ad.video%>" type="video/mp4" />' +
             '<%}%>' +
             '</video>' +
             '</div>' +

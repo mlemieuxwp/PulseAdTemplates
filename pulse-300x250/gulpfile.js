@@ -139,7 +139,7 @@ gulp.task('scripts', function() {
     'js/carousel.js',
     'js/slides.js',
     'js/video.js',
-    'js/videoTracking.js',
+    //'js/videoTracking.js',
     'js/init.js'
   ])
   .pipe(uglify())

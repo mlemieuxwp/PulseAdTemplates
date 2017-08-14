@@ -23,6 +23,8 @@ var PulseArticles = (function() {
         var sponsorAny = bsAd.sponsorAny;
         var sponsorNone = bsAd.sponsorNone;
 
+        //console.log(bsAd);
+
         if (shuffle) {
             selArticles = Utils.shuffleArray(articles).slice(0, maxLength);
         } else {
@@ -35,7 +37,7 @@ var PulseArticles = (function() {
             sponsorAll: sponsorAll,
             client_tracking : bsAd.client_tracking,
             linkTarget: function(i) {
-                return sponsorAll || this.articles[i].sponsor ? '_blank' : '_top';
+                return sponsorAll || this.articles[i].isSponsorContentEnabled ? '_blank' : '_top';
             },
             urlParam: urlParam ? '?spon_con=' + urlParam : ''
         });
@@ -46,7 +48,7 @@ var PulseArticles = (function() {
             sponsorAll: sponsorAll,
             client_tracking : bsAd.client_tracking,
             linkTarget: function(i) {
-                return sponsorAll || this.articles[i].sponsor ? '_blank' : '_top';
+                return sponsorAll || this.articles[i].isSponsorContentEnabled ? '_blank' : '_top';
             },
             urlParam: urlParam ? '?spon_con=' + urlParam : ''
         });
@@ -69,12 +71,13 @@ var PulseArticles = (function() {
             ad.videoTracking = JSON.stringify(ad.videoTracking);
         }
         if (ad && ad.type === 'html') {
-            ad.html = Utils.htmlDecode(ad.html);
+            ad.snippet = Utils.htmlDecode(ad.snippet);
         }
 
         if (ad) {
             var adHtml = Templates.engine(Templates.types[ad.type], {
                 ad: ad,
+                clickThruURL : bsAd.clickThruURL,
                 setAdClick: Utils.setAdClick,
                 checkImgSrc: Utils.checkImgSrc,
                 client_tracking : bsAd.client_tracking
