@@ -34,11 +34,11 @@ var PulseSlides = (function() {
 
         if (ad && ad.type === 'video') {
             ad.videoTracking = {};
-            ad.videoTracking.trackStart = ad.trackstart || null;
-            ad.videoTracking.track25 = ad.track25 || null;
-            ad.videoTracking.track50 = ad.track50 || null;
-            ad.videoTracking.track75 = ad.track75 || null;
-            ad.videoTracking.track100 = ad.track100 || null;
+            ad.videoTracking.trackStart = ad.trackingInfo.startTrack || null;
+            ad.videoTracking.track25 = ad.trackingInfo.track25 || null;
+            ad.videoTracking.track50 = ad.trackingInfo.track50 || null;
+            ad.videoTracking.track75 = ad.trackingInfo.track75 || null;
+            ad.videoTracking.track100 = ad.trackingInfo.track100 || null;
             ad.videoTracking = JSON.stringify(ad.videoTracking);
         }
 

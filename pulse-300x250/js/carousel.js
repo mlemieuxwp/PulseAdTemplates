@@ -1,7 +1,12 @@
 var PulseCarousel = (function() {
 
     var adPosition = bsAd.adPosition || 'last';
-    var autoPlay = bsAd.autoPlay || 0;
+    var autoPlaySpeed = bsAd.autoPlay || 0;
+    var autoplay = false;
+    
+    if(autoPlaySpeed >0 ){
+    	autoplay = true;
+    }
 
     function headerFooterSlide(swiper) {
 
@@ -47,7 +52,7 @@ var PulseCarousel = (function() {
         var pulse_wrapper = document.getElementsByClassName(pulse_selector)[0];
         var next = document.createElement('a');
         next.classList.add('pulse-next');
-        autoPlay = autoPlay*1000;
+        autoPlaySpeed = autoPlaySpeed*1000;
 
         var prev = document.createElement('a');
         prev.classList.add('pulse-prev');
@@ -62,7 +67,9 @@ var PulseCarousel = (function() {
             lazyLoading     : true,
             loop            : true,
             nextButton      : '.pulse-next',
-            prevButton      : '.pulse-prev'
+            prevButton      : '.pulse-prev',
+            speed			:autoPlaySpeed,
+            autoplay : true
         });
 
 
@@ -79,7 +86,7 @@ var PulseCarousel = (function() {
                      if ( Utils.elementInViewport(frame,parent) && !timer ) {
                          setTimeout(function(){
                              swiper.slideNext();
-                         }, autoPlay);
+                         }, autoPlaySpeed);
                          timer = true;
                      }
 
@@ -88,7 +95,7 @@ var PulseCarousel = (function() {
                 console.log("no parent access - start autoplay")
                 setTimeout(function(){
                     swiper.slideNext();
-                }, autoPlay);
+                }, autoPlaySpeed);
             }
         }
 
